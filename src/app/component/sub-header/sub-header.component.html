@@ -1,20 +1,25 @@
-<nav class="navbar navbar-expand navbar-light navbar-expand-lg bg-white">
+<nav class="navbar-header navbar navbar-expand navbar-dark bg-primary">
   <!-- <div class="collapse navbar-collapse"> -->
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="/cargo/search" routerLink="/cargo/search" routerLinkActive="active">
         Search<span class="sr-only">(current)</span>
         <span class="badge badge-pill badge-danger">698</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Create</a>
+      <a class="nav-link" href="/cargo/create" routerLink="/cargo/create" routerLinkActive="active">Create</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">My Cargo</a>
+      <a class="nav-link" href="/cargo/my" routerLink="/cargo/my" routerLinkActive="active">My Cargo</a>
     </li>
   </ul>
   <!-- </div> -->
+
+  <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+
 </nav>
 
 <router-outlet></router-outlet>

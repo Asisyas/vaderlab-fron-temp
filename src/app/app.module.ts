@@ -10,6 +10,7 @@ import { SubHeaderComponent } from './component/sub-header/sub-header.component'
 import { CargoSearchComponent } from './component/cargo-search/cargo-search.component';
 import { CargoCreateComponent } from './component/cargo-create/cargo-create.component';
 import { CargoMyListComponent } from './component/cargo-my-list/cargo-my-list.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,8 @@ import { CargoMyListComponent } from './component/cargo-my-list/cargo-my-list.co
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot( APP_ROUTES, { enableTracing: true })
   ],
   providers: [],
