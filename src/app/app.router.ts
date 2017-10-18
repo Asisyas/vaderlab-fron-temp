@@ -1,8 +1,8 @@
 import {Routes} from '@angular/router';
 import {SubHeaderComponent} from './component/sub-header/sub-header.component';
-import {CargoSearchComponent} from './component/cargo-search/cargo-search.component';
-import {CargoMyListComponent} from './component/cargo-my-list/cargo-my-list.component';
-import {CargoCreateComponent} from './component/cargo-create/cargo-create.component';
+import {CargoSearchComponent} from './component/logistic/cargo-search/cargo-search.component';
+import {CargoMyListComponent} from './component/logistic/cargo-my-list/cargo-my-list.component';
+import {CargoCreateComponent} from './component/logistic/cargo-create/cargo-create.component';
 
 
 const CARGO_ROUTES = [

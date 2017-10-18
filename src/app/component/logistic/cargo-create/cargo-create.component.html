@@ -1,0 +1,176 @@
+<div class="container" style="margin-top: 10px;">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Create new cargo</h4>
+      <h6 class="card-subtitle mb-2 text-muted"></h6>
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="card-block">
+
+          <div class="form-row">
+            <app-input-geocoder></app-input-geocoder>
+          </div>
+
+          <div class="form-row">
+
+            <div class="col-md-6 form-group bmd-form-group">
+              <label for="cargo-departure">Departure</label>
+              <input
+                required
+                type="text"
+                class="form-control"
+                id="cargo-departure"
+                aria-describedby="cargo-departure-help"
+                placeholder="Minsk"
+              >
+              <small id="cargo-departure-help" class="form-text text-muted">Start typing the name of the city of departure</small>
+            </div>
+
+            <div class="col-md-6 form-group bmd-form-group">
+              <label for="cargo-arrival">Arrival</label>
+              <input
+                required
+                name="geo-arrival-place"
+                type="text"
+                class="form-control"
+                id="cargo-arrival"
+                placeholder="Moscow"
+                aria-describedby="cargo-arrival-help"
+              >
+              <small id="cargo-arrival-help" class="form-text text-muted">Start typing the name of the city of arrival</small>
+            </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-6 form-group bmd-form-group">
+              <label for="cargo-departure-description-short">Short description</label>
+              <input
+                required
+                maxlength="30"
+                type="text"
+                class="form-control"
+                id="cargo-departure-description-short"
+                placeholder="Древесина"
+                value="{{ cargo.title }}"
+                [(ngModel)]="cargo.title"
+                name="title"
+              >
+              <small id="cargo-departure-description-short-help" class="form-text text-muted">
+                A few words about your cargo <span class="float-right">{{cargo.title?.length || 0}} / 30</span>
+              </small>
+            </div>
+            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.permanent">
+              <label for="cargo-departure-date-start">Date of download</label>
+              <material-datepicker
+                ngDefaultControl
+                id="cargo-departure-date-start"
+                class="form-control"
+                name="departure_date"
+                placeholder="dd.mm.YYYY"
+                fontFamily="robo"
+                dateFormat="DD-MM-YYYY"
+                [(disabled)]="cargo.permanent"
+                [(ngModel)]="cargo.departure_date"
+                [(date)]="cargo.departure_date"></material-datepicker>
+            </div>
+            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.permanent">
+              <label for="cargo-departure-date-end"> Date of uploading </label>
+              <material-datepicker
+                ngDefaultControl
+                id="cargo-departure-date-end"
+                class="form-control"
+                name="arrival_date"
+                placeholder="dd.mm.YYYY"
+                dateFormat="DD-MM-YYYY"
+                fontFamily="robo"
+                [(disabled)]="cargo.permanent"
+                [(rangeStart)]="cargo.departure_date"
+                [(ngModel)]="cargo.arrival_date"
+                [(date)]="cargo.arrival_date"></material-datepicker>
+            </div>
+            <div class="col-md-2 form-group bmd-form-group">
+              <div class="form-check" id="sad">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    name="permanent"
+                    [(ngModel)]="cargo.permanent"
+                  > Permanent
+                </label>
+                <small id="cargo-departure-date-help" class="form-text text-muted">Select the departure date of the shipment</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="col-md-3 form-group bmd-form-group">
+              <label for="cargo-body-type">Body type</label>
+              <select
+                class="form-control"
+                id="cargo-body-type"
+                name="transport_type"
+                [(ngModel)]="cargo.transport_type"
+              >
+                <option
+                  *ngFor="let tt of transport_type"
+                  value="{{ tt }}"
+                  [attr.selected]="cargo.transport_type == tt ? true: null"
+                >{{ tt }}</option>
+              </select>
+            </div>
+            <div class="col-md-3 form-group bmd-form-group">
+              <label for="cargo-load-type">Load type</label>
+              <select
+                class="form-control"
+                id="cargo-load-type"
+                [(ngModel)]="cargo.load_type"
+                name="load_type"
+              >
+                <option *ngFor="let lt of load_type"
+                  [ngValue]="lt"
+                  [attr.selected]="cargo.load_type == lt ? true: null"
+                >{{ lt }}</option>
+              </select>
+            </div>
+
+            <div class="col-md-1 form-group bmd-form-group">
+              <label for="cargo-weight"> Weight </label>
+              <input
+                type="number"
+                class="form-control"
+                id="cargo-weight"
+                aria-describedby="cargo-departure-date-help"
+                placeholder="0.00"
+                value="{{ cargo.weight }}"
+                [(ngModel)]="cargo.weight"
+                name="weight"
+              >
+            </div>
+
+
+            <div class="col-md-1 form-group bmd-form-group">
+              <label for="cargo-volume"> Volume </label>
+              <input
+                type="number"
+                class="form-control"
+                id="cargo-volume"
+                aria-describedby="cargo-departure-date-help"
+                placeholder="0.00"
+                value="{{ cargo.volume }}"
+                [(ngModel)]="cargo.volume"
+                name="volume"
+              >
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+  </div>
+</div>

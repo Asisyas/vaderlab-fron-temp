@@ -4,5 +4,12 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  debug_router: false,
+
+  maps_google_api_key: '',
+  maps_yandex_api_key: '',
+  maps_mapquest_api_key: '',
+  maps_bing_api_key: '',
+
 };
