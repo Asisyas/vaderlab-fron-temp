@@ -24,3 +24,8 @@ header.navbar-header {
   opacity: 0.4;
   cursor: not-allowed !important;
 }
+
+.pac-container:after{
+  content:none !important;
+}
+

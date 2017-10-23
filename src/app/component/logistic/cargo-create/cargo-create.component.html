@@ -7,35 +7,32 @@
         <div class="card-block">
 
           <div class="form-row">
-            <app-input-geocoder></app-input-geocoder>
+
           </div>
 
           <div class="form-row">
 
             <div class="col-md-6 form-group bmd-form-group">
               <label for="cargo-departure">Departure</label>
-              <input
-                required
-                type="text"
-                class="form-control"
+              <app-input-geocoder
+                #geocoder_departure_input
+                placeholder="Minsk, Belarus"
                 id="cargo-departure"
                 aria-describedby="cargo-departure-help"
-                placeholder="Minsk"
-              >
+                [types]="['(cities)']"
+              ></app-input-geocoder>
               <small id="cargo-departure-help" class="form-text text-muted">Start typing the name of the city of departure</small>
             </div>
 
             <div class="col-md-6 form-group bmd-form-group">
               <label for="cargo-arrival">Arrival</label>
-              <input
-                required
-                name="geo-arrival-place"
-                type="text"
-                class="form-control"
+              <app-input-geocoder
+                #geocoder_arrival_input
+                placeholder="Moscow, Russia"
                 id="cargo-arrival"
-                placeholder="Moscow"
-                aria-describedby="cargo-arrival-help"
-              >
+                [types]="['(cities)']"
+                aria-describedby="cargo-departure-help"
+              ></app-input-geocoder>
               <small id="cargo-arrival-help" class="form-text text-muted">Start typing the name of the city of arrival</small>
             </div>
 

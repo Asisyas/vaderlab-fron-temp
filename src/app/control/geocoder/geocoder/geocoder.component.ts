@@ -1,104 +1,57 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import { environment } from '../../../../environments/environment';
-
-declare var $, GeocoderJS, Bloodhound;
+import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import { MapsAPILoader } from '@agm/core';
+import {FormControl} from '@angular/forms';
+import { } from 'googlemaps';
 
 @Component({
   selector: 'app-input-geocoder',
   templateUrl: './geocoder.component.html',
   styleUrls: ['./geocoder.component.css']
 })
-export class GeocoderComponent implements OnInit, AfterViewInit {
-
-  private geocoder: object;
-
-  @ViewChild('geocoder_input') input: ElementRef;
+export class GeocoderComponent implements OnInit {
 
   @Input()
-  private valueSource;
+  public placeholder: string;
 
-  private isGeocoded = true;
+  private _position: google.maps.places.PlaceResult;
 
-  constructor() {
-    this.geocoder = {};
+  private _types: string[] = ['address'];
 
-    const geocoders: GeocoderConfig[] = [
-      { provider: 'google', apiKey: environment.maps_google_api_key },
-      { provider: 'yandex', apiKey: environment.maps_yandex_api_key } ,
-      { provider: 'bing', apiKey: environment.maps_bing_api_key },
-      { provider: 'mapquest', apiKey: environment.maps_mapquest_api_key },
-      { provider: 'openstreetmap', apiKey: '' }
-    ];
+  @ViewChild('search')
+  public searchElementRef: ElementRef;
 
-    for (let i = 0; i < geocoders.length; i++) {
-      const tmp = geocoders[i];
-      this.geocoder[tmp.provider] = GeocoderJS.createGeocoder(tmp);
-    }
-
+  constructor(private mapsAPILoader: MapsAPILoader,
+              private ngZone: NgZone) {
   }
 
-  protected getCurrentProvider(): string {
-    return 'google';
+  @Input()
+  set position(place: google.maps.places.PlaceResult) {
+    this._position = place;
+  }
+
+  get position(): google.maps.places.PlaceResult {
+    return this._position;
+  }
+
+  @Input()
+  set types(types: string[]) {
+    this._types = types;
+  }
+
+  get types(): string[] {
+    return this._types;
   }
 
   ngOnInit() {
-
-    const engine = new Bloodhound({
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      datumTokenizer: Bloodhound.tokenizers.whitespace,
-      remote: {
-        url: '%QUERY',
-        wildcard: '%QUERY',
-        filter: function(response) {
-          return response;
-        },
-        transport:  (options, onSuccess, onError) => {
-          this.geocoder[this.getCurrentProvider()].geocode(options.url, (data) => {
-              done(data, null, null);
-          });
-
-          function done(data, textStatus, request) {
-            onSuccess(data);
-          }
-
-          function fail(request, textStatus, errorThrown) {
-            onError(errorThrown);
-          }
-
-          function always() {
-          }
-        }
-      }
-    });
-
-    $(this.input.nativeElement).typeahead({
-      highlight: true,
-      minLength: 1,
-      hint: true
-    }, {
-      source: engine,
-      displayKey: function(data) {
-        console.log(data);
-
-        //const city = data.getCity();
-        //const region = data.getRegion();
-        //const countryCode  = data.getCountyCode();
-
-        const arr = [
-          data.getCity(),
-          data.getRegion(),
-        ];
-
-        return data.getCountyCode() + ' ' + arr.join(', ');
-      },
+    this.mapsAPILoader.load().then(() => {
+      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: this.types
+      });
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          this.position = autocomplete.getPlace();
+        });
+      });
     });
   }
-
-  ngAfterViewInit() {
-  }
-}
-
-interface GeocoderConfig {
-  provider: string;
-  apiKey: string;
 }

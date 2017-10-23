@@ -14,6 +14,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DatepickerModule } from 'angular2-material-datepicker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.componen
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router })
+    RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router }),
+    AgmCoreModule.forRoot({
+      apiKey: environment.maps_google_api_key,
+      libraries: ['places']
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

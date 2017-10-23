@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   debug_router: false,
 
-  maps_google_api_key: '',
+  maps_google_api_key: 'AIzaSyBDPbGjIEEblXPDVpOObMBjwJsp5AG7r64',
   maps_yandex_api_key: '',
   maps_mapquest_api_key: '',
   maps_bing_api_key: '',
