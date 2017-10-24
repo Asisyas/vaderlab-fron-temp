@@ -1,0 +1,37 @@
+span.twitter-typeahead {
+  display: inherit !important;
+}
+
+input.typeahead.tt-input {
+  vertical-align: initial !important;
+}
+
+.input-field .twitter-typeahead + label:after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 65px;
+  opacity: 0;
+  transition: 0.2s opacity ease-out, 0.2s color ease-out;
+}
+
+.input-field .twitter-typeahead ~ .material-icons {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  color: transparent;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: 0.3s color;
+}
+
+.input-field .twitter-typeahead + label {
+  left: 1rem;
+}
+
+.geocoder-provider-select {
+  border: 0px;
+  margin-left: -70px;
+  z-index: 1;
+  background-color: inherit;
+}
