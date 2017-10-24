@@ -57,8 +57,8 @@ export class CargoCreateComponent implements OnInit {
 
     window.test = this.arrival_place_component.position;
 
-    this.cargo.arrivalPosition = CargoCreateComponent._updateposition(this.arrival_place_component.position);
-    this.cargo.departurePosition = CargoCreateComponent._updateposition(this.departure_place_component.position);
+    this.cargo.arrival_position = CargoCreateComponent._updateposition(this.arrival_place_component.position);
+    this.cargo.departure_position = CargoCreateComponent._updateposition(this.departure_place_component.position);
   }
 
   ngOnInit() {

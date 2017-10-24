@@ -4,276 +4,351 @@ export const cargo: Cargo[] = [
   {
     id: 1,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 2,
     title: 'Доски',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 1.4893
+    weight: 1.4893,
+    external_data: {}
   },
   {
     id: 3,
     title: 'Дольшое длинное название груза которое должно быть правильно отображено',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 0.9999999999,
-    weight: 99.999999
+    weight: 99.999999,
+    external_data: {}
   },
   {
     id: 4,
     title: 'Small cats',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 0.001,
-    weight: 99999.220
+    weight: 99999.220,
+    external_data: {}
   },
   {
     id: 5,
     title: '(*&98kjmkm43tk43w-0-)',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1000000,
-    weight: 9999999.378921749832
+    weight: 9999999.378921749832,
+    external_data: {}
   },
   {
     id: 6,
     title: 'тестовый груз из под какой-=то ляляляля',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2017'),
     arrival_date: new Date('11.08.2020'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 7,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 8,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 9,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 10,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 11,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 12,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 13,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 14,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 15,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 16,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 17,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 18,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 19,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 20,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 21,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 22,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 23,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 24,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   },
   {
     id: 25,
     title: 'Бревна',
+    arrival_position: { lat: 53, lng: 24 },
+    departure_position: { lat: 48, lng: 36 },
     departure_date: new Date('07.08.2018'),
     arrival_date: new Date('11.08.2018'),
     permanent: false,
     load_type: '',
     transport_type: '',
     volume: 1,
-    weight: 0.20
+    weight: 0.20,
+    external_data: {}
   }
 ];
