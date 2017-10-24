@@ -5,8 +5,7 @@ import {LOAD_TYPE} from '../../../enum/logistic/load-type';
 import {TRANSPORT_TYPE} from '../../../enum/logistic/transport-type';
 import PlaceResult = google.maps.places.PlaceResult;
 import {LatLng} from '../../../model/logistic/cargo/LatLng';
-
-declare var window;
+import {CargoService} from '../../../service/logictic/cargo/cargo.service';
 
 @Component({
   selector: 'app-cargo-create',
@@ -21,15 +20,17 @@ export class CargoCreateComponent implements OnInit {
   public transport_type: object = TRANSPORT_TYPE;
   public load_type: object = LOAD_TYPE;
 
+  private _errors: object;
+
   @ViewChild('geocoder_arrival_input') arrival_place_component;
 
   @ViewChild('geocoder_departure_input') departure_place_component;
 
-  constructor() {
+  constructor(private cargo_service: CargoService) {
   }
 
   protected static _updateposition(place: PlaceResult) {
-    if (!place) {
+    if (!place || !place.geometry) {
       return null;
     }
 
@@ -43,22 +44,20 @@ export class CargoCreateComponent implements OnInit {
     this.updatePosition();
     this.updateExternalData();
     console.log(this.cargo);
+
+    this.cargo_service.create(this.cargo).catch(error => {
+
+    });
   }
 
   protected updateExternalData() {
-
-
-
     this.cargo.external_data['position_arrival'] = {};
     this.cargo.external_data['position_departure'] = {};
   }
 
   protected updatePosition() {
-
-    window.test = this.arrival_place_component.position;
-
-    this.cargo.arrival_position = CargoCreateComponent._updateposition(this.arrival_place_component.position);
-    this.cargo.departure_position = CargoCreateComponent._updateposition(this.departure_place_component.position);
+    this.cargo.arrival_coordinates = CargoCreateComponent._updateposition(this.arrival_place_component.position);
+    this.cargo.departure_coordinates = CargoCreateComponent._updateposition(this.departure_place_component.position);
   }
 
   ngOnInit() {

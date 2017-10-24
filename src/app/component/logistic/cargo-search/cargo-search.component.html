@@ -19,13 +19,16 @@
   </div>
   -->
 
-  <div class="card bmd-card-raised">
+  <div *ngFor="let cargo of cargoCollection" class="card bmd-card-raised logistic-list-item">
     <div class="card-header">
       <div class="row">
         <div class="col"><b>BY</b> Минск - <b>RU</b> Москва</div>
         <div class="col"> 11.08.1989 - 12.09.2017 </div>
-        <div class="col"> <b>Тент</b> Боковая </div>
-        <div class="col"> стеллажи • 18т. • 0м3 </div>
+        <div class="col"> <b>{{ cargo.transport_type }}</b> {{ cargo.load_type}} </div>
+        <div class="col"> {{ cargo.title }}
+          <span *ngIf="cargo.weight"> •{{ cargo.weight }}т.</span>
+          <span *ngIf="cargo.volume"> • {{cargo.volume}}м3 </span>
+        </div>
         <div class="col text-right text-danger"> 1200 $ </div>
       </div>
     </div>

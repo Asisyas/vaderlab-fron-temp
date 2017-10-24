@@ -3,7 +3,7 @@
     <div class="card-body">
       <h4 class="card-title">Create new cargo</h4>
       <h6 class="card-subtitle mb-2 text-muted"></h6>
-      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <form #f="ngForm" (submit)="onSubmit(f)">
         <div class="card-block">
 
           <div class="form-row">
@@ -56,7 +56,7 @@
                 A few words about your cargo <span class="float-right">{{cargo.title?.length || 0}} / 30</span>
               </small>
             </div>
-            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.permanent">
+            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.is_permanent">
               <label for="cargo-departure-date-start">Date of download</label>
               <material-datepicker
                 ngDefaultControl
@@ -66,11 +66,11 @@
                 placeholder="dd.mm.YYYY"
                 fontFamily="robo"
                 dateFormat="DD-MM-YYYY"
-                [(disabled)]="cargo.permanent"
+                [(disabled)]="cargo.is_permanent"
                 [(ngModel)]="cargo.departure_date"
                 [(date)]="cargo.departure_date"></material-datepicker>
             </div>
-            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.permanent">
+            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.is_permanent">
               <label for="cargo-departure-date-end"> Date of uploading </label>
               <material-datepicker
                 ngDefaultControl
@@ -80,7 +80,7 @@
                 placeholder="dd.mm.YYYY"
                 dateFormat="DD-MM-YYYY"
                 fontFamily="robo"
-                [(disabled)]="cargo.permanent"
+                [(disabled)]="cargo.is_permanent"
                 [(rangeStart)]="cargo.departure_date"
                 [(ngModel)]="cargo.arrival_date"
                 [(date)]="cargo.arrival_date"></material-datepicker>
@@ -92,7 +92,7 @@
                     type="checkbox"
                     class="form-check-input"
                     name="permanent"
-                    [(ngModel)]="cargo.permanent"
+                    [(ngModel)]="cargo.is_permanent"
                   > Permanent
                 </label>
                 <small id="cargo-departure-date-help" class="form-text text-muted">Select the departure date of the shipment</small>
@@ -162,11 +162,17 @@
 
           </div>
 
+          <!--
           <div class="form-row">
-
+            <div class="col-md-1 form-group bmd-form-group">
+              <input type="tel" class="form-control">$
+            </div>
           </div>
+          -->
+
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="reset" class="btn btn-outline-primary">Reset</button>
+        <button type="submit" class="btn btn-primary btn-raised">Create</button>
       </form>
     </div>
   </div>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CargoService} from '../../../service/logictic/cargo/cargo.service';
+import {Cargo} from '../../../model/logistic/cargo/cargo';
 
 @Component({
   selector: 'app-cargo-search',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CargoSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cargo_service: CargoService) { }
+
+  @Input()
+  private cargoCollection: Cargo[];
 
   ngOnInit() {
+    this.cargo_service.search().then(cargo => {
+      this.cargoCollection = <Cargo[]>cargo;
+      console.log(this.cargoCollection['_body']);
+    });
   }
 
 }

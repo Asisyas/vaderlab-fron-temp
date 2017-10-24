@@ -9,9 +9,9 @@ export class Cargo implements LogisticEntityInterface {
 
   public arrival_date: Date;
 
-  public arrival_position: LatLng;
+  public arrival_coordinates: LatLng;
 
-  public departure_position: LatLng;
+  public departure_coordinates: LatLng;
 
   public departure_date: Date;
 
@@ -23,7 +23,7 @@ export class Cargo implements LogisticEntityInterface {
 
   public volume: number;
 
-  public permanent: boolean;
+  public is_permanent: boolean;
 
   public external_data: object;
 
@@ -43,12 +43,12 @@ export class Cargo implements LogisticEntityInterface {
     ) {
       this.id = id;
       this.title = title;
-      this.departure_position = departure;
-      this.arrival_position = arrival;
+      this.departure_coordinates = departure;
+      this.arrival_coordinates = arrival;
       this.arrival_date = arrival_date;
       this.departure_date = departure_date;
       this.transport_type = transport_type;
-      this.permanent = permanent;
+      this.is_permanent = permanent;
       this.load_type = load_type;
       this.weight = weight;
       this.volume = volume;

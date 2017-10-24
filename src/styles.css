@@ -29,3 +29,14 @@ header.navbar-header {
   content:none !important;
 }
 
+material-datepicker {
+  padding-bottom: 4px !important;
+}
+
+select.form-control {
+  margin-top: -3px;
+}
+
+*:focus {
+  outline: 0 none !important;
+}

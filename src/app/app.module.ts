@@ -8,13 +8,16 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { SubHeaderComponent } from './component/sub-header/sub-header.component';
 import { CargoSearchComponent } from './component/logistic/cargo-search/cargo-search.component';
-import {CargoCreateComponent} from './component/logistic/cargo-create/cargo-create.component';
+import { CargoCreateComponent } from './component/logistic/cargo-create/cargo-create.component';
 import { CargoMyListComponent } from './component/logistic/cargo-my-list/cargo-my-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DatepickerModule } from 'angular2-material-datepicker';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.component';
 import { AgmCoreModule } from '@agm/core';
+import { ApiService } from './service/core/api.service';
+import {CargoService} from './service/logictic/cargo/cargo.service';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { AgmCoreModule } from '@agm/core';
     GeocoderComponent
   ],
   imports: [
+    HttpModule,
     BrowserAnimationsModule,
     DatepickerModule,
     BrowserModule,
@@ -38,7 +42,11 @@ import { AgmCoreModule } from '@agm/core';
       libraries: ['places']
     })
   ],
-  providers: [],
+  providers: [
+    ApiService,
+    CargoService,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

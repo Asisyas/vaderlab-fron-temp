@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+  base_backend_url: 'http://127.0.0.1:8000/api',
   production: false,
   debug_router: false,
 

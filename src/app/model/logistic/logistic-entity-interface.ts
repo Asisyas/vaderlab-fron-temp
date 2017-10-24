@@ -2,8 +2,10 @@ import {LatLng} from './cargo/LatLng';
 
 export interface LogisticEntityInterface {
   id: number;
-  permanent: boolean;
+  is_permanent: boolean;
   external_data: object;
-  arrival_position: LatLng;
-  departure_position: LatLng;
+  arrival_date: Date;
+  departure_date: Date;
+  arrival_coordinates: LatLng;
+  departure_coordinates: LatLng;
 }
