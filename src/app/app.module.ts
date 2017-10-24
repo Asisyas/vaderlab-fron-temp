@@ -18,6 +18,7 @@ import { AgmCoreModule } from '@agm/core';
 import { ApiService } from './service/core/api.service';
 import {CargoService} from './service/logictic/cargo/cargo.service';
 import {HttpModule} from '@angular/http';
+import {TimeAgoPipe} from "time-ago-pipe";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {HttpModule} from '@angular/http';
     CargoSearchComponent,
     CargoCreateComponent,
     CargoMyListComponent,
-    GeocoderComponent
+    GeocoderComponent,
+    TimeAgoPipe
   ],
   imports: [
     HttpModule,

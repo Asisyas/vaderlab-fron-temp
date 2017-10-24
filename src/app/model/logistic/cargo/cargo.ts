@@ -7,6 +7,10 @@ export class Cargo implements LogisticEntityInterface {
 
   public title: string;
 
+  public created_at: Date;
+
+  public updated_at: Date;
+
   public arrival_date: Date;
 
   public arrival_coordinates: LatLng;
@@ -29,6 +33,8 @@ export class Cargo implements LogisticEntityInterface {
 
   constructor(
     id: number = null,
+    created_at: Date = null,
+    updated_at: Date = null,
     title: string = '',
     departure: LatLng = null,
     arrival: LatLng = null,
