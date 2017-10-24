@@ -18,7 +18,8 @@ import { AgmCoreModule } from '@agm/core';
 import { ApiService } from './service/core/api.service';
 import {CargoService} from './service/logictic/cargo/cargo.service';
 import {HttpModule} from '@angular/http';
-import {TimeAgoPipe} from "time-ago-pipe";
+import {TimeAgoPipe} from 'time-ago-pipe';
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {TimeAgoPipe} from "time-ago-pipe";
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    ToastyModule.forRoot(),
     RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router }),
     AgmCoreModule.forRoot({
       apiKey: environment.maps_google_api_key,

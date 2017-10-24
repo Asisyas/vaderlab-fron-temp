@@ -1,4 +1,5 @@
 import {Cargo} from '../../model/logistic/cargo/cargo';
+/*
 
 export const cargo: Cargo[] = [
   {
@@ -352,3 +353,5 @@ export const cargo: Cargo[] = [
     external_data: {}
   }
 ];
+
+*/
