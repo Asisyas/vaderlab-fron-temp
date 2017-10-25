@@ -17,7 +17,7 @@ export class CargoSearchComponent implements OnInit {
   ngOnInit() {
     this.cargo_service.search().then(cargo => {
       this.cargoCollection = <Cargo[]>cargo;
-      console.log(this.cargoCollection['_body']);
+      console.log(this.cargoCollection);
     });
   }
 

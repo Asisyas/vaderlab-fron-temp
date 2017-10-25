@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  base_backend_url: 'https://www.vaderlab.com/api',
+  base_backend_url: 'http://localhost:8000/api',
   production: false,
   debug_router: false,
 

@@ -21,6 +21,12 @@ import {HttpModule} from '@angular/http';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {ToastyModule} from 'ng2-toasty';
 
+import {
+  MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
+  MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
+  MatNativeDateModule, MatSelectModule,
+} from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +45,12 @@ import {ToastyModule} from 'ng2-toasty';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    /** **/
+    MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
+    MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
+    MatNativeDateModule, MatSelectModule,
+    /** **/
+
     ToastyModule.forRoot(),
     RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router }),
     AgmCoreModule.forRoot({

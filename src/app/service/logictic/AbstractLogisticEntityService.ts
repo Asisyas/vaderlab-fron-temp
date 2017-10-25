@@ -16,6 +16,8 @@ export abstract class AbstractLogisticEntityService<T extends LogisticEntityInte
 
     const data: object = Object.assign({}, entity);
     delete data['id'];
+    delete data['created_at'];
+    delete data['updated_at'];
 
     this.processDates(entity, data);
 

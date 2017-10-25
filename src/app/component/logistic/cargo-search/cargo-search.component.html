@@ -1,33 +1,17 @@
 <div class="container" style="margin-top: 10px">
-  <!--
-  <div class="card bmd-card-raised">
-    <div class="card-body">
-
-      <span>
-
-        <b>BY</b> Минск - <b>RU</b> Москва
-        <span class="text-muted"> 11.08.1989 - 12.09.2017</span>
-      </span>
-
-      <span class="pull-md-right float-right text-primary text-capitalize"> 1200 € </span>
-    </div>
-
-    <div class="card-footer">
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    </div>
-
-  </div>
-  -->
-
   <div *ngFor="let cargo of cargoCollection" class="card bmd-card-raised logistic-list-item">
     <div class="card-header">
       <div class="row">
         <div class="col"><b>BY</b> Минск - <b>RU</b> Москва</div>
-        <div class="col"> 11.08.1989 - 12.09.2017 </div>
+        <div class="col" *ngIf="!cargo.is_permanent">
+          {{ cargo.departure_date | date:'dd.MM.yyyy' }} -
+          {{ cargo.arrival_date | date:'dd.MM.yyyy' }}
+        </div>
+        <div class="col" *ngIf="cargo.is_permanent"> Regularly </div>
         <div class="col"> <b>{{ cargo.transport_type }}</b> {{ cargo.load_type}} </div>
         <div class="col"> {{ cargo.title }}
           <span *ngIf="cargo.weight"> •{{ cargo.weight }}т.</span>
-          <span *ngIf="cargo.volume"> • {{cargo.volume}}м3 </span>
+          <span *ngIf="cargo.volume"> • {{cargo.volume}}м³ </span>
         </div>
         <div class="col text-right text-danger"> 1200 $ </div>
       </div>
@@ -37,7 +21,8 @@
         ЧУТП "БЕЛСЕЛЬТУР"
       </b>
       <span class="text-primary">• +375297777041 • +375296327742 • Skype: vtruck2007 • ICQ: 581576833</span>
-      <span class="float-right text-muted"> Добавлено </span>
+      <span class="float-right text-muted"> Created {{ cargo.created_at|timeAgo }}</span>
+      <span class="float-right text-muted" *ngIf="cargo.updated_at">/ Updated {{ cargo.updated_at|timeAgo }}</span>
     </div>
   </div>
 

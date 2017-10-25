@@ -1,4 +1,5 @@
 <div class="container" style="margin-top: 10px;">
+
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Create new cargo</h4>
@@ -6,129 +7,94 @@
       <form #f="ngForm" (submit)="onSubmit(f)">
         <div class="card-block">
 
-          <div class="form-row">
+          <div class="row">
 
-          </div>
-
-          <div class="form-row">
-
-            <div class="col-md-6 form-group bmd-form-group">
-              <label for="cargo-departure">Departure</label>
-              <app-input-geocoder
-                #geocoder_departure_input
-                placeholder="Minsk, Belarus"
-                id="cargo-departure"
-                aria-describedby="cargo-departure-help"
-                [types]="['(cities)']"
-              ></app-input-geocoder>
-              <small id="cargo-departure-help" class="form-text text-muted">Start typing the name of the city of departure</small>
+            <div class="col-md-6">
+                <app-input-geocoder
+                  #geocoder_departure_input
+                  placeholder="Departure city"
+                  id="cargo-departure"
+                  aria-describedby="cargo-departure-help"
+                  [types]="['(cities)']"
+                ></app-input-geocoder>
             </div>
 
-            <div class="col-md-6 form-group bmd-form-group">
-              <label for="cargo-arrival">Arrival</label>
+            <div class="col-md-6 from-froup ">
               <app-input-geocoder
                 #geocoder_arrival_input
-                placeholder="Moscow, Russia"
+                placeholder="Arrival city"
                 id="cargo-arrival"
                 [types]="['(cities)']"
                 aria-describedby="cargo-departure-help"
               ></app-input-geocoder>
-              <small id="cargo-arrival-help" class="form-text text-muted">Start typing the name of the city of arrival</small>
             </div>
 
           </div>
 
-          <div class="form-row">
-            <div class="col-md-6 form-group bmd-form-group">
-              <label for="cargo-departure-description-short">Short description</label>
-              <input
-                required
-                maxlength="30"
-                type="text"
-                class="form-control"
-                id="cargo-departure-description-short"
-                placeholder="Древесина"
-                value="{{ cargo.title }}"
-                [(ngModel)]="cargo.title"
-                name="title"
-              >
-              <small id="cargo-departure-description-short-help" class="form-text text-muted">
-                A few words about your cargo <span class="float-right">{{cargo.title?.length || 0}} / 30</span>
-              </small>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field>
+                <input
+                  matInput
+                  required
+                  maxlength="30"
+                  placeholder="Short description"
+                  value="{{ cargo.title }}"
+                  [(ngModel)]="cargo.title"
+                  name="title"
+                >
+              </mat-form-field>
             </div>
-            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.is_permanent">
-              <label for="cargo-departure-date-start">Date of download</label>
-              <material-datepicker
-                ngDefaultControl
-                id="cargo-departure-date-start"
-                class="form-control"
-                name="departure_date"
-                placeholder="dd.mm.YYYY"
-                fontFamily="robo"
-                dateFormat="DD-MM-YYYY"
-                [(disabled)]="cargo.is_permanent"
-                [(ngModel)]="cargo.departure_date"
-                [(date)]="cargo.departure_date"></material-datepicker>
+            <div class="col-md-3">
+              <mat-form-field>
+                <input
+                  matInput [matDatepicker]="departure_date"
+                  placeholder="Date of download"
+                  [(disabled)]="cargo.is_permanent"
+                  [(ngModel)]="cargo.departure_date"
+                  name="departure_date"
+                >
+                <mat-datepicker-toggle matSuffix [for]="departure_date"></mat-datepicker-toggle>
+                <mat-datepicker #departure_date></mat-datepicker>
+              </mat-form-field>
             </div>
-            <div class="col-md-2 form-group bmd-form-group" [(attr.disabled)]="cargo.is_permanent">
-              <label for="cargo-departure-date-end"> Date of uploading </label>
-              <material-datepicker
-                ngDefaultControl
-                id="cargo-departure-date-end"
-                class="form-control"
-                name="arrival_date"
-                placeholder="dd.mm.YYYY"
-                dateFormat="DD-MM-YYYY"
-                fontFamily="robo"
-                [(disabled)]="cargo.is_permanent"
-                [(rangeStart)]="cargo.departure_date"
-                [(ngModel)]="cargo.arrival_date"
-                [(date)]="cargo.arrival_date"></material-datepicker>
+            <div class="col-md-3" [(attr.disabled)]="cargo.is_permanent || !cargo.departure_date">
+              <mat-form-field>
+                <input
+                  matInput [matDatepicker]="arrival_date"
+                  placeholder="Date of uploading"
+                  [(disabled)]="cargo.is_permanent || !cargo.departure_date"
+                  [(ngModel)]="cargo.arrival_date"
+                  name="arrival_date"
+                >
+                <mat-datepicker-toggle matSuffix [for]="arrival_date"></mat-datepicker-toggle>
+                <mat-datepicker #arrival_date></mat-datepicker>
+              </mat-form-field>
+
             </div>
-            <div class="col-md-2 form-group bmd-form-group">
-              <div class="form-check" id="sad">
-                <label class="form-check-label">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    name="permanent"
-                    [(ngModel)]="cargo.is_permanent"
-                  > Permanent
-                </label>
-                <small id="cargo-departure-date-help" class="form-text text-muted">Select the departure date of the shipment</small>
-              </div>
+            <div class="col-md-2">
+              <mat-checkbox name="permanent" [(ngModel)]="cargo.is_permanent">Permanent</mat-checkbox>
             </div>
           </div>
 
-          <div class="form-row">
-            <div class="col-md-3 form-group bmd-form-group">
-              <label for="cargo-body-type">Body type</label>
-              <select
-                class="form-control"
-                id="cargo-body-type"
-                name="transport_type"
-                [(ngModel)]="cargo.transport_type"
-              >
-                <option
-                  *ngFor="let tt of transport_type"
-                  value="{{ tt }}"
-                  [attr.selected]="cargo.transport_type == tt ? true: null"
-                >{{ tt }}</option>
-              </select>
+          <div class="row">
+            <div class="col-md-3">
+              <mat-form-field>
+                <mat-select placeholder="Body type"  [(ngModel)]="cargo.transport_type" name="transport_type">
+                  <mat-option *ngFor="let tt of transport_type" [value]="tt">
+                    {{ tt }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
             <div class="col-md-3 form-group bmd-form-group">
-              <label for="cargo-load-type">Load type</label>
-              <select
-                class="form-control"
-                id="cargo-load-type"
-                [(ngModel)]="cargo.load_type"
-                name="load_type"
-              >
-                <option *ngFor="let lt of load_type"
-                  [ngValue]="lt"
-                  [attr.selected]="cargo.load_type == lt ? true: null"
-                >{{ lt }}</option>
-              </select>
+              <mat-form-field>
+                <mat-select placeholder="Load type"  [(ngModel)]="cargo.load_type" name="load_type">
+                  <mat-option *ngFor="let lt of load_type" [value]="lt">
+                    {{ lt }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
 
             <div class="col-md-1 form-group bmd-form-group">
@@ -162,13 +128,6 @@
 
           </div>
 
-          <!--
-          <div class="form-row">
-            <div class="col-md-1 form-group bmd-form-group">
-              <input type="tel" class="form-control">$
-            </div>
-          </div>
-          -->
 
         </div>
         <button type="reset" class="btn btn-outline-primary">Reset</button>
