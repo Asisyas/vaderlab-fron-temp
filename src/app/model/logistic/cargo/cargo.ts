@@ -49,6 +49,8 @@ export class Cargo implements LogisticEntityInterface {
     ) {
       this.id = id;
       this.title = title;
+      this.updated_at = updated_at;
+      this.created_at = created_at;
       this.departure_coordinates = departure;
       this.arrival_coordinates = arrival;
       this.arrival_date = arrival_date;
