@@ -87,7 +87,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-md-3 form-group bmd-form-group">
+            <div class="col-md-3">
               <mat-form-field>
                 <mat-select placeholder="Load type"  [(ngModel)]="cargo.load_type" name="load_type">
                   <mat-option *ngFor="let lt of load_type" [value]="lt">
@@ -97,7 +97,7 @@
               </mat-form-field>
             </div>
 
-            <div class="col-md-1 form-group bmd-form-group">
+            <div class="col-md-1">
               <label for="cargo-weight"> Weight </label>
               <input
                 type="number"
