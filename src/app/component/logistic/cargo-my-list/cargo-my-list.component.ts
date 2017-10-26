@@ -16,6 +16,7 @@ export class CargoMyListComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(CargoCreateComponent, {
+      disableClose: true,
       // height: '400px'
     });
 

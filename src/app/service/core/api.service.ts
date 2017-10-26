@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import {Http, Request, RequestMethod, ResponseContentType} from '@angular/http';
+import {Http, Request, RequestMethod, ResponseContentType, Headers} from '@angular/http';
 import {ToastOptions, ToastyConfig, ToastyService} from 'ng2-toasty';
+import {OAuthService} from 'angular2-oauth2/oauth-service';
+
+declare var sessionStorage;
 
 @Injectable()
 export class ApiService {
 
   private _base_url: string;
 
-  constructor(private http: Http, private toastyService: ToastyService, private toastyConfig: ToastyConfig) {
+  constructor(
+    private oAuthService: OAuthService,
+    private http: Http,
+    private toastyService: ToastyService,
+    private toastyConfig: ToastyConfig) {
+
     this.toastyConfig.theme = 'material';
     let vb = environment.base_backend_url;
     if (!vb.endsWith('/')) {
@@ -28,11 +36,14 @@ export class ApiService {
       path = path.slice(1);
     }
 
+
+
     const req: Request = new Request({
       url: this._base_url + path,
       method: method,
       responseType: responseType,
-      body: data
+      body: data,
+      headers: this.createHeaders()
     });
 
     return this.http
@@ -41,6 +52,18 @@ export class ApiService {
       .catch((reason: any) => {
         return this.handleError(reason);
       });
+  }
+
+
+
+  private createHeaders() {
+    const headers = new Headers();
+    const access_token = this.oAuthService.getAccessToken();
+    if(access_token) {
+      headers.append('Authorization', 'Bearer ' + access_token);
+    }
+
+    return headers;
   }
 
   private handleError(error: any): Promise<any> {

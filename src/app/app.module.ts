@@ -20,12 +20,14 @@ import {CargoService} from './service/logictic/cargo/cargo.service';
 import {HttpModule} from '@angular/http';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {ToastyModule} from 'ng2-toasty';
+import { OAuthService } from 'angular2-oauth2/oauth-service';
 
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
   MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
   MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule,
 } from '@angular/material';
+import {AuthService} from "./service/secured/auth-service";
 
 @NgModule({
   declarations: [
@@ -61,8 +63,10 @@ import {
   ],
   entryComponents: [CargoCreateComponent],
   providers: [
+    OAuthService,
     ApiService,
     CargoService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
