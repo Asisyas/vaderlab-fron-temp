@@ -13,6 +13,9 @@ export class GeocoderComponent implements OnInit {
   @Input()
   public placeholder: string;
 
+  @Input()
+  public required: any;
+
   private _position: google.maps.places.PlaceResult;
 
   private _types: string[] = ['address'];

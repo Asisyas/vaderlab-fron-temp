@@ -24,7 +24,7 @@ import {ToastyModule} from 'ng2-toasty';
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
   MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
-  MatNativeDateModule, MatSelectModule,
+  MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule,
 } from '@angular/material';
 
 @NgModule({
@@ -48,7 +48,8 @@ import {
     /** **/
     MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
     MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
-    MatNativeDateModule, MatSelectModule,
+    MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule,
+    MatIconModule,
     /** **/
 
     ToastyModule.forRoot(),
@@ -58,6 +59,7 @@ import {
       libraries: ['places']
     })
   ],
+  entryComponents: [CargoCreateComponent],
   providers: [
     ApiService,
     CargoService,

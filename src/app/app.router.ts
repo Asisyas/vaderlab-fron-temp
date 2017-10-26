@@ -11,15 +11,18 @@ const CARGO_ROUTES = [
   },
   {
     path: 'my', component: CargoMyListComponent
-  },
-  {
-    path: 'create', component: CargoCreateComponent,
   }
 ];
+
+const CARGO_SUB_ROUTES = [
+  { path: '/cargo/search', 'label': 'Search' },
+  { path: '/cargo/my', 'label': 'My Cargo'  },
+];
+
 
 
 export const APP_ROUTES: Routes = [
   {
-    path: 'cargo', component: SubHeaderComponent, children: CARGO_ROUTES, data: { 'menu_items': '' }
+    path: 'cargo', component: SubHeaderComponent, children: CARGO_ROUTES, data: { 'menu_items': CARGO_SUB_ROUTES }
   }
 ];

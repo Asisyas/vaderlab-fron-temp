@@ -1,5 +1,5 @@
+<!--
 <nav class="navbar navbar-header navbar-expand-lg navbar-light">
-  <!-- <div class="collapse navbar-collapse"> -->
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
       <a class="nav-link" href="/cargo/search" routerLink="/cargo/search" routerLinkActive="active">
@@ -14,12 +14,24 @@
       <a class="nav-link" href="/cargo/my" routerLink="/cargo/my" routerLinkActive="active">My Cargo</a>
     </li>
   </ul>
-  <!-- </div> -->
 
   <span class="navbar-text">
       Navbar text with an inline element
     </span>
 
+</nav>
+
+-->
+
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     *ngFor="let link of menu_items"
+     [routerLink]="link.path"
+     routerLinkActive #rla="routerLinkActive"
+     [active]="rla.isActive">
+    {{link.label}}
+  </a>
 </nav>
 
 <router-outlet></router-outlet>

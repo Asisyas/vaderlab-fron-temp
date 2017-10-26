@@ -1,31 +1,23 @@
-<div class="container" style="margin-top: 10px;">
-
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Create new cargo</h4>
-      <h6 class="card-subtitle mb-2 text-muted"></h6>
-      <form #f="ngForm" (submit)="onSubmit(f)">
-        <div class="card-block">
-
+<form #f="ngForm" (submit)="onSubmit(f)">
+    <mat-dialog-content>
+      <div mat-dialog-title>Cargo create</div>
           <div class="row">
 
             <div class="col-md-6">
-                <app-input-geocoder
-                  #geocoder_departure_input
-                  placeholder="Departure city"
-                  id="cargo-departure"
-                  aria-describedby="cargo-departure-help"
-                  [types]="['(cities)']"
-                ></app-input-geocoder>
+              <app-input-geocoder
+                required
+                #geocoder_departure_input
+                placeholder="Departure city"
+                [types]="['(cities)']"
+              ></app-input-geocoder>
             </div>
 
             <div class="col-md-6 from-froup ">
               <app-input-geocoder
+                required
                 #geocoder_arrival_input
                 placeholder="Arrival city"
-                id="cargo-arrival"
                 [types]="['(cities)']"
-                aria-describedby="cargo-departure-help"
               ></app-input-geocoder>
             </div>
 
@@ -55,7 +47,8 @@
                   name="departure_date"
                 >
                 <mat-datepicker-toggle matSuffix [for]="departure_date"></mat-datepicker-toggle>
-                <mat-datepicker #departure_date></mat-datepicker>
+                <mat-datepicker [startAt]="date_now" #departure_date></mat-datepicker>
+
               </mat-form-field>
             </div>
             <div class="col-md-3" [(attr.disabled)]="cargo.is_permanent || !cargo.departure_date">
@@ -68,7 +61,11 @@
                   name="arrival_date"
                 >
                 <mat-datepicker-toggle matSuffix [for]="arrival_date"></mat-datepicker-toggle>
-                <mat-datepicker #arrival_date></mat-datepicker>
+                <mat-datepicker
+                  #arrival_date
+                  [(startAt)]="cargo.departure_date"
+                  [(startView)]="cargo.departure_date"
+                ></mat-datepicker>
               </mat-form-field>
 
             </div>
@@ -98,41 +95,38 @@
             </div>
 
             <div class="col-md-1">
-              <label for="cargo-weight"> Weight </label>
-              <input
-                type="number"
-                class="form-control"
-                id="cargo-weight"
-                aria-describedby="cargo-departure-date-help"
-                placeholder="0.00"
-                value="{{ cargo.weight }}"
-                [(ngModel)]="cargo.weight"
-                name="weight"
-              >
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Weight"
+                  value="{{ cargo.weight }}"
+                  [(ngModel)]="cargo.weight"
+                  name="weight"
+                >
+              </mat-form-field>
             </div>
 
 
-            <div class="col-md-1 form-group bmd-form-group">
-              <label for="cargo-volume"> Volume </label>
-              <input
-                type="number"
-                class="form-control"
-                id="cargo-volume"
-                aria-describedby="cargo-departure-date-help"
-                placeholder="0.00"
-                value="{{ cargo.volume }}"
-                [(ngModel)]="cargo.volume"
-                name="volume"
-              >
+            <div class="col-md-1">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Volume"
+                  value="{{ cargo.volume }}"
+                  [(ngModel)]="cargo.volume"
+                  name="volume"
+                >
+              </mat-form-field>
             </div>
 
           </div>
+    </mat-dialog-content>
 
-
-        </div>
-        <button type="reset" class="btn btn-outline-primary">Reset</button>
-        <button type="submit" class="btn btn-primary btn-raised">Create</button>
-      </form>
-    </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancelCreation($event)">Cancel</button>
+    <button mat-raised-button type="reset">Reset</button>
+    <button mat-raised-button type="submit" color="primary">Create</button>
   </div>
-</div>
+</form>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, Inject} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {Cargo} from '../../../model/logistic/cargo/cargo';
 import {LOAD_TYPE} from '../../../enum/logistic/load-type';
@@ -6,6 +6,7 @@ import {TRANSPORT_TYPE} from '../../../enum/logistic/transport-type';
 import PlaceResult = google.maps.places.PlaceResult;
 import {LatLng} from '../../../model/logistic/cargo/LatLng';
 import {CargoService} from '../../../service/logictic/cargo/cargo.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-cargo-create',
@@ -16,17 +17,20 @@ export class CargoCreateComponent implements OnInit {
 
   @Input()
   public cargo: Cargo;
-
   public transport_type: object = TRANSPORT_TYPE;
   public load_type: object = LOAD_TYPE;
-
   private _errors: object;
+  public date_now: Date;
 
   @ViewChild('geocoder_arrival_input') arrival_place_component;
 
   @ViewChild('geocoder_departure_input') departure_place_component;
 
-  constructor(private cargo_service: CargoService) {
+  constructor(
+    public dialogRef: MatDialogRef<CargoCreateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private cargo_service: CargoService) {
+    this.date_now = new Date();
   }
 
   protected static _updateposition(place: PlaceResult) {
@@ -40,14 +44,20 @@ export class CargoCreateComponent implements OnInit {
     };
   }
 
+  cancelCreation(evt: Event): void {
+    evt.preventDefault();
+
+    this.dialogRef.close(null);
+  }
+
   onSubmit(f: NgForm) {
     this.updatePosition();
     this.updateExternalData();
     console.log(this.cargo);
 
-    this.cargo_service.create(this.cargo).catch(error => {
-
-    });
+    this.cargo_service.create(this.cargo)
+      .then(cargo => this.dialogRef.close(cargo))
+      .catch(error => {});
   }
 
   protected updateExternalData() {
