@@ -59,7 +59,7 @@ export class ApiService {
   private createHeaders() {
     const headers = new Headers();
     const access_token = this.oAuthService.getAccessToken();
-    if(access_token) {
+    if (access_token) {
       headers.append('Authorization', 'Bearer ' + access_token);
     }
 

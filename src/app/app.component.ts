@@ -4,7 +4,6 @@ import {ApiService} from './service/core/api.service';
 import {AuthService} from "./service/secured/auth-service";
 
 declare var $;
-declare var sessionStorage;
 
 @Component({
   selector: 'app-root',

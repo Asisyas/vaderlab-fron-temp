@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import {Headers, Http} from '@angular/http';
 import {OAuthService} from 'angular2-oauth2/oauth-service';
 import {environment} from '../../../environments/environment';
-
-declare var sessionStorage;
+import {SessionService} from '../core/session.service';
+import {UserInterface} from '../../model/user/user-interface';
 
 @Injectable()
 export class AuthService {
 
   constructor(    private oAuthService: OAuthService,
+                  private sessionService: SessionService,
                   private http: Http) {
     this.oAuthService.loginUrl = environment.vaderlab_oauth_login_url;
     this.oAuthService.redirectUri = environment.vaderlab_oauth_redirect_uri;
@@ -16,10 +17,9 @@ export class AuthService {
     this.oAuthService.issuer = environment.vaderlab_oauth_client_issuer;
     this.oAuthService.scope = environment.vaderlab_oauth_scope;
     this.oAuthService.oidc = false;
-    this.oAuthService.setStorage(sessionStorage);
+    this.oAuthService.setStorage(sessionService);
     this.oAuthService.logoutUrl = environment.vaderlab_oauth_logout_url;
-    this._onJwtLogin(this.oAuthService.tryLogin({}));
-
+    console.log(this.oAuthService.tryLogin({}));
   }
 
   public login() {
@@ -44,13 +44,13 @@ export class AuthService {
   }
 
   protected _onJwtLogin(status: boolean) {
+    console.log(status);
     if (!status) {
       return;
     }
 
-    this.http.get(environment.vaderlab_cargo_jwt_auth_url, {
-      'params': { 'vaderlab_bearer': this.oAuthService.getAccessToken()}
-    }).toPromise().then(data => console.log(data.json()));
-  }
+    const vaderlabAccessToken = this.oAuthService.getAccessToken();
 
+    console.log(vaderlabAccessToken);
+  }
 }

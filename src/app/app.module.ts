@@ -16,10 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.component';
 import { AgmCoreModule } from '@agm/core';
 import { ApiService } from './service/core/api.service';
-import {CargoService} from './service/logictic/cargo/cargo.service';
-import {HttpModule} from '@angular/http';
-import {TimeAgoPipe} from 'time-ago-pipe';
-import {ToastyModule} from 'ng2-toasty';
+import { CargoService } from './service/logictic/cargo/cargo.service';
+import { HttpModule } from '@angular/http';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { ToastyModule } from 'ng2-toasty';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 
 import {
@@ -27,7 +27,9 @@ import {
   MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
   MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule,
 } from '@angular/material';
-import {AuthService} from "./service/secured/auth-service";
+
+import { AuthService } from './service/secured/auth-service';
+import { SessionService } from './service/core/session.service';
 
 @NgModule({
   declarations: [
@@ -63,10 +65,11 @@ import {AuthService} from "./service/secured/auth-service";
   ],
   entryComponents: [CargoCreateComponent],
   providers: [
+    SessionService,
     OAuthService,
     ApiService,
     CargoService,
-    AuthService
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })
