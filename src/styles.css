@@ -45,3 +45,19 @@ select.form-control {
 mat-form-field.mat-form-field{
   width: 100%;
 }
+
+.list.item {
+  position: relative;
+  z-index: 90;
+  margin-top: 5px;
+}
+
+.assets {
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+.miscellanious {
+  margin-top: 1rem;
+}

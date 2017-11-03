@@ -19,7 +19,7 @@ export class AuthService {
     this.oAuthService.oidc = false;
     this.oAuthService.setStorage(sessionService);
     this.oAuthService.logoutUrl = environment.vaderlab_oauth_logout_url;
-    console.log(this.oAuthService.tryLogin({}));
+    this.oAuthService.tryLogin({});
   }
 
   public login() {
@@ -41,16 +41,5 @@ export class AuthService {
 
   public get vaderlabIdToken() {
     return this.oAuthService.getIdToken();
-  }
-
-  protected _onJwtLogin(status: boolean) {
-    console.log(status);
-    if (!status) {
-      return;
-    }
-
-    const vaderlabAccessToken = this.oAuthService.getAccessToken();
-
-    console.log(vaderlabAccessToken);
   }
 }

@@ -1,0 +1,5 @@
+<div *ngFor="let component of place['address_components'] ">
+  <div *ngIf="isCity(component)" class="city"><strong>{{ component.long_name }}</strong></div>
+  <div *ngIf="isRegion(component)" class="region">{{ component.long_name }}</div>
+  <div *ngIf="isCountry(component)" class="country">{{ component.short_name }}</div>
+</div>

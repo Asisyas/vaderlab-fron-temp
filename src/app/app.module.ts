@@ -30,6 +30,8 @@ import {
 
 import { AuthService } from './service/secured/auth-service';
 import { SessionService } from './service/core/session.service';
+import { GeocoderService } from './service/google/geocoder/geocoder.service';
+import { GooglePlaceidComponent } from './control/google-placeid/google-placeid.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { SessionService } from './service/core/session.service';
     CargoCreateComponent,
     CargoMyListComponent,
     GeocoderComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    GooglePlaceidComponent
   ],
   imports: [
     HttpModule,
@@ -60,7 +63,8 @@ import { SessionService } from './service/core/session.service';
     RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router }),
     AgmCoreModule.forRoot({
       apiKey: environment.maps_google_api_key,
-      libraries: ['places']
+      libraries: ['places'],
+      language: 'ru',
     })
   ],
   entryComponents: [CargoCreateComponent],
@@ -70,6 +74,7 @@ import { SessionService } from './service/core/session.service';
     ApiService,
     CargoService,
     AuthService,
+    GeocoderService
   ],
   bootstrap: [AppComponent]
 })

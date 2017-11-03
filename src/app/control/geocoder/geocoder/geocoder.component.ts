@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
-import {FormControl} from '@angular/forms';
 import { } from 'googlemaps';
+import {GeocoderService} from '../../../service/google/geocoder/geocoder.service';
 
 @Component({
   selector: 'app-input-geocoder',
@@ -16,7 +16,10 @@ export class GeocoderComponent implements OnInit {
   @Input()
   public required: any;
 
-  private _position: google.maps.places.PlaceResult;
+  @Input()
+  public google_id?: string;
+
+  private _position: google.maps.GeocoderResult;
 
   private _types: string[] = ['address'];
 
@@ -24,15 +27,17 @@ export class GeocoderComponent implements OnInit {
   public searchElementRef: ElementRef;
 
   constructor(private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private geocoderService: GeocoderService
+              ) {
   }
 
   @Input()
-  set position(place: google.maps.places.PlaceResult) {
+  set position(place: google.maps.GeocoderResult) {
     this._position = place;
   }
 
-  get position(): google.maps.places.PlaceResult {
+  get position(): google.maps.GeocoderResult {
     return this._position;
   }
 
@@ -52,9 +57,17 @@ export class GeocoderComponent implements OnInit {
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          this.position = autocomplete.getPlace();
+          this.geocoderService.geocodePlaceId(autocomplete.getPlace().place_id)
+            .then(data => this.position = data);
         });
       });
+
+      if (this.google_id) {
+        this.geocoderService.geocodePlaceId(this.google_id)
+          .then((res: google.maps.GeocoderResult) => {
+            this.position = res;
+          });
+      }
     });
   }
 }

@@ -3,7 +3,7 @@ import {LatLng} from './cargo/LatLng';
 export interface LogisticEntityInterface {
   id: number;
   is_permanent: boolean;
-  external_data: object;
+  extra_data: object;
   created_at: Date;
   updated_at: Date;
   arrival_date: Date;

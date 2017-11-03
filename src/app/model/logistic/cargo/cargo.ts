@@ -29,7 +29,7 @@ export class Cargo implements LogisticEntityInterface {
 
   public is_permanent: boolean;
 
-  public external_data: object;
+  public extra_data: object;
 
   constructor(
     id: number = null,
@@ -60,6 +60,6 @@ export class Cargo implements LogisticEntityInterface {
       this.load_type = load_type;
       this.weight = weight;
       this.volume = volume;
-      this.external_data = external_data;
+      this.extra_data = external_data;
   }
 }

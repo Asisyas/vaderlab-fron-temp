@@ -33,14 +33,15 @@ export class CargoCreateComponent implements OnInit {
     this.date_now = new Date();
   }
 
-  protected static _updateposition(place: PlaceResult) {
+  protected static _updateposition(place): LatLng {
     if (!place || !place.geometry) {
       return null;
     }
 
+
     return {
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng()
+      lat: place.geometry.location.lat,
+      lng: place.geometry.location.lng
     };
   }
 
@@ -58,11 +59,21 @@ export class CargoCreateComponent implements OnInit {
     this.cargo_service.create(this.cargo)
       .then(cargo => this.dialogRef.close(cargo))
       .catch(error => {});
+
+    return false;
   }
 
   protected updateExternalData() {
-    this.cargo.external_data['position_arrival'] = {};
-    this.cargo.external_data['position_departure'] = {};
+    this.cargo.extra_data['arrival_position'] = this._parsePosition(this.arrival_place_component.position);
+    this.cargo.extra_data['departure_position'] = this._parsePosition(this.departure_place_component.position);
+  }
+
+  protected _parsePosition(position) {
+    console.log(position);
+    const tmp: object = {};
+    tmp['google_place_id'] = position.place_id;
+
+    return tmp;
   }
 
   protected updatePosition() {

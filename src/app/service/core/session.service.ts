@@ -31,11 +31,16 @@ export class SessionService implements Storage {
   }
 
   public getItem(key: string, def: any = null): any {
-    return localStorage.getItem(this.createKey(key));
+    const val = localStorage.getItem(this.createKey(key));
+    try {
+      return JSON.parse(val);
+    } catch (e) {
+      return val;
+    }
   }
 
   public setItem(key: string, val: any) {
-    localStorage.setItem(this.createKey(key), val);
+    localStorage.setItem(this.createKey(key), this.prepareVal(val));
   }
 
   public clear() {
@@ -59,6 +64,14 @@ export class SessionService implements Storage {
     const id = localStorage.getItem(SessionService.KEY_CURRENT_USR_ID);
 
     return id || '';
+  }
+
+  protected prepareVal(val: any) {
+    if ((/string|number|boolean/).test(typeof val)) {
+     return val;
+    }
+
+    return JSON.stringify(val);
   }
 
   protected createKey(pubkey: string) {
