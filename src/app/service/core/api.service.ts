@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import {Http, Request, RequestMethod, ResponseContentType, Headers} from '@angular/http';
 import {ToastOptions, ToastyConfig, ToastyService} from 'ng2-toasty';
 import {OAuthService} from 'angular2-oauth2/oauth-service';
+import {Observable} from 'rxjs/Observable';
 
 declare var sessionStorage;
 
@@ -10,6 +11,7 @@ declare var sessionStorage;
 export class ApiService {
 
   private _base_url: string;
+  private _errorCode?: number;
 
   constructor(
     private oAuthService: OAuthService,
@@ -66,8 +68,11 @@ export class ApiService {
     return headers;
   }
 
+  public getErrorCodeObserver() {
+    return Observable.of(this._errorCode);
+  }
+
   private handleError(error: any): Promise<any> {
-//    console.error('An error occurred', error); // for demo purposes only
     this.showErrorMessage(error);
     return Promise.reject(error.message || error);
   }

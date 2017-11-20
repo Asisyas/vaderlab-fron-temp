@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { APP_ROUTES } from './app.router';
 import { environment } from '../environments/environment';
@@ -25,13 +25,23 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
   MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
-  MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule,
+  MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule, MatMenuModule,
+  MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule, MatTableModule, MatSortModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 import { AuthService } from './service/secured/auth-service';
 import { SessionService } from './service/core/session.service';
 import { GeocoderService } from './service/google/geocoder/geocoder.service';
 import { GooglePlaceidComponent } from './control/google-placeid/google-placeid.component';
+import {UserService} from './service/user/user.service';
+import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -46,6 +56,14 @@ import { GooglePlaceidComponent } from './control/google-placeid/google-placeid.
     GooglePlaceidComponent
   ],
   imports: [
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+    HttpClientModule,
     HttpModule,
     BrowserAnimationsModule,
     DatepickerModule,
@@ -56,7 +74,8 @@ import { GooglePlaceidComponent } from './control/google-placeid/google-placeid.
     MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
     MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
     MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule,
-    MatIconModule,
+    MatIconModule, MatMenuModule, MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatTableModule, MatSortModule, MatTooltipModule,
     /** **/
 
     ToastyModule.forRoot(),
@@ -69,14 +88,22 @@ import { GooglePlaceidComponent } from './control/google-placeid/google-placeid.
   ],
   entryComponents: [CargoCreateComponent],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'RU'
+    },
+    UserService,
     SessionService,
     OAuthService,
     ApiService,
     CargoService,
     AuthService,
-    GeocoderService
+    GeocoderService,
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(translate: TranslateService) {
+    translate.setDefaultLang('ru');
+  }
 }

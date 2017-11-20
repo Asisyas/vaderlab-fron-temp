@@ -1,6 +1,28 @@
 <mat-toolbar color="primary">
   <button mat-button> Cargo Vaderlab</button>
 
-  <a mat-button routerLink="/cargo/search" routerLinkActive="true"> Cargo </a>
-  <a mat-button routerLink="/cargo/search"> Transport </a>
+  <a mat-button routerLink="/cargo/search" href="/cargo/search" routerLinkActive="true"> {{ 'Cargo'| translate }} </a>
+  <a mat-button routerLink="/cargo/search" href="/cargo/search" translate> {{ 'Transport'| translate }}</a>
+
+  <span class="right-space"></span>
+  <div *ngIf="userService.inited">
+    <button mat-button="" *ngIf="userService.user == null" (click)="authService.login()">
+      <mat-icon> input </mat-icon>
+      {{ 'Sign in'| translate }}
+    </button>
+
+    <div *ngIf="userService.user">
+      <button mat-button="" [matMenuTriggerFor]="menu">
+        <mat-icon> account_circle </mat-icon>
+        {{ userService.user.user_information['name_first'] }}
+        {{ userService.user.user_information['name_last'] }}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="authService.logout()">
+          <mat-icon> power_settings_new </mat-icon>
+          <span >{{ 'Logout'| translate  }}</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
 </mat-toolbar>

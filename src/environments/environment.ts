@@ -9,15 +9,14 @@ export const environment = {
   debug_router: false,
 
   vaderlab_oauth_login_url: 'https://www.vaderlab.com/en/oauth/v2/auth',
-  vaderlab_oauth_redirect_uri: 'http://127.0.0.1:4200/',
+  vaderlab_oauth_redirect_uri: 'http://localhost:4200/',
   vaderlab_oauth_client_id: '1_42wvpowlyd4w0oookcw800kc4oo8gscsgw0wokk4oocssk4o40',
   vaderlab_oauth_client_issuer: 'https://www.vaderlab.com/api/user/current.json',
   vaderlab_oauth_scope: '',
-  vaderlab_oauth_logout_url: 'https://www.vaderlab.com/en/logout',
+  vaderlab_oauth_logout_url: '', //https://www.vaderlab.com/en/logout
 
   maps_google_api_key: 'AIzaSyBDPbGjIEEblXPDVpOObMBjwJsp5AG7r64',
   maps_yandex_api_key: '',
   maps_mapquest_api_key: '',
   maps_bing_api_key: '',
-
 };

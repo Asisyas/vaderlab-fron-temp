@@ -41,7 +41,7 @@
         </div>
         <div class="col-2"><b>{{ cargo.transport_type }}</b> {{ cargo.load_type}}
           <span *ngIf="cargo.weight"> • {{ cargo.weight }}т.</span>
-          <span *ngIf="cargo.volume"> • {{cargo.volume}}м³ </span>
+          <span *ngIf="cargo.volume"> • {{ cargo.volume }}м³ </span>
         </div>
         <div class="col-2">{{ cargo.title }}</div>
       </div>

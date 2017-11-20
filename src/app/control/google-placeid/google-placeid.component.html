@@ -1,5 +1,21 @@
-<div *ngFor="let component of place['address_components'] ">
-  <div *ngIf="isCity(component)" class="city"><strong>{{ component.long_name }}</strong></div>
-  <div *ngIf="isRegion(component)" class="region">{{ component.long_name }}</div>
-  <div *ngIf="isCountry(component)" class="country">{{ component.short_name }}</div>
-</div>
+<span [matTooltip]='tooltipValue' [matTooltipPosition]="'above'">
+
+  <span *ngIf="addressData['country'] && visibleItems['flag']"
+        class="country flag-icon flag-icon-{{ addressData['country'].short_name |lowercase }} flag-icon-squared">
+  </span>
+
+  <span *ngIf="addressData['city'] && visibleItems['city']" class="city">
+    <strong>{{ addressData['city'].long_name }}</strong>
+  </span>
+  <span *ngIf="addressData['region'] && visibleItems['region']" class="region">
+    {{ addressData['region'].long_name }}
+  </span>
+
+  <span *ngIf="addressData['country'] && visibleItems['country']" class="country">
+    <strong>{{ addressData['country'].long_name }}</strong>
+  </span>
+
+  <span *ngIf="addressData['country'] && visibleItems['country_short']" class="country">
+    <strong>{{ addressData['country'].short_name }}</strong>
+  </span>
+</span>

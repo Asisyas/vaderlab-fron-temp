@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import {Headers, Http} from '@angular/http';
 import {OAuthService} from 'angular2-oauth2/oauth-service';
 import {environment} from '../../../environments/environment';
 import {SessionService} from '../core/session.service';
-import {UserInterface} from '../../model/user/user-interface';
+
+declare var document;
 
 @Injectable()
 export class AuthService {
 
   constructor(    private oAuthService: OAuthService,
-                  private sessionService: SessionService,
-                  private http: Http) {
+                  private sessionService: SessionService
+  ) {
     this.oAuthService.loginUrl = environment.vaderlab_oauth_login_url;
     this.oAuthService.redirectUri = environment.vaderlab_oauth_redirect_uri;
     this.oAuthService.clientId = environment.vaderlab_oauth_client_id;
@@ -28,18 +28,6 @@ export class AuthService {
 
   public logout() {
     this.oAuthService.logOut();
-  }
-
-
-  public get vaderlabOauthToken() {
-    return this.oAuthService.getAccessToken();
-  }
-
-  public get vaderlaboauthScope() {
-    return this.oAuthService.scope;
-  }
-
-  public get vaderlabIdToken() {
-    return this.oAuthService.getIdToken();
+    document.location.reload();
   }
 }

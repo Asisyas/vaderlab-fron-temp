@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {OAuthService} from 'angular2-oauth2/oauth-service';
 import {ApiService} from './service/core/api.service';
 import {AuthService} from "./service/secured/auth-service";
+import {UserService} from "./service/user/user.service";
 
 declare var $;
 
@@ -16,23 +17,18 @@ export class AppComponent implements OnInit {
 
   title = 'app';
 
-  constructor(private securedservice: AuthService) {
+  @Input()
+  ready =  false;
+
+  constructor(
+    private userService: UserService
+  ) {
+    this.userService.initedStateObserver().subscribe((ready) => {
+      this.ready = ready;
+    });
   }
 
   ngOnInit(): void {
     $('body').bootstrapMaterialDesign();
   }
-
-  public login() {
-    this.securedservice.login();
-  }
-
-  public logoff() {
-    this.securedservice.logout();
-  }
-
-  public get name() {
-    return '';
-  }
-
 }

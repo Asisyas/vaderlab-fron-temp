@@ -6,6 +6,7 @@ export class User implements UserInterface {
   private _username: string;
   private _roles: string[];
   private _groups: string[];
+  private _user_information: object;
 
   public get id(): number {
     return this._id;
@@ -37,5 +38,13 @@ export class User implements UserInterface {
 
   public set groups(groups: string[]) {
     this._groups = groups;
+  }
+
+  public get user_information() {
+    return this._user_information;
+  }
+
+  public set user_information(user_information: object) {
+    this._user_information = user_information;
   }
 }

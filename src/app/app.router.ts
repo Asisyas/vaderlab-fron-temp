@@ -15,8 +15,8 @@ const CARGO_ROUTES = [
 ];
 
 const CARGO_SUB_ROUTES = [
-  { path: '/cargo/search', 'label': 'Search' },
-  { path: '/cargo/my', 'label': 'My Cargo'  },
+  { path: '/cargo/search', 'label': 'Search', secured: false, },
+  { path: '/cargo/my', 'label': 'My Cargo', secured: true,  },
 ];
 
 

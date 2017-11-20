@@ -22,6 +22,7 @@
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css",
         "../node_modules/ng2-toasty/style-material.css",
+        "../node_modules/flag-icon-css/css/flag-icon.min.css",
         "styles.css"
       ],
       "scripts": [

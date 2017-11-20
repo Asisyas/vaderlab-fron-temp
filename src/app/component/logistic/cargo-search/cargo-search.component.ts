@@ -15,10 +15,11 @@ export class CargoSearchComponent implements OnInit {
   private cargoCollection: Cargo[];
 
   ngOnInit() {
-    this.cargo_service.search().then(cargo => {
+    /*this.cargo_service.search().then(cargo => {
       this.cargoCollection = <Cargo[]>cargo;
       console.log(this.cargoCollection);
     });
+    */
   }
 
 }

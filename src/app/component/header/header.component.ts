@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../service/user/user.service';
+import {AuthService} from "../../service/secured/auth-service";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,8 @@ export class HeaderComponent implements OnInit {
 
   public navLinks: any;
 
-  constructor() {
+  constructor(public userService: UserService,
+              public authService: AuthService) {
 
     this.navLinks = [
       { path: '/cargo/search', label: 'Cargo' },

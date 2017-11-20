@@ -54,7 +54,6 @@ export class CargoCreateComponent implements OnInit {
   onSubmit(f: NgForm) {
     this.updatePosition();
     this.updateExternalData();
-    console.log(this.cargo);
 
     this.cargo_service.create(this.cargo)
       .then(cargo => this.dialogRef.close(cargo))
@@ -69,7 +68,10 @@ export class CargoCreateComponent implements OnInit {
   }
 
   protected _parsePosition(position) {
-    console.log(position);
+    if(!position) {
+      return null;
+    }
+
     const tmp: object = {};
     tmp['google_place_id'] = position.place_id;
 

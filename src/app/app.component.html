@@ -1,4 +1,9 @@
+<div *ngIf="ready == false" class="loading-blocker">
+  <mat-progress-bar class="loading-blocker__card"
+                    [color]="'primary'"
+                    [mode]="'indeterminate'">
+  </mat-progress-bar>
+</div>
 <ng2-toasty [position]="'top-center'"></ng2-toasty>
-<button (click)="login()"> LOGIN {{ name }} </button>
 <app-header></app-header>
 <router-outlet></router-outlet>

@@ -1,13 +1,14 @@
 <form #f="ngForm" (submit)="onSubmit(f)">
     <mat-dialog-content>
-      <div mat-dialog-title>Cargo create</div>
+      <div mat-dialog-title>{{ 'New Cargo'| translate }}</div>
           <div class="row">
 
             <div class="col-md-6">
               <app-input-geocoder
                 required
                 #geocoder_departure_input
-                placeholder="Departure city"
+                i18n-placeholder
+                placeholder="{{ 'Departure city' | translate }}"
                 [types]="['(cities)']"
               ></app-input-geocoder>
             </div>
@@ -16,7 +17,7 @@
               <app-input-geocoder
                 required
                 #geocoder_arrival_input
-                placeholder="Arrival city"
+                placeholder="{{ 'Arrival city' | translate }}"
                 [types]="['(cities)']"
               ></app-input-geocoder>
             </div>
@@ -30,7 +31,7 @@
                   matInput
                   required
                   maxlength="30"
-                  placeholder="Short description"
+                  placeholder="{{ 'Short description'|translate }}"
                   value="{{ cargo.title }}"
                   [(ngModel)]="cargo.title"
                   name="title"
@@ -41,7 +42,7 @@
               <mat-form-field>
                 <input
                   matInput [matDatepicker]="departure_date"
-                  placeholder="Date of download"
+                  placeholder="{{ 'Date of download'|translate }}"
                   [(disabled)]="cargo.is_permanent"
                   [(ngModel)]="cargo.departure_date"
                   name="departure_date"
@@ -55,7 +56,7 @@
               <mat-form-field>
                 <input
                   matInput [matDatepicker]="arrival_date"
-                  placeholder="Date of uploading"
+                  placeholder="{{ 'Date of uploading' | translate}}"
                   [(disabled)]="cargo.is_permanent || !cargo.departure_date"
                   [(ngModel)]="cargo.arrival_date"
                   name="arrival_date"
@@ -70,25 +71,25 @@
 
             </div>
             <div class="col-md-2">
-              <mat-checkbox name="permanent" [(ngModel)]="cargo.is_permanent">Permanent</mat-checkbox>
+              <mat-checkbox name="permanent" [(ngModel)]="cargo.is_permanent">{{ 'Is Permanent'| translate }}</mat-checkbox>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-3">
               <mat-form-field>
-                <mat-select placeholder="Body type"  [(ngModel)]="cargo.transport_type" name="transport_type">
+                <mat-select placeholder="{{ 'Body type' | translate }}"  [(ngModel)]="cargo.transport_type" name="transport_type">
                   <mat-option *ngFor="let tt of transport_type" [value]="tt">
-                    {{ tt }}
+                    {{ tt|translate }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="col-md-3">
               <mat-form-field>
-                <mat-select placeholder="Load type"  [(ngModel)]="cargo.load_type" name="load_type">
+                <mat-select placeholder="{{ 'Load type'| translate }}"  [(ngModel)]="cargo.load_type" name="load_type">
                   <mat-option *ngFor="let lt of load_type" [value]="lt">
-                    {{ lt }}
+                    {{ lt|translate }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -99,7 +100,7 @@
                 <input
                   matInput
                   type="number"
-                  placeholder="Weight"
+                  placeholder="{{ 'Weight'|translate }}"
                   value="{{ cargo.weight }}"
                   [(ngModel)]="cargo.weight"
                   name="weight"
@@ -113,7 +114,7 @@
                 <input
                   matInput
                   type="number"
-                  placeholder="Volume"
+                  placeholder="{{ 'Volume' | translate }}"
                   value="{{ cargo.volume }}"
                   [(ngModel)]="cargo.volume"
                   name="volume"
@@ -125,8 +126,8 @@
     </mat-dialog-content>
 
   <div mat-dialog-actions>
-    <button mat-button (click)="cancelCreation($event)">Cancel</button>
-    <button mat-raised-button type="reset">Reset</button>
-    <button mat-raised-button type="submit" color="primary">Create</button>
+    <button mat-button (click)="cancelCreation($event)" i18n> {{ 'Cancel'| translate }}</button>
+    <button mat-raised-button type="reset" i18n>{{ 'Reset' | translate}}</button>
+    <button mat-raised-button type="submit" color="primary" i18n>{{ 'Create'|translate }}</button>
   </div>
 </form>
