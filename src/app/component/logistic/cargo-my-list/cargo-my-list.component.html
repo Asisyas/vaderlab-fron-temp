@@ -40,7 +40,7 @@
       <mat-cell *matCellDef="let row">
         <app-google-placeid
           [viewItems]="['flag', 'city']"
-          [placeId]="row.extra_data['departure_position'].google_place_id"
+          [placeId]="row.departure_place"
         >
         </app-google-placeid>
       </mat-cell>
@@ -51,7 +51,7 @@
       <mat-cell *matCellDef="let row">
         <app-google-placeid
           [viewItems]="['flag', 'city']"
-          [placeId]="row.extra_data['arrival_position'].google_place_id"
+          [placeId]="row.arrival_place"
         >
         </app-google-placeid>
       </mat-cell>

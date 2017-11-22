@@ -8,6 +8,6 @@ export interface LogisticEntityInterface {
   updated_at: Date;
   arrival_date: Date;
   departure_date: Date;
-  arrival_coordinates: LatLng;
-  departure_coordinates: LatLng;
+  arrival_place: string;
+  departure_place: string;
 }

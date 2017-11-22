@@ -13,9 +13,9 @@ export class Cargo implements LogisticEntityInterface {
 
   public arrival_date: Date;
 
-  public arrival_coordinates: LatLng;
+  public arrival_place: string;
 
-  public departure_coordinates: LatLng;
+  public departure_place: string;
 
   public departure_date: Date;
 
@@ -36,8 +36,8 @@ export class Cargo implements LogisticEntityInterface {
     created_at: Date = null,
     updated_at: Date = null,
     title: string = '',
-    departure: LatLng = null,
-    arrival: LatLng = null,
+    departure: string = null,
+    arrival: string = null,
     arrival_date: Date  = null,
     departure_date: Date  = null,
     permanent = false,
@@ -51,8 +51,8 @@ export class Cargo implements LogisticEntityInterface {
       this.title = title;
       this.updated_at = updated_at;
       this.created_at = created_at;
-      this.departure_coordinates = departure;
-      this.arrival_coordinates = arrival;
+      this.departure_place = departure;
+      this.arrival_place = arrival;
       this.arrival_date = arrival_date;
       this.departure_date = departure_date;
       this.transport_type = transport_type;

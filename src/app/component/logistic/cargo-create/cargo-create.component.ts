@@ -33,16 +33,12 @@ export class CargoCreateComponent implements OnInit {
     this.date_now = new Date();
   }
 
-  protected static _updateposition(place): LatLng {
+  protected static _updateposition(place): string {
     if (!place || !place.geometry) {
       return null;
     }
 
-
-    return {
-      lat: place.geometry.location.lat,
-      lng: place.geometry.location.lng
-    };
+    return place.place_id;
   }
 
   cancelCreation(evt: Event): void {
@@ -53,7 +49,6 @@ export class CargoCreateComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     this.updatePosition();
-    this.updateExternalData();
 
     this.cargo_service.create(this.cargo)
       .then(cargo => this.dialogRef.close(cargo))
@@ -62,25 +57,9 @@ export class CargoCreateComponent implements OnInit {
     return false;
   }
 
-  protected updateExternalData() {
-    this.cargo.extra_data['arrival_position'] = this._parsePosition(this.arrival_place_component.position);
-    this.cargo.extra_data['departure_position'] = this._parsePosition(this.departure_place_component.position);
-  }
-
-  protected _parsePosition(position) {
-    if(!position) {
-      return null;
-    }
-
-    const tmp: object = {};
-    tmp['google_place_id'] = position.place_id;
-
-    return tmp;
-  }
-
   protected updatePosition() {
-    this.cargo.arrival_coordinates = CargoCreateComponent._updateposition(this.arrival_place_component.position);
-    this.cargo.departure_coordinates = CargoCreateComponent._updateposition(this.departure_place_component.position);
+    this.cargo.arrival_place = CargoCreateComponent._updateposition(this.arrival_place_component.position);
+    this.cargo.departure_place = CargoCreateComponent._updateposition(this.departure_place_component.position);
   }
 
   ngOnInit() {

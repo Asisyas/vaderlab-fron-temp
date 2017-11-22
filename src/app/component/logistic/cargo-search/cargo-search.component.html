@@ -23,10 +23,10 @@
         <div class="col-4">
           <div class="row">
             <div class="col">
-              <app-google-placeid [placeId]="cargo.extra_data['departure_position'].google_place_id"></app-google-placeid>
+              <app-google-placeid [placeId]="cargo.departure_place"></app-google-placeid>
             </div>
             <div class="col">
-              <app-google-placeid [placeId]="cargo.extra_data['arrival_position'].google_place_id"></app-google-placeid>
+              <app-google-placeid [placeId]="cargo.arrival_place"></app-google-placeid>
             </div>
           </div>
         </div>
