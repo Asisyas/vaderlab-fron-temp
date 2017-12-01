@@ -3,10 +3,9 @@ import { NgForm } from '@angular/forms';
 import {Cargo} from '../../../model/logistic/cargo/cargo';
 import {LOAD_TYPE} from '../../../enum/logistic/load-type';
 import {TRANSPORT_TYPE} from '../../../enum/logistic/transport-type';
-import PlaceResult = google.maps.places.PlaceResult;
-import {LatLng} from '../../../model/logistic/cargo/LatLng';
-import {CargoService} from '../../../service/logictic/cargo/cargo.service';
+import {CargoService} from '../../../service/logistic/cargo/cargo.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+
 
 @Component({
   selector: 'app-cargo-create',
@@ -29,7 +28,8 @@ export class CargoCreateComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<CargoCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private cargo_service: CargoService) {
+    private cargo_service: CargoService
+  ) {
     this.date_now = new Date();
   }
 

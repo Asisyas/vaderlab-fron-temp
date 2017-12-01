@@ -1,0 +1,35 @@
+<mat-card class="filters__card-list">
+
+  <mat-card-content>
+    <button
+      matTooltip="{{ 'Create new filter of the cargo'|translate }}"
+      matTooltipPosition="above"
+      mat-raised-button
+      color="accent"
+      (click)="createFilterDialog()"
+    >
+      <mat-icon> add </mat-icon>
+      {{ 'Create'|translate }}
+    </button>
+    <mat-list>
+      <mat-list-item>
+        <span class="filter__list-item">
+          <span maxlength="32">
+            Новый фильтр
+          </span>
+          <span class="">
+            <button mat-icon-button>
+              <mat-icon matTooltip="{{ 'Edit filter'|translate }}">build</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon matTooltip="{{ 'Filter is active'|translate }}">visibility</mat-icon>
+            </button>
+          </span>
+        </span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card-content>
+
+
+</mat-card>

@@ -1,9 +1,8 @@
 import {LogisticEntityInterface} from '../logistic-entity-interface';
-import {LatLng} from './LatLng';
 
 export class Cargo implements LogisticEntityInterface {
 
-  public id: number;
+  public id: number | null;
 
   public title: string;
 

@@ -1,0 +1,12 @@
+
+
+.filter__list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%
+}
+
+.filters__card-list {
+  min-width: 400px;
+}

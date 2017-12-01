@@ -10,16 +10,12 @@ export class CargoService extends AbstractLogisticEntityStore<Cargo> {
     super(api_service);
   }
 
-  public create(cargo: Cargo): Promise<Cargo> {
-    return super.create(cargo);
-  }
-
-  public list(): Promise<Cargo[]> {
-    return super.list();
-  }
-
   protected get path_list(): string {
     return '/cargo/my/list.json';
+  }
+
+  protected get path_update(): string {
+    return '/cargo/my/update.json';
   }
 
   protected get path_create(): string {

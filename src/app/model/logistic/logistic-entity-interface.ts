@@ -1,7 +1,7 @@
-import {LatLng} from './cargo/LatLng';
+import {EntityInterface} from '../entity/entity-interface';
 
-export interface LogisticEntityInterface {
-  id: number;
+export interface LogisticEntityInterface extends EntityInterface {
+  id: number | null;
   is_permanent: boolean;
   extra_data: object;
   created_at: Date;

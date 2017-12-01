@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.component';
 import { AgmCoreModule } from '@agm/core';
 import { ApiService } from './service/core/api.service';
-import { CargoService } from './service/logictic/cargo/cargo.service';
+import { CargoService } from './service/logistic/cargo/cargo.service';
 import { HttpModule } from '@angular/http';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { ToastyModule } from 'ng2-toasty';
@@ -27,17 +27,19 @@ import {
   MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
   MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule, MatMenuModule,
   MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule, MatTableModule, MatSortModule,
-  MatTooltipModule,
+  MatTooltipModule, MatStepperModule,
 } from '@angular/material';
 
 import { AuthService } from './service/secured/auth-service';
 import { SessionService } from './service/core/session.service';
 import { GeocoderService } from './service/google/geocoder/geocoder.service';
 import { GooglePlaceidComponent } from './control/google-placeid/google-placeid.component';
-import {UserService} from './service/user/user.service';
-import {TranslateModule, TranslateLoader, TranslateService} from '@ngx-translate/core';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { UserService } from './service/user/user.service';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CargoFilterMyListComponent } from './component/logistic/cargo-filter-my-list/cargo-filter-my-list.component';
+import { CargoFilterCreateComponent } from './component/logistic/cargo-filter-create/cargo-filter-create.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +55,9 @@ export function createTranslateLoader(http: HttpClient) {
     CargoMyListComponent,
     GeocoderComponent,
     TimeAgoPipe,
-    GooglePlaceidComponent
+    GooglePlaceidComponent,
+    CargoFilterCreateComponent,
+    CargoFilterMyListComponent,
   ],
   imports: [
     TranslateModule.forRoot({
@@ -75,7 +79,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
     MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule,
     MatIconModule, MatMenuModule, MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule,
-    MatTableModule, MatSortModule, MatTooltipModule,
+    MatTableModule, MatSortModule, MatTooltipModule, MatStepperModule,
     /** **/
 
     ToastyModule.forRoot(),
@@ -86,7 +90,7 @@ export function createTranslateLoader(http: HttpClient) {
       language: 'ru',
     })
   ],
-  entryComponents: [CargoCreateComponent],
+  entryComponents: [CargoCreateComponent, CargoFilterCreateComponent],
   providers: [
     {
       provide: LOCALE_ID,

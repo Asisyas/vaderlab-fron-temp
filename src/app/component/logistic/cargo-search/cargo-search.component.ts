@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CargoService} from '../../../service/logictic/cargo/cargo.service';
+import {CargoService} from '../../../service/logistic/cargo/cargo.service';
 import {Cargo} from '../../../model/logistic/cargo/cargo';
 
 @Component({

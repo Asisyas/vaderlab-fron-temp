@@ -37,6 +37,9 @@
   "Reset": "Сбросить",
   "Yes": "Да",
   "No": "Нет",
+  "Done": "Готово",
+  "Next": "Далее",
+  "Back": "Назад",
 
   "Transport Type": "Тип транспорта",
   "Load Type": "Тип загрузки",
@@ -56,9 +59,24 @@
   "Date of download": "Дата погрузки",
   "Date of uploading": "Дата отгрузки",
 
+  "Create new filter of the cargo": "Создать новое условие поиска грузов",
+  "Creating new filter of the cargo": "Создание нового условия поиска грузов",
+  "Create new filter of the transport": "Создать новое условие поиска транспорта",
+  "Creating new filter of the transport": "Создание нового условия поиска транспорта",
   "Transport": "Транспорт",
   "Cargo": "Грузы",
   "New Cargo": "Новая заявка груза",
   "My Cargo": "Мои грузы",
-  "Search": "Поиск"
+  "Search": "Поиск",
+
+  "Places of departure": "Места отправления",
+  "Places of arrival": "Места прибытия",
+
+  "Edit filter": "Редактировать фильтр",
+  "Filter is active": "Фильтр активен",
+  "Filter is not active": "Фильтр не активен",
+
+  "permanent-type--1": "Только временные",
+  "permanent-type-0": "Временные и постоянные",
+  "permanent-type-1": "Только постоянные"
 }

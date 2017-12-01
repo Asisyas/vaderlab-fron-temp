@@ -1,10 +1,12 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {CargoCreateComponent} from '../cargo-create/cargo-create.component';
 import {MatDialog, MatSort} from '@angular/material';
-import {CargoService} from '../../../service/logictic/cargo/cargo.service';
+import {CargoService} from '../../../service/logistic/cargo/cargo.service';
 import {Cargo} from '../../../model/logistic/cargo/cargo';
 import {Observable} from 'rxjs/Observable';
 import {DataSource} from '@angular/cdk/collections';
+import {UserService} from "../../../service/user/user.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -23,14 +25,23 @@ export class CargoMyListComponent implements OnInit {
   public dataSource: ListDataSource;
 
   constructor(
-    private cargoService: CargoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private __router: Router,
+    private __userService: UserService,
+    private __cargoService: CargoService
   ) {
   }
 
   ngOnInit() {
-    this.dataSource = new ListDataSource(this.cargoService.listObservable);
-    this.cargoService.list();
+
+    // if (!this.__userService.isLoggedIn()) {
+    //  this.__router.navigate(['/']);
+
+//      return null;
+//    }
+
+    this.dataSource = new ListDataSource(this.__cargoService.listObservable);
+    this.__cargoService.list();
   }
 
   openDialog() {
