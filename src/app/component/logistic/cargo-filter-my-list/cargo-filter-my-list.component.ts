@@ -19,7 +19,7 @@ export class CargoFilterMyListComponent implements OnInit {
   createFilterDialog() {
     const dialogRef = this.dialog.open(CargoFilterCreateComponent, {
       disableClose: true,
-      width: '80%'
+      width: '900px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

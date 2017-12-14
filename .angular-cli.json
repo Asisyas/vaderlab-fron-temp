@@ -34,7 +34,11 @@
         "../node_modules/bootstrap/dist/js/bootstrap.js",
         "../node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js",
         "../node_modules/leaflet/dist/leaflet.js",
-        "../node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js"
+        "../node_modules/clipper-lib/clipper.js",
+        "../node_modules/leaflet-clipper/dist/L.Clipper.min.js",
+        "../node_modules/leaflet.gridlayer.googlemutant/Leaflet.GoogleMutant.js",
+        "../node_modules/@turf/turf/turf.js",
+        "../node_modules/leaflet-geodesy/leaflet-geodesy.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

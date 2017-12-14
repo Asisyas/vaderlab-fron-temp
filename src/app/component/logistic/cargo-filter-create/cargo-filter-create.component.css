@@ -6,3 +6,11 @@
 .filter__create-form {
   width: 800px;
 }
+
+.dialog-actions {
+  position: absolute;
+}
+
+.leaflet-container {
+  margin-bottom: 10px;
+}

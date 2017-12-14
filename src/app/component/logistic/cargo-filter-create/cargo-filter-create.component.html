@@ -47,24 +47,50 @@
 
     <div mat-dialog-title>{{ 'New filter of the Cargo'| translate }}</div>
 
-    <div class="row">
-      <div class="col-md-6">
 
-        <div class="row">
-          <div class="col-md-12">
-            <mat-form-field>
-              <input
-                matInput
-                type="text"
-                placeholder="{{ 'Title' | translate }}"
-                value="{{ filter.title }}"
-                [(ngModel)]="filter.title"
-                name="title"
-              >
-            </mat-form-field>
+    <mat-horizontal-stepper [linear]="isLinear">
+      <mat-step [stepControl]="departureFormGroup">
+        <form>
+          <div class="row">
+            <div class="col-md-12">
+              <ng-template matStepLabel>{{ 'Departure Places'| translate }}</ng-template>
+              <div id="filter_form_map_departure" style="min-height: 400px; width: 100%;"></div>
+            </div>
           </div>
-        </div>
 
+          <div class="dialog-actions">
+            <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
+            <button mat-raised-button matStepperNext>
+              {{ 'Next' | translate }}
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="arrivalFormGroup">
+        <form>
+          <ng-template matStepLabel>{{ 'Arrival places'| translate }}</ng-template>
+          <div id="filter_form_map_arrival" style="min-height: 400px; width: 100%;"></div>
+          <div class="dialog-actions">
+            <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
+            <button mat-raised-button matStepperPrevious>
+              <mat-icon>keyboard_arrow_left</mat-icon>
+              {{ 'Back' | translate }}
+            </button>
+            <button mat-raised-button matStepperNext>
+              {{ 'Next' | translate }}
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="extraOptionsFormGroup">
+        <ng-template matStepLabel>{{ 'Extra options' | translate }}</ng-template>
+
+        <h4>{{ 'Dates' |translate }}</h4>
         <div class="row">
           <div class="col-md-8">
             <div class="row">
@@ -73,22 +99,25 @@
                   <input
                     matInput [matDatepicker]="departure_date_min"
                     placeholder="{{ 'Minimal date of the download'|translate }}"
-                    [(disabled)]="filter.is_permanent"
+                    [disabled]="isDateFieldsDisabled()"
                     [(ngModel)]="filter.departure_date_min"
                     name="departure_date_min"
                   >
                   <mat-datepicker-toggle matSuffix [for]="departure_date_min"></mat-datepicker-toggle>
-                  <mat-datepicker [startAt]="date_now" #departure_date_min></mat-datepicker>
+                  <mat-datepicker
+                    [startAt]="date_now"
+                    [(startView)]="date_now"
+                    #departure_date_min
+                  ></mat-datepicker>
                 </mat-form-field>
               </div>
 
-
-              <div class="col-md-6" [(attr.disabled)]="filter.is_permanent">
+              <div class="col-md-6">
                 <mat-form-field>
                   <input
                     matInput [matDatepicker]="departure_date_max"
                     placeholder="{{ 'Maximum date of the download' | translate}}"
-                    [(disabled)]="filter.is_permanent"
+                    [disabled]="isDateFieldsDisabled()"
                     [(ngModel)]="filter.departure_date_max"
                     name="departure_date_max"
                   >
@@ -108,8 +137,8 @@
                   <input
                     matInput [matDatepicker]="arrival_date_min"
                     placeholder="{{ 'Minimal date of the download'|translate }}"
-                    [(disabled)]="filter.is_permanent"
-                    [(ngModel)]="filter.arrival_date_min"
+                    [disabled]="isDateFieldsDisabled()"
+                    [ngModel]="filter.arrival_date_min"
                     name="arrival_date_min"
                   >
                   <mat-datepicker-toggle matSuffix [for]="arrival_date_min"></mat-datepicker-toggle>
@@ -127,7 +156,7 @@
                   <input
                     matInput [matDatepicker]="arrival_date_max"
                     placeholder="{{ 'Maximum date of the download' | translate}}"
-                    [(disabled)]="filter.is_permanent"
+                    [disabled]="isDateFieldsDisabled()"
                     [(ngModel)]="filter.arrival_date_max"
                     name="arrival_date_max"
                   >
@@ -152,9 +181,9 @@
             </mat-form-field>
           </div>
         </div>
-
+        <h4>{{ 'Dimensions' |translate }}</h4>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-2">
             <mat-form-field>
               <input
                 matInput
@@ -166,7 +195,7 @@
               >
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-2">
             <mat-form-field>
               <input
                 matInput
@@ -179,9 +208,8 @@
             </mat-form-field>
           </div>
         </div>
-
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-2">
             <mat-form-field>
               <input
                 matInput
@@ -193,7 +221,7 @@
               >
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-2">
             <mat-form-field>
               <input
                 matInput
@@ -206,17 +234,60 @@
             </mat-form-field>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div id="filter_form_map" style="min-height: 500px; width: 100%; height: 100%"></div>
-      </div>
 
-    </div>
+        <div class="dialog-actions">
+          <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
+          <button mat-raised-button matStepperPrevious>
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            {{ 'Back' | translate }}
+          </button>
+          <button mat-raised-button matStepperNext>
+            {{ 'Next' | translate }}
+            <mat-icon>keyboard_arrow_right</mat-icon>
+          </button>
+        </div>
+
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>{{ 'Done' | translate }}</ng-template>
+
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <input
+                matInput
+                type="text"
+                placeholder="{{ 'Title' | translate }}"
+                value="{{ filter.title }}"
+                [(ngModel)]="filter.title"
+                name="title"
+              >
+              <mat-hint align="end">{{filter.title?.length || 0}}/30</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="dialog-actions">
+          <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
+          <button mat-button matStepperPrevious>
+            <mat-icon>keyboard_arrow_left</mat-icon>
+            {{ 'Back' | translate }}
+          </button>
+          <button *ngIf="isCreateBtnShowed()" mat-raised-button type="submit" color="primary">
+            <mat-icon>done</mat-icon>
+            {{ 'Create' | translate }}
+          </button>
+        </div>
+      </mat-step>
+
+    </mat-horizontal-stepper>
 
   </mat-dialog-content>
-  <mat-dialog-actions>
+<!--
+    <mat-dialog-actions>
       <button mat-button (click)="cancelCreation($event)" i18n> {{ 'Cancel'| translate }}</button>
-      <button mat-button type="reset">{{ 'Reset'|translate }}</button>
-      <button mat-raised-button type="submit" color="primary" i18n>{{ 'Create'|translate }}</button>
-  </mat-dialog-actions>
+      <button *ngIf="isCreateBtnShowed()" mat-raised-button type="submit" color="primary" i18n>{{ 'Create'|translate }}</button>
+    </mat-dialog-actions>
+-->
 </form>
