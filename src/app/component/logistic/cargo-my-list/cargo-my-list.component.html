@@ -1,114 +1,123 @@
 <div class="container-fluid" style="margin-top: 20px">
 
-  <div class="row">
-    <div class="col-md-12">
-      <button mat-raised-button color="accent" (click)="openDialog()">
-        <mat-icon>add</mat-icon> {{ 'New Cargo'|translate }}
-      </button>
 
-      <!--
-      <button mat-button mat-raised-button color="basic" [matMenuTriggerFor]="settingsMenu">
-        <mat-icon>settings</mat-icon>
-      </button>
-
-      <mat-menu #settingsMenu="matMenu">
-        <button mat-menu-item>
-          <mat-checkbox [(ngModel)]="created_at">Created At</mat-checkbox>
-        </button>
-
-        <button mat-menu-item>
-          <mat-checkbox [(ngModel)]="title">Title</mat-checkbox>
-        </button>
-      </mat-menu>
-      -->
-
-    </div>
+  <div class="text-center">
+    <mat-progress-spinner
+            color="primary"
+            mode="indeterminate"
+    >
+    </mat-progress-spinner>
   </div>
 
+  <div [hidden]="showPreloader()">
+    <div class="row">
+      <div class="col-md-12">
+        <button mat-raised-button color="accent" (click)="openDialog()">
+          <mat-icon>add</mat-icon> {{ 'New Cargo'|translate }}
+        </button>
 
-  <mat-table #table [dataSource]="dataSource">
+        <!--
+        <button mat-button mat-raised-button color="basic" [matMenuTriggerFor]="settingsMenu">
+          <mat-icon>settings</mat-icon>
+        </button>
 
-    <!--
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-    </ng-container>
-    -->
+        <mat-menu #settingsMenu="matMenu">
+          <button mat-menu-item>
+            <mat-checkbox [(ngModel)]="created_at">Created At</mat-checkbox>
+          </button>
 
-    <ng-container matColumnDef="departure_place">
-      <mat-header-cell *matHeaderCellDef > {{ 'Departure'|translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <app-google-placeid
-          [viewItems]="['flag', 'city']"
-          [placeId]="row.departure_place"
-        >
-        </app-google-placeid>
-      </mat-cell>
-    </ng-container>
+          <button mat-menu-item>
+            <mat-checkbox [(ngModel)]="title">Title</mat-checkbox>
+          </button>
+        </mat-menu>
+        -->
 
-    <ng-container matColumnDef="arrival_place">
-      <mat-header-cell *matHeaderCellDef > {{ 'Arrival'|translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <app-google-placeid
-          [viewItems]="['flag', 'city']"
-          [placeId]="row.arrival_place"
-        >
-        </app-google-placeid>
-      </mat-cell>
-    </ng-container>
+      </div>
+    </div>
 
-    <ng-container matColumnDef="created_at">
-      <mat-header-cell *matHeaderCellDef > {{ 'Created At'| translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.created_at|date }} </mat-cell>
-    </ng-container>
+    <mat-table #table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef > {{ 'Title'|translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
-    </ng-container>
+      <!--
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+      -->
 
-    <ng-container matColumnDef="transport_type">
-      <mat-header-cell *matHeaderCellDef > {{ 'Transport Type'|translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.transport_type | translate }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="departure_place">
+        <mat-header-cell *matHeaderCellDef > {{ 'Departure'|translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <app-google-placeid
+                  [viewItems]="['flag', 'city']"
+                  [placeId]="row.departure_place"
+          >
+          </app-google-placeid>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="load_type">
-      <mat-header-cell *matHeaderCellDef > {{ 'Load Type'|translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.load_type | translate}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="arrival_place">
+        <mat-header-cell *matHeaderCellDef > {{ 'Arrival'|translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <app-google-placeid
+                  [viewItems]="['flag', 'city']"
+                  [placeId]="row.arrival_place"
+          >
+          </app-google-placeid>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="departure_date">
-      <mat-header-cell *matHeaderCellDef  disableClear="true"> {{ 'Departure Date'| translate  }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ row.is_permanent ? '' : row.departure_date|date }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="created_at">
+        <mat-header-cell *matHeaderCellDef > {{ 'Created At'| translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.created_at|date }} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="arrival_date">
-      <mat-header-cell *matHeaderCellDef > {{ 'Arrival Date' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        {{ row.is_permanent ? '' : row.arrival_date|date }}
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef > {{ 'Title'|translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="is_permanent">
-      <mat-header-cell *matHeaderCellDef > {{ 'Is Permanent'|translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{ (row.is_permanent ? 'Yes' : 'No') | translate }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="transport_type">
+        <mat-header-cell *matHeaderCellDef > {{ 'Transport Type'|translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.transport_type | translate }} </mat-cell>
+      </ng-container>
 
-    <!--
-    <ng-container matColumnDef="volume">
-      <mat-header-cell *matHeaderCellDef > Volume </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.volume }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="load_type">
+        <mat-header-cell *matHeaderCellDef > {{ 'Load Type'|translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.load_type | translate}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="departure_date">
+        <mat-header-cell *matHeaderCellDef  disableClear="true"> {{ 'Departure Date'| translate  }} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.is_permanent ? '' : row.departure_date|date }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="arrival_date">
+        <mat-header-cell *matHeaderCellDef > {{ 'Arrival Date' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          {{ row.is_permanent ? '' : row.arrival_date|date }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="is_permanent">
+        <mat-header-cell *matHeaderCellDef > {{ 'Is Permanent'|translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ (row.is_permanent ? 'Yes' : 'No') | translate }} </mat-cell>
+      </ng-container>
+
+      <!--
+      <ng-container matColumnDef="volume">
+        <mat-header-cell *matHeaderCellDef > Volume </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.volume }} </mat-cell>
+      </ng-container>
 
 
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef > Weight </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.weight }} </mat-cell>
-    </ng-container>
-    -->
+      <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef > Weight </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.weight }} </mat-cell>
+      </ng-container>
+      -->
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
-  </mat-table>
-
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
+    </mat-table>
+  </div>
 </div>

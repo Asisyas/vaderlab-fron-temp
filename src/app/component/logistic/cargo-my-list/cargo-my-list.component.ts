@@ -23,7 +23,7 @@ export class CargoMyListComponent implements OnInit {
   ];
   @Input()
   public dataSource: ListDataSource;
-
+  private _showPreloader = true;
   constructor(
     public dialog: MatDialog,
     private __router: Router,
@@ -41,17 +41,21 @@ export class CargoMyListComponent implements OnInit {
 //    }
 
     this.dataSource = new ListDataSource(this.__cargoService.listObservable);
-    this.__cargoService.list();
+    this.__cargoService.list().then(()=> {
+      this._showPreloader = false;
+    });
+  }
+
+  showPreloader(): boolean {
+    return this._showPreloader;
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(CargoCreateComponent, {
       disableClose: true,
-      // height: '400px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result:', result);
     });
   }
 }
