@@ -18,7 +18,7 @@ export abstract class StoreService<T extends EntityInterface> {
 
 
   constructor(protected api_service: ApiService) {
-    this._entities = null;
+    this._entities = [];
     this._listObservable = new Subject();
   }
 

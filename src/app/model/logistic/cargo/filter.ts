@@ -8,7 +8,7 @@ export class Filter implements LogisticFilterEntityInterface {
   arrival_date_max: Date | null;
   departure_date_min: Date | null;
   departure_date_max: Date | null;
-  is_permanent: number = ANY;
+  permanent_status: number = ANY;
   arrival_geometry: any | null;
   departure_geometry: any | null;
   volume_max: number | null;

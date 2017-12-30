@@ -6,7 +6,7 @@ export interface LogisticFilterEntityInterface extends EntityInterface {
   arrival_date_max: Date | null;
   departure_date_min: Date  |null;
   departure_date_max: Date | null;
-  is_permanent: number;
+  permanent_status: number;
   arrival_geometry: any | null;
   departure_geometry: any|null;
   volume_max: number | null;

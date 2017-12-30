@@ -151,7 +151,7 @@
               </div>
 
 
-              <div class="col-md-6" [(attr.disabled)]="filter.is_permanent">
+              <div class="col-md-6" [(attr.disabled)]="filter.permanent_status">
                 <mat-form-field>
                   <input
                     matInput [matDatepicker]="arrival_date_max"
@@ -173,7 +173,7 @@
           </div>
           <div class="col-md-4">
             <mat-form-field>
-              <mat-select placeholder="{{ 'Is permanent'| translate }}"  [(ngModel)]="filter.is_permanent" name="is_permanent">
+              <mat-select placeholder="{{ 'Is permanent'| translate }}"  [(ngModel)]="filter.permanent_status" name="permanent_status">
                 <mat-option *ngFor="let pt of _permanent_type" [value]="pt">
                   {{ 'permanent-type-' + pt |translate }}
                 </mat-option>
@@ -261,6 +261,7 @@
                 placeholder="{{ 'Title' | translate }}"
                 value="{{ filter.title }}"
                 [(ngModel)]="filter.title"
+                maxlength="30"
                 name="title"
               >
               <mat-hint align="end">{{filter.title?.length || 0}}/30</mat-hint>

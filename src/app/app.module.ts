@@ -23,11 +23,11 @@ import { ToastyModule } from 'ng2-toasty';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 
 import {
-  MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-  MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
-  MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule, MatMenuModule,
-  MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule, MatTableModule, MatSortModule,
-  MatTooltipModule, MatStepperModule,
+    MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
+    MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
+    MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule, MatMenuModule,
+    MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule, MatTableModule, MatSortModule,
+    MatTooltipModule, MatStepperModule,
 } from '@angular/material';
 
 import { AuthService } from './service/secured/auth-service';
@@ -40,74 +40,76 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CargoFilterMyListComponent } from './component/logistic/cargo-filter-my-list/cargo-filter-my-list.component';
 import { CargoFilterCreateComponent } from './component/logistic/cargo-filter-create/cargo-filter-create.component';
+import {FilterService} from "./service/logistic/cargo/filter.service";
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SubHeaderComponent,
-    CargoSearchComponent,
-    CargoCreateComponent,
-    CargoMyListComponent,
-    GeocoderComponent,
-    TimeAgoPipe,
-    GooglePlaceidComponent,
-    CargoFilterCreateComponent,
-    CargoFilterMyListComponent,
-  ],
-  imports: [
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
-    HttpClientModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    DatepickerModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    /** **/
-    MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
-    MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
-    MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule,
-    MatIconModule, MatMenuModule, MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule,
-    MatTableModule, MatSortModule, MatTooltipModule, MatStepperModule,
-    /** **/
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        SubHeaderComponent,
+        CargoSearchComponent,
+        CargoCreateComponent,
+        CargoMyListComponent,
+        GeocoderComponent,
+        TimeAgoPipe,
+        GooglePlaceidComponent,
+        CargoFilterCreateComponent,
+        CargoFilterMyListComponent,
+    ],
+    imports: [
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [HttpClient]
+            }
+        }),
+        HttpClientModule,
+        HttpModule,
+        BrowserAnimationsModule,
+        DatepickerModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        /** **/
+        MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
+        MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
+        MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule,
+        MatIconModule, MatMenuModule, MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule,
+        MatTableModule, MatSortModule, MatTooltipModule, MatStepperModule,
+        /** **/
 
-    ToastyModule.forRoot(),
-    RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router }),
-    AgmCoreModule.forRoot({
-      apiKey: environment.maps_google_api_key,
-      libraries: ['places'],
-      language: 'ru',
-    })
-  ],
-  entryComponents: [CargoCreateComponent, CargoFilterCreateComponent],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'RU'
-    },
-    UserService,
-    SessionService,
-    OAuthService,
-    ApiService,
-    CargoService,
-    AuthService,
-    GeocoderService,
-  ],
-  bootstrap: [AppComponent]
+        ToastyModule.forRoot(),
+        RouterModule.forRoot( APP_ROUTES, { enableTracing: environment.debug_router }),
+        AgmCoreModule.forRoot({
+            apiKey: environment.maps_google_api_key,
+            libraries: ['places'],
+            language: 'ru',
+        })
+    ],
+    entryComponents: [CargoCreateComponent, CargoFilterCreateComponent],
+    providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: 'RU'
+        },
+        UserService,
+        SessionService,
+        OAuthService,
+        ApiService,
+        CargoService,
+        FilterService,
+        AuthService,
+        GeocoderService,
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(translate: TranslateService) {
-    translate.setDefaultLang('ru');
-  }
+    constructor(translate: TranslateService) {
+        translate.setDefaultLang('ru');
+    }
 }
