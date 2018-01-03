@@ -18,4 +18,9 @@ export abstract class AbstractLogisticEntityStore<T extends LogisticEntityInterf
 
     return data;
   }
+
+  protected _entityInit(entity: T) {
+    entity.departure_date = entity.departure_date ? new Date(entity.departure_date): null;
+    entity.arrival_date = entity.arrival_date ? new Date(entity.arrival_date): null;
+  }
 }

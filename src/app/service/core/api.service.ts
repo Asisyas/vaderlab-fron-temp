@@ -97,6 +97,16 @@ export class ApiService {
         toastOptions.msg = 'Unknown internal server error, try again later.';
         this.toastyService.error(toastOptions);
         break;
+      case 400:
+        toastOptions.title = 'Validation error';
+        toastOptions.msg = 'Check the data and try again.';
+        this.toastyService.error(toastOptions);
+        break;
+      case 403:
+          toastOptions.title = 'Access denied';
+          toastOptions.msg = 'You do not have permission to view this page or perform this action.';
+          this.toastyService.error(toastOptions);
+          break;
     }
   }
 }

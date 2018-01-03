@@ -11,19 +11,27 @@ import {FilterService} from "../../../service/logistic/cargo/filter.service";
 export class CargoFilterMyListComponent implements OnInit {
 
   public filterListObservable;
+  private _isReady = false;
 
   constructor(
     public dialog: MatDialog,
-    private __filterService: FilterService
+    protected _filterService: FilterService
   ) { }
 
-  ngOnInit() {
-    this.filterListObservable = this.__filterService.listObservable;
-      this.__filterService.list();
+  isReady(){
+    return this._isReady;
   }
 
-  createFilterDialog() {
+  ngOnInit() {
+    this.filterListObservable = this._filterService.listObservable;
+      this._filterService.list().then(() => {
+        this._isReady = true;
+      });
+  }
+
+  createFilterDialog(filter: any = null) {
     const dialogRef = this.dialog.open(CargoFilterCreateComponent, {
+      data: filter,
       disableClose: true,
       width: '900px'
     });

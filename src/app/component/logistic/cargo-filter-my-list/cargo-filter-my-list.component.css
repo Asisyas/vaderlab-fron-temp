@@ -1,12 +1,30 @@
-
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 6em
+}
 
 .filter__list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%
+  width: 100%;
+  cursor: pointer;
+}
+
+
+.filter__list-item:hover > .filter__list-item-actions {
+  display: inherit;
+}
+
+.filter__list-item-actions {
+  display: none;
+}
+
+mat-list-item:hover {
+  background-color: var(--light);
 }
 
 .filters__card-list {
-  min-width: 400px;
+  max-width: 350px;
 }

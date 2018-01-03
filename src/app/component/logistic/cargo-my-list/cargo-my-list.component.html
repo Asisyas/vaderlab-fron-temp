@@ -1,13 +1,8 @@
+<mat-progress-bar [hidden]="!showPreloader()"
+        color="primary"
+        mode="indeterminate">
+</mat-progress-bar>
 <div class="container-fluid" style="margin-top: 20px">
-
-
-  <div class="text-center">
-    <mat-progress-spinner
-            color="primary"
-            mode="indeterminate"
-    >
-    </mat-progress-spinner>
-  </div>
 
   <div [hidden]="showPreloader()">
     <div class="row">

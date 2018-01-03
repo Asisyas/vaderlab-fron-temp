@@ -1,54 +1,10 @@
-<form #f="ngForm" (submit)="onSubmit(f)">
-  <mat-dialog-content>
-    <!--<mat-horizontal-stepper [linear]="isLinear" style="min-width: 800px; min-height: 500px">
-      <div mat-dialog-title>{{ 'Creating new filter of the cargo'| translate }}</div>
 
-      <mat-step [stepControl]="placeDepartureGroup">
-        <form [formGroup]="placeDepartureGroup">
-          <ng-template matStepLabel>{{ 'Places of departure'|translate }}</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="City, Country, Region" required>
-          </mat-form-field>
-
-          <agm-map class="map-filter"> </agm-map>
-        </form>
-      </mat-step>
-
-      <mat-step [stepControl]="placeArrivalGroup">
-        <form [formGroup]="placeArrivalGroup">
-          <ng-template matStepLabel>{{ 'Places of arrival'|translate }}</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" required>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperPrevious>{{ 'Back'|translate }}</button>
-            <button mat-button matStepperNext>{{ 'Next'|translate }}</button>
-          </div>
-        </form>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>{{ 'Time frames'|translate }}</ng-template>
-        You are now done.
-      </mat-step>
-
-
-      <mat-step>
-        <ng-template matStepLabel>{{ 'Dimensions'|translate }}</ng-template>
-        You are now done.
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel>{{ 'Done'|translate }}</ng-template>
-        You are now done.
-      </mat-step>
-
-    </mat-horizontal-stepper> -->
-
+<mat-dialog-content>
+  <form #f="ngForm" (submit)="onSubmit(f)">
     <div mat-dialog-title>{{ 'New filter of the Cargo'| translate }}</div>
 
 
-    <mat-horizontal-stepper [linear]="isLinear">
+    <mat-horizontal-stepper [linear]="isLinear" #filter_stepper>
       <mat-step [stepControl]="departureFormGroup">
         <form>
           <div class="row">
@@ -76,12 +32,8 @@
           <div class="dialog-actions">
             <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
             <button mat-raised-button matStepperPrevious>
-              <mat-icon>keyboard_arrow_left</mat-icon>
-              {{ 'Back' | translate }}
             </button>
             <button mat-raised-button matStepperNext>
-              {{ 'Next' | translate }}
-              <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
           </div>
         </form>
@@ -97,17 +49,17 @@
               <div class="col-md-6">
                 <mat-form-field>
                   <input
-                    matInput [matDatepicker]="departure_date_min"
-                    placeholder="{{ 'Minimal date of the download'|translate }}"
-                    [disabled]="isDateFieldsDisabled()"
-                    [(ngModel)]="filter.departure_date_min"
-                    name="departure_date_min"
+                          matInput [matDatepicker]="departure_date_min"
+                          placeholder="{{ 'Minimal date of the download'|translate }}"
+                          [disabled]="isDateFieldsDisabled()"
+                          [(ngModel)]="filter.departure_date_min"
+                          name="departure_date_min"
                   >
                   <mat-datepicker-toggle matSuffix [for]="departure_date_min"></mat-datepicker-toggle>
                   <mat-datepicker
-                    [startAt]="date_now"
-                    [(startView)]="date_now"
-                    #departure_date_min
+                          [startAt]="date_now"
+                          [(startView)]="date_now"
+                          #departure_date_min
                   ></mat-datepicker>
                 </mat-form-field>
               </div>
@@ -115,17 +67,17 @@
               <div class="col-md-6">
                 <mat-form-field>
                   <input
-                    matInput [matDatepicker]="departure_date_max"
-                    placeholder="{{ 'Maximum date of the download' | translate}}"
-                    [disabled]="isDateFieldsDisabled()"
-                    [(ngModel)]="filter.departure_date_max"
-                    name="departure_date_max"
+                          matInput [matDatepicker]="departure_date_max"
+                          placeholder="{{ 'Maximum date of the download' | translate}}"
+                          [disabled]="isDateFieldsDisabled()"
+                          [(ngModel)]="filter.departure_date_max"
+                          name="departure_date_max"
                   >
                   <mat-datepicker-toggle matSuffix [for]="departure_date_max"></mat-datepicker-toggle>
                   <mat-datepicker
-                    #departure_date_max
-                    [(startAt)]="filter.departure_date_min"
-                    [(startView)]="filter.departure_date_min"
+                          #departure_date_max
+                          [(startAt)]="filter.departure_date_min"
+                          [(startView)]="filter.departure_date_min"
                   ></mat-datepicker>
                 </mat-form-field>
 
@@ -135,17 +87,17 @@
               <div class="col-md-6">
                 <mat-form-field>
                   <input
-                    matInput [matDatepicker]="arrival_date_min"
-                    placeholder="{{ 'Minimal date of the download'|translate }}"
-                    [disabled]="isDateFieldsDisabled()"
-                    [ngModel]="filter.arrival_date_min"
-                    name="arrival_date_min"
+                          matInput [matDatepicker]="arrival_date_min"
+                          placeholder="{{ 'Minimal date of the download'|translate }}"
+                          [disabled]="isDateFieldsDisabled()"
+                          [ngModel]="filter.arrival_date_min"
+                          name="arrival_date_min"
                   >
                   <mat-datepicker-toggle matSuffix [for]="arrival_date_min"></mat-datepicker-toggle>
                   <mat-datepicker
-                    [(startAt)]="filter.departure_date_min || filter.departure_date_max"
-                    [(startView)]="filter.departure_date_min  || filter.departure_date_max"
-                    #arrival_date_min
+                          [(startAt)]="filter.departure_date_min || filter.departure_date_max"
+                          [(startView)]="filter.departure_date_min  || filter.departure_date_max"
+                          #arrival_date_min
                   ></mat-datepicker>
                 </mat-form-field>
               </div>
@@ -154,17 +106,17 @@
               <div class="col-md-6" [(attr.disabled)]="filter.permanent_status">
                 <mat-form-field>
                   <input
-                    matInput [matDatepicker]="arrival_date_max"
-                    placeholder="{{ 'Maximum date of the download' | translate}}"
-                    [disabled]="isDateFieldsDisabled()"
-                    [(ngModel)]="filter.arrival_date_max"
-                    name="arrival_date_max"
+                          matInput [matDatepicker]="arrival_date_max"
+                          placeholder="{{ 'Maximum date of the download' | translate}}"
+                          [disabled]="isDateFieldsDisabled()"
+                          [(ngModel)]="filter.arrival_date_maxzz"
+                          name="arrival_date_max"
                   >
                   <mat-datepicker-toggle matSuffix [for]="arrival_date_max"></mat-datepicker-toggle>
                   <mat-datepicker
-                    #arrival_date_max
-                    [(startAt)]="filter.arrival_date_max"
-                    [(startView)]="filter.arrival_date_max"
+                          #arrival_date_max
+                          [(startAt)]="filter.arrival_date_max"
+                          [(startView)]="filter.arrival_date_max"
                   ></mat-datepicker>
                 </mat-form-field>
 
@@ -186,24 +138,24 @@
           <div class="col-md-2">
             <mat-form-field>
               <input
-                matInput
-                type="number"
-                placeholder="{{ 'Volume min' | translate }}"
-                value="{{ filter.volume_min }}"
-                [(ngModel)]="filter.volume_min"
-                name="volume"
+                      matInput
+                      type="number"
+                      placeholder="{{ 'Volume min' | translate }}"
+                      value="{{ filter.volume_min }}"
+                      [(ngModel)]="filter.volume_min"
+                      name="volume"
               >
             </mat-form-field>
           </div>
           <div class="col-md-2">
             <mat-form-field>
               <input
-                matInput
-                type="number"
-                placeholder="{{ 'Volume max' | translate }}"
-                value="{{ filter.volume_max }}"
-                [(ngModel)]="filter.volume_max"
-                name="volume"
+                      matInput
+                      type="number"
+                      placeholder="{{ 'Volume max' | translate }}"
+                      value="{{ filter.volume_max }}"
+                      [(ngModel)]="filter.volume_max"
+                      name="volume"
               >
             </mat-form-field>
           </div>
@@ -212,24 +164,24 @@
           <div class="col-md-2">
             <mat-form-field>
               <input
-                matInput
-                type="number"
-                placeholder="{{ 'Weight min' | translate }}"
-                value="{{ filter.weight_min }}"
-                [(ngModel)]="filter.weight_min"
-                name="weight"
+                      matInput
+                      type="number"
+                      placeholder="{{ 'Weight min' | translate }}"
+                      value="{{ filter.weight_min }}"
+                      [(ngModel)]="filter.weight_min"
+                      name="weight"
               >
             </mat-form-field>
           </div>
           <div class="col-md-2">
             <mat-form-field>
               <input
-                matInput
-                type="number"
-                placeholder="{{ 'Weight max' | translate }}"
-                value="{{ filter.weight_max }}"
-                [(ngModel)]="filter.weight_max"
-                name="weight"
+                      matInput
+                      type="number"
+                      placeholder="{{ 'Weight max' | translate }}"
+                      value="{{ filter.weight_max }}"
+                      [(ngModel)]="filter.weight_max"
+                      name="weight"
               >
             </mat-form-field>
           </div>
@@ -238,12 +190,8 @@
         <div class="dialog-actions">
           <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
           <button mat-raised-button matStepperPrevious>
-            <mat-icon>keyboard_arrow_left</mat-icon>
-            {{ 'Back' | translate }}
           </button>
           <button mat-raised-button matStepperNext>
-            {{ 'Next' | translate }}
-            <mat-icon>keyboard_arrow_right</mat-icon>
           </button>
         </div>
 
@@ -256,13 +204,13 @@
           <div class="col-md-4">
             <mat-form-field>
               <input
-                matInput
-                type="text"
-                placeholder="{{ 'Title' | translate }}"
-                value="{{ filter.title }}"
-                [(ngModel)]="filter.title"
-                maxlength="30"
-                name="title"
+                      matInput
+                      type="text"
+                      placeholder="{{ 'Title' | translate }}"
+                      value="{{ filter.title }}"
+                      [(ngModel)]="filter.title"
+                      maxlength="30"
+                      name="title"
               >
               <mat-hint align="end">{{filter.title?.length || 0}}/30</mat-hint>
             </mat-form-field>
@@ -270,7 +218,6 @@
         </div>
 
         <div class="dialog-actions">
-          <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
           <button mat-button matStepperPrevious>
             <mat-icon>keyboard_arrow_left</mat-icon>
             {{ 'Back' | translate }}
@@ -283,12 +230,18 @@
       </mat-step>
 
     </mat-horizontal-stepper>
+  </form>
+</mat-dialog-content>
 
-  </mat-dialog-content>
-<!--
-    <mat-dialog-actions>
-      <button mat-button (click)="cancelCreation($event)" i18n> {{ 'Cancel'| translate }}</button>
-      <button *ngIf="isCreateBtnShowed()" mat-raised-button type="submit" color="primary" i18n>{{ 'Create'|translate }}</button>
-    </mat-dialog-actions>
--->
-</form>
+<mat-dialog-actions>
+  <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
+  <button *ngIf="filter_stepper.selectedIndex > 0" mat-button (click)="filter_stepper.previous()">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+    {{ 'Back' | translate }}
+  </button>
+  <button *ngIf="filter_stepper.selectedIndex < 3" (click)="filter_stepper.next()" mat-raised-button>
+    {{ 'Next' | translate }}
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+  <button *ngIf="filter_stepper.selectedIndex === 3" (click)="onSubmit(f)" mat-raised-button type="submit" color="primary">{{ 'Create'|translate }}</button>
+</mat-dialog-actions>

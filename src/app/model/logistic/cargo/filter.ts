@@ -4,10 +4,6 @@ import {ANY} from '../../../enum/logistic/permanent-type';
 export class Filter implements LogisticFilterEntityInterface {
   id: number | null;
   title: string;
-  arrival_date_min: Date | null;
-  arrival_date_max: Date | null;
-  departure_date_min: Date | null;
-  departure_date_max: Date | null;
   permanent_status: number = ANY;
   arrival_geometry: any | null;
   departure_geometry: any | null;
@@ -15,4 +11,9 @@ export class Filter implements LogisticFilterEntityInterface {
   volume_min: number | null;
   weight_max: number | null;
   weight_min: number | null;
+  arrival_date_min: Date | null;
+  arrival_date_max: Date | null;
+  departure_date_min: Date | null;
+  departure_date_max: Date | null;
+
 }

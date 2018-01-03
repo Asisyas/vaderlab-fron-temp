@@ -27,4 +27,11 @@ export abstract class AbstractLogisticFilterEntityStore<T extends LogisticFilter
 
         return data;
     }
+
+    protected _entityInit(entity: T) {
+        entity.departure_date_min = entity.departure_date_min ? new Date(entity.departure_date_min): null;
+        entity.departure_date_max = entity.departure_date_max ? new Date(entity.departure_date_max): null;
+        entity.arrival_date_min = entity.arrival_date_min ? new Date(entity.arrival_date_min): null;
+        entity.arrival_date_max = entity.arrival_date_max ? new Date(entity.arrival_date_max): null;
+    }
 }

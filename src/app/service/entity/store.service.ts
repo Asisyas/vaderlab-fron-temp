@@ -88,6 +88,7 @@ export abstract class StoreService<T extends EntityInterface> {
 
   protected _updateEntityCollection(entity: T): void {
     const index = this.indexOf(entity);
+    this._entityInit(entity);
 
     if (index !== -1) {
       this._entities[index] = entity;
@@ -96,6 +97,11 @@ export abstract class StoreService<T extends EntityInterface> {
     }
 
     this._listObservable.next(this._entities);
+
+    console.log(this._entities);
+  }
+
+  protected _entityInit(entity: T): void {
   }
 
   protected _processPromise(promise: Promise<any>): Promise<T> {
