@@ -1,36 +1,45 @@
-import {NgForm} from "@angular/forms";
-import {TRANSPORT_TYPE} from "../../../enum/logistic/transport-type";
-import {LogisticEntityInterface} from "../../../model/logistic/logistic-entity-interface";
-import {StoreService} from "../../../service/entity/store.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {Inject, ViewChild} from "@angular/core";
-import {LOAD_TYPE} from "../../../enum/logistic/load-type";
+import {NgForm} from '@angular/forms';
+import {TRANSPORT_TYPE} from '../../../enum/logistic/transport-type';
+import {LogisticEntityInterface} from '../../../model/logistic/logistic-entity-interface';
+import {StoreService} from '../../../service/entity/store.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Inject, OnInit, ViewChild} from '@angular/core';
+import {LOAD_TYPE} from '../../../enum/logistic/load-type';
 
 
 
-export abstract class AbstractEntityCreateComponent1<T extends LogisticEntityInterface> {
+export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInterface> implements OnInit
+{
     public transport_type: object = TRANSPORT_TYPE;
     public load_type: object = LOAD_TYPE;
     public date_now: Date;
-
     @ViewChild('geocoder_arrival_input')
     public arrival_place_component;
-
     @ViewChild('geocoder_departure_input')
     public departure_place_component;
 
-    constructor(
-        public dialogRef: MatDialogRef<AbstractEntityCreateComponent1<T>>,
-        @Inject(MAT_DIALOG_DATA) public data: any,
-        private entity_service: StoreService<T>
-    ) {
-        this.date_now = new Date();
+    protected _entity;
+    protected _dialogRef: MatDialogRef<AbstractEntityCreateComponent<T>>;
+    protected _entityService: StoreService<T>;
+
+    public get entity_service(): StoreService<T> {
+        return this._entityService;
     }
 
-    public abstract get entity(): T;
-    public abstract set entity(entity?: T): T;
+    public get dialogRef(): MatDialogRef<AbstractEntityCreateComponent<T>> {
+        return this._dialogRef;
+    }
+
+    public get entity(): T {
+        return this._entity;
+    }
+
+    public set entity(entity: T) {
+        this._entity = entity;
+    }
 
     ngOnInit() {
+        this.date_now = new Date();
     }
 
     cancelCreation(evt: Event): void {

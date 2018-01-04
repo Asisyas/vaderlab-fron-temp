@@ -21,7 +21,7 @@ export class FilterService extends AbstractLogisticFilterEntityStore<Filter> {
   }
 
   protected get path_update(): string {
-    return undefined;
+      return '/cargo/filter';
   }
 
   constructor(protected api_service: ApiService) {

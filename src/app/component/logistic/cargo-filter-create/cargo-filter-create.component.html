@@ -13,15 +13,6 @@
               <div id="filter_form_map_departure" style="min-height: 400px; width: 100%;"></div>
             </div>
           </div>
-
-          <div class="dialog-actions">
-            <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
-            <button mat-raised-button matStepperNext>
-              {{ 'Next' | translate }}
-              <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-          </div>
-
         </form>
       </mat-step>
 
@@ -29,13 +20,6 @@
         <form>
           <ng-template matStepLabel>{{ 'Arrival places'| translate }}</ng-template>
           <div id="filter_form_map_arrival" style="min-height: 400px; width: 100%;"></div>
-          <div class="dialog-actions">
-            <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
-            <button mat-raised-button matStepperPrevious>
-            </button>
-            <button mat-raised-button matStepperNext>
-            </button>
-          </div>
         </form>
       </mat-step>
 
@@ -90,7 +74,7 @@
                           matInput [matDatepicker]="arrival_date_min"
                           placeholder="{{ 'Minimal date of the download'|translate }}"
                           [disabled]="isDateFieldsDisabled()"
-                          [ngModel]="filter.arrival_date_min"
+                          [(ngModel)]="filter.arrival_date_min"
                           name="arrival_date_min"
                   >
                   <mat-datepicker-toggle matSuffix [for]="arrival_date_min"></mat-datepicker-toggle>
@@ -109,7 +93,7 @@
                           matInput [matDatepicker]="arrival_date_max"
                           placeholder="{{ 'Maximum date of the download' | translate}}"
                           [disabled]="isDateFieldsDisabled()"
-                          [(ngModel)]="filter.arrival_date_maxzz"
+                          [(ngModel)]="filter.arrival_date_max"
                           name="arrival_date_max"
                   >
                   <mat-datepicker-toggle matSuffix [for]="arrival_date_max"></mat-datepicker-toggle>
@@ -186,15 +170,6 @@
             </mat-form-field>
           </div>
         </div>
-
-        <div class="dialog-actions">
-          <button mat-button (click)="cancelCreation($event)"> {{ 'Cancel'| translate }}</button>
-          <button mat-raised-button matStepperPrevious>
-          </button>
-          <button mat-raised-button matStepperNext>
-          </button>
-        </div>
-
       </mat-step>
 
       <mat-step>
@@ -215,17 +190,6 @@
               <mat-hint align="end">{{filter.title?.length || 0}}/30</mat-hint>
             </mat-form-field>
           </div>
-        </div>
-
-        <div class="dialog-actions">
-          <button mat-button matStepperPrevious>
-            <mat-icon>keyboard_arrow_left</mat-icon>
-            {{ 'Back' | translate }}
-          </button>
-          <button *ngIf="isCreateBtnShowed()" mat-raised-button type="submit" color="primary">
-            <mat-icon>done</mat-icon>
-            {{ 'Create' | translate }}
-          </button>
         </div>
       </mat-step>
 

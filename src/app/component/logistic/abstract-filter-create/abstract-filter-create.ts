@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { Filter } from '../../../model/logistic/cargo/filter';
 import { PERMANENT_TYPE } from '../../../enum/logistic/permanent-type';
 import { MapsAPILoader } from '@agm/core';
 import 'leaflet.pm';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Promise} from "q";
-import {FilterService} from "../../../service/logistic/cargo/filter.service";
-import {AbstractLogisticFilterEntityStore} from "../../../service/logistic/AbstractLogisticFilterEntityStore";
-import {LogisticFilterEntityInterface} from "../../../model/logistic/logistic-filter-entity-interface";
+import {Promise} from 'q';
+import {AbstractLogisticFilterEntityStore} from '../../../service/logistic/AbstractLogisticFilterEntityStore';
+import {LogisticFilterEntityInterface} from '../../../model/logistic/logistic-filter-entity-interface';
 
 declare var turf, L, LGeo, window;
 
@@ -40,7 +38,6 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
 
     public abstract get filter(): T;
 
-
     public abstract get filterService(): AbstractLogisticFilterEntityStore<T>;
 
     ngOnInit() {
@@ -67,21 +64,18 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
     }
 
     onSubmit() {
+        const action = this.filter.id ? 'update' : 'create';
         this.filter.arrival_geometry = this._getGeometryFromJson(this.getGeometry(this.arrival_geometry_layer));
         this.filter.departure_geometry = this._getGeometryFromJson(this.getGeometry(this.departure_geometry_layer));
 
         const promise  = this.filterService
-            .create(this.filter)
-            .then(filter => { this.dialogRef.close(filter); console.log('CREATED !', filter); })
+            [action](this.filter)
+            .then(filter => { this.dialogRef.close(filter); })
             .catch(error => { console.log(error); });
     }
 
-    isCreateBtnShowed() {
-        return false;
-    }
-
-    protected getGeometry(layer){
-        if(!layer) {
+    protected getGeometry(layer) {
+        if (!layer) {
             return null;
         }
 
@@ -90,7 +84,7 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
 
     protected _getGeometryFromJson(data) {
         const features = data['features'];
-        if(!features.length) {
+        if (!features.length) {
             return null;
         }
 
@@ -104,8 +98,8 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
                 const map = L.map(elementId).setView([1, 1], 2);
                 const editableLayers = new L.FeatureGroup();
 
-                if(geoData) {
-                    let layer = L.geoJson(geoData);
+                if (geoData) {
+                    const layer = L.geoJson(geoData);
                     editableLayers.addLayer(layer);
                     map.fitBounds(layer.getBounds());
                 }
@@ -156,7 +150,7 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
             const tmpLayer = layers[i];
             const tmpLayerJson = tmpLayer.toGeoJSON();
 
-            if(tmpLayerJson.geometry.type == 'Point') {
+            if (tmpLayerJson.geometry.type === 'Point') {
                 layer.removeLayer(tmpLayer);
                 continue;
             }
@@ -175,10 +169,5 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
             const tmpLayer = currentlayers[i];
             layer.addLayer(tmpLayer);
         }
-    }
-
-
-    debug(e) {
-        console.log(e);
     }
 }

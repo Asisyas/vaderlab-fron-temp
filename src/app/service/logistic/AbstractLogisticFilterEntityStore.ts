@@ -5,7 +5,7 @@
 
 import {ApiService} from '../core/api.service';
 import {StoreService} from '../entity/store.service';
-import {LogisticFilterEntityInterface} from "../../model/logistic/logistic-filter-entity-interface";
+import {LogisticFilterEntityInterface} from '../../model/logistic/logistic-filter-entity-interface';
 
 export abstract class AbstractLogisticFilterEntityStore<T extends LogisticFilterEntityInterface> extends StoreService<T> {
 
@@ -18,20 +18,47 @@ export abstract class AbstractLogisticFilterEntityStore<T extends LogisticFilter
 
         delete data['created_at'];
         delete data['updated_at'];
+        delete data['creator_id'];
+        delete data['id'];
 
-        data['departure_date_min'] = data['departure_date_min'] ? data['departure_date_min'].toLocaleDateString() : null;
-        data['departure_date_max'] = data['departure_date_max'] ? data['departure_date_max'].toLocaleDateString() : null;
+        data['departure_date_min'] = this._serializeDate(data['departure_date_min']);
+        data['departure_date_max'] = this._serializeDate(data['departure_date_max']);
 
-        data['arrival_date_min'] = data['arrival_date_min'] ? data['arrival_date_min'].toLocaleDateString() : null;
-        data['arrival_date_max'] = data['arrival_date_max'] ? data['arrival_date_max'].toLocaleDateString() : null;
+        data['arrival_date_min'] = this._serializeDate(data['arrival_date_min']);
+        data['arrival_date_max'] = this._serializeDate(data['arrival_date_max']);
 
         return data;
     }
 
     protected _entityInit(entity: T) {
-        entity.departure_date_min = entity.departure_date_min ? new Date(entity.departure_date_min): null;
-        entity.departure_date_max = entity.departure_date_max ? new Date(entity.departure_date_max): null;
-        entity.arrival_date_min = entity.arrival_date_min ? new Date(entity.arrival_date_min): null;
-        entity.arrival_date_max = entity.arrival_date_max ? new Date(entity.arrival_date_max): null;
+        entity.departure_date_min = this._parseDate(entity.departure_date_min);
+        entity.departure_date_max = this._parseDate(entity.departure_date_max);
+        entity.arrival_date_min = this._parseDate(entity.arrival_date_min);
+        entity.arrival_date_max = this._parseDate(entity.arrival_date_max);
+    }
+
+    protected _serializeDate(date: any) {
+        if (!date) {
+            return null;
+        }
+
+
+        if (!(date instanceof Date)) {
+            date = new Date(date);
+        }
+
+        return date.toLocaleDateString();
+    }
+
+    protected _parseDate(date: any) {
+        if (!date) {
+            return null;
+        }
+
+        if (date instanceof Date) {
+            return date;
+        }
+
+        return new Date(date);
     }
 }

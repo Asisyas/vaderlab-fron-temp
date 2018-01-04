@@ -23,8 +23,8 @@ export abstract class StoreService<T extends EntityInterface> {
   }
 
   public create(entity: T): Promise<T> {
-
     const data: object = this._processEntity(entity);
+    const id = data['id'];
     delete data['id'];
 
     return this._processPromise(this.api_service.call(
@@ -36,7 +36,7 @@ export abstract class StoreService<T extends EntityInterface> {
 
   public update(entity: T): Promise<T> {
     return this._processPromise(this.api_service.call(
-      this.path_create,
+      this.path_update + '/' + entity.id + '.json',
       this._processEntity(entity),
       RequestMethod.Put
     ));

@@ -15,7 +15,7 @@ export class CargoService extends AbstractLogisticEntityStore<Cargo> {
   }
 
   protected get path_update(): string {
-    return '/cargo/my/update.json';
+    return '/cargo/my/';
   }
 
   protected get path_create(): string {
@@ -23,6 +23,6 @@ export class CargoService extends AbstractLogisticEntityStore<Cargo> {
   }
 
   protected get path_delete(): string {
-    return '/cargo/my/delete';
+    return '/cargo/my/';
   }
 }

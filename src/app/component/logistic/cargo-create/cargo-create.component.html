@@ -32,8 +32,8 @@
                   required
                   maxlength="30"
                   placeholder="{{ 'Short description'|translate }}"
-                  value="{{ cargo.title }}"
-                  [(ngModel)]="cargo.title"
+                  value="{{ entity.title }}"
+                  [(ngModel)]="entity.title"
                   name="title"
                 >
               </mat-form-field>
@@ -43,8 +43,8 @@
                 <input
                   matInput [matDatepicker]="departure_date"
                   placeholder="{{ 'Date of download'|translate }}"
-                  [(disabled)]="cargo.is_permanent"
-                  [(ngModel)]="cargo.departure_date"
+                  [(disabled)]="entity.is_permanent"
+                  [(ngModel)]="entity.departure_date"
                   name="departure_date"
                 >
                 <mat-datepicker-toggle matSuffix [for]="departure_date"></mat-datepicker-toggle>
@@ -52,33 +52,33 @@
 
               </mat-form-field>
             </div>
-            <div class="col-md-3" [(attr.disabled)]="cargo.is_permanent || !cargo.departure_date">
+            <div class="col-md-3" [(attr.disabled)]="entity.is_permanent || !entity.departure_date">
               <mat-form-field>
                 <input
                   matInput [matDatepicker]="arrival_date"
                   placeholder="{{ 'Date of uploading' | translate}}"
-                  [(disabled)]="cargo.is_permanent || !cargo.departure_date"
-                  [(ngModel)]="cargo.arrival_date"
+                  [(disabled)]="entity.is_permanent || !entity.departure_date"
+                  [(ngModel)]="entity.arrival_date"
                   name="arrival_date"
                 >
                 <mat-datepicker-toggle matSuffix [for]="arrival_date"></mat-datepicker-toggle>
                 <mat-datepicker
                   #arrival_date
-                  [(startAt)]="cargo.departure_date"
-                  [(startView)]="cargo.departure_date"
+                  [(startAt)]="entity.departure_date"
+                  [(startView)]="entity.departure_date"
                 ></mat-datepicker>
               </mat-form-field>
 
             </div>
             <div class="col-md-2">
-              <mat-checkbox name="permanent" [(ngModel)]="cargo.is_permanent">{{ 'Is Permanent'| translate }}</mat-checkbox>
+              <mat-checkbox name="permanent" [(ngModel)]="entity.is_permanent">{{ 'Is Permanent'| translate }}</mat-checkbox>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-3">
               <mat-form-field>
-                <mat-select placeholder="{{ 'Body type' | translate }}"  [(ngModel)]="cargo.transport_type" name="transport_type">
+                <mat-select placeholder="{{ 'Body type' | translate }}"  [(ngModel)]="entity.transport_type" name="transport_type">
                   <mat-option *ngFor="let tt of transport_type" [value]="tt">
                     {{ tt|translate }}
                   </mat-option>
@@ -87,7 +87,7 @@
             </div>
             <div class="col-md-3">
               <mat-form-field>
-                <mat-select placeholder="{{ 'Load type'| translate }}"  [(ngModel)]="cargo.load_type" name="load_type">
+                <mat-select placeholder="{{ 'Load type'| translate }}"  [(ngModel)]="entity.load_type" name="load_type">
                   <mat-option *ngFor="let lt of load_type" [value]="lt">
                     {{ lt|translate }}
                   </mat-option>
@@ -101,8 +101,8 @@
                   matInput
                   type="number"
                   placeholder="{{ 'Weight'|translate }}"
-                  value="{{ cargo.weight }}"
-                  [(ngModel)]="cargo.weight"
+                  value="{{ entity.weight }}"
+                  [(ngModel)]="entity.weight"
                   name="weight"
                 >
               </mat-form-field>
@@ -115,8 +115,8 @@
                   matInput
                   type="number"
                   placeholder="{{ 'Volume' | translate }}"
-                  value="{{ cargo.volume }}"
-                  [(ngModel)]="cargo.volume"
+                  value="{{ entity.volume }}"
+                  [(ngModel)]="entity.volume"
                   name="volume"
                 >
               </mat-form-field>
