@@ -43,6 +43,8 @@
             <div class="col-md-3">
               <mat-form-field [class]="formErrors.getErrorClass('departure_date')">
                 <input
+                  [min]="date_now"
+                  [max]="date_max"
                   matInput [matDatepicker]="departure_date"
                   placeholder="{{ 'Date of download'|translate }}"
                   [(disabled)]="entity.is_permanent"
@@ -57,6 +59,8 @@
             <div class="col-md-3" [(attr.disabled)]="entity.is_permanent || !entity.departure_date">
               <mat-form-field [class]="formErrors.getErrorClass('arrival_date')">
                 <input
+                  [min]="entity.departure_date"
+                  [max]="date_max"
                   matInput [matDatepicker]="arrival_date"
                   placeholder="{{ 'Date of uploading' | translate}}"
                   [(disabled)]="entity.is_permanent || !entity.departure_date"

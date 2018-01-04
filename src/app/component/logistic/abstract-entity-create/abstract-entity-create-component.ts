@@ -14,13 +14,14 @@ export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInte
     public transport_type: object = TRANSPORT_TYPE;
     public load_type: object = LOAD_TYPE;
     public date_now: Date;
+    public date_max: Date;
     @ViewChild('geocoder_arrival_input')
     public arrival_place_component;
 
     @ViewChild('geocoder_departure_input')
     public departure_place_component;
     public formErrors: any = null;
-    
+
     protected _entityFormGroup: FormGroup;
     protected _entity;
     protected _dialogRef: MatDialogRef<AbstractEntityCreateComponent<T>>;
@@ -49,6 +50,7 @@ export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInte
 
     ngOnInit() {
         this.date_now = new Date();
+        this.date_max = new Date( Date.now() * 1000 + 86400 * 365 );
     }
 
     cancelCreation(evt: Event): void {

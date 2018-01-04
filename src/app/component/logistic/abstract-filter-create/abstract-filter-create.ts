@@ -21,6 +21,7 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
     extraOptionsFormGroup: FormGroup;
 
     date_now: Date;
+    date_max: Date;
     departure_geometry: any;
     departure_geometry_layer: any;
     arrival_geometry: any;
@@ -43,6 +44,7 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
     ngOnInit() {
 
         this.date_now = new Date();
+        this.date_max = new Date( Date.now() + 86400 * 365 );
         this.arrivalFormGroup = this._formBuilder.group({});
         this.departureFormGroup = this._formBuilder.group({});
         this.extraOptionsFormGroup = this._formBuilder.group({});
@@ -148,7 +150,11 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
         let unoinLayer = newLayer.toGeoJSON();
         for (let i = 0; i < layers.length; ++i) {
             const tmpLayer = layers[i];
-            const tmpLayerJson = tmpLayer.toGeoJSON();
+            let tmpLayerJson = tmpLayer.toGeoJSON();
+
+            if (tmpLayerJson.type === 'FeatureCollection') {
+                tmpLayerJson = tmpLayerJson.features[0];
+            }
 
             if (tmpLayerJson.geometry.type === 'Point') {
                 layer.removeLayer(tmpLayer);
