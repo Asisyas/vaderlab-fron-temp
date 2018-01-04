@@ -1,4 +1,4 @@
-<form #f="ngForm" (submit)="onSubmit(f)">
+<form #f="ngForm" (submit)="onSubmit(f)" >
     <mat-dialog-content>
       <div mat-dialog-title>{{ 'New Cargo'| translate }}</div>
           <div class="row">
@@ -7,7 +7,7 @@
               <app-input-geocoder
                 required
                 #geocoder_departure_input
-                i18n-placeholder
+                [google_id]="entity.departure_place"
                 placeholder="{{ 'Departure city' | translate }}"
                 [types]="['(cities)']"
               ></app-input-geocoder>
@@ -16,6 +16,7 @@
             <div class="col-md-6 from-froup ">
               <app-input-geocoder
                 required
+                [google_id]="entity.arrival_place"
                 #geocoder_arrival_input
                 placeholder="{{ 'Arrival city' | translate }}"
                 [types]="['(cities)']"
@@ -26,7 +27,7 @@
 
           <div class="row">
             <div class="col-md-4">
-              <mat-form-field>
+              <mat-form-field [class]="formErrors.getErrorClass('title')">
                 <input
                   matInput
                   required
@@ -35,11 +36,12 @@
                   value="{{ entity.title }}"
                   [(ngModel)]="entity.title"
                   name="title"
-                >
+                />
+                  <app-form-error field="title" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
             </div>
             <div class="col-md-3">
-              <mat-form-field>
+              <mat-form-field [class]="formErrors.getErrorClass('departure_date')">
                 <input
                   matInput [matDatepicker]="departure_date"
                   placeholder="{{ 'Date of download'|translate }}"
@@ -49,11 +51,11 @@
                 >
                 <mat-datepicker-toggle matSuffix [for]="departure_date"></mat-datepicker-toggle>
                 <mat-datepicker [startAt]="date_now" #departure_date></mat-datepicker>
-
+                  <app-form-error field="departure_date" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
             </div>
             <div class="col-md-3" [(attr.disabled)]="entity.is_permanent || !entity.departure_date">
-              <mat-form-field>
+              <mat-form-field [class]="formErrors.getErrorClass('arrival_date')">
                 <input
                   matInput [matDatepicker]="arrival_date"
                   placeholder="{{ 'Date of uploading' | translate}}"
@@ -67,6 +69,7 @@
                   [(startAt)]="entity.departure_date"
                   [(startView)]="entity.departure_date"
                 ></mat-datepicker>
+                  <app-form-error field="arrival_date" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
 
             </div>
@@ -77,26 +80,36 @@
 
           <div class="row">
             <div class="col-md-3">
-              <mat-form-field>
-                <mat-select placeholder="{{ 'Body type' | translate }}"  [(ngModel)]="entity.transport_type" name="transport_type">
+              <mat-form-field [class]="formErrors.getErrorClass('transport_type')">
+                <mat-select
+                        placeholder="{{ 'Body type' | translate }}"
+                        [(ngModel)]="entity.transport_type"
+                        name="transport_type"
+                >
                   <mat-option *ngFor="let tt of transport_type" [value]="tt">
                     {{ tt|translate }}
                   </mat-option>
                 </mat-select>
+                  <app-form-error field="transport_type" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
             </div>
             <div class="col-md-3">
-              <mat-form-field>
-                <mat-select placeholder="{{ 'Load type'| translate }}"  [(ngModel)]="entity.load_type" name="load_type">
+              <mat-form-field [class]="formErrors.getErrorClass('load_type')">
+                <mat-select
+                        placeholder="{{ 'Load type'| translate }}"
+                        [(ngModel)]="entity.load_type"
+                        name="load_type"
+                >
                   <mat-option *ngFor="let lt of load_type" [value]="lt">
                     {{ lt|translate }}
                   </mat-option>
                 </mat-select>
+                  <app-form-error field="load_type" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
             </div>
 
             <div class="col-md-1">
-              <mat-form-field>
+              <mat-form-field [class]="formErrors.getErrorClass('weight')">
                 <input
                   matInput
                   type="number"
@@ -105,12 +118,13 @@
                   [(ngModel)]="entity.weight"
                   name="weight"
                 >
+                  <app-form-error field="weight" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
             </div>
 
 
             <div class="col-md-1">
-              <mat-form-field>
+              <mat-form-field [class]="formErrors.getErrorClass('volume')">
                 <input
                   matInput
                   type="number"
@@ -119,6 +133,7 @@
                   [(ngModel)]="entity.volume"
                   name="volume"
                 >
+                  <app-form-error field="volume" [formErrors]="formErrors"></app-form-error>
               </mat-form-field>
             </div>
 

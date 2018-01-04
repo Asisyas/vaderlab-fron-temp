@@ -11,7 +11,6 @@ import { CargoSearchComponent } from './component/logistic/cargo-search/cargo-se
 import { CargoCreateComponent } from './component/logistic/cargo-create/cargo-create.component';
 import { CargoMyListComponent } from './component/logistic/cargo-my-list/cargo-my-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { DatepickerModule } from 'angular2-material-datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.component';
 import { AgmCoreModule } from '@agm/core';
@@ -40,7 +39,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CargoFilterMyListComponent } from './component/logistic/cargo-filter-my-list/cargo-filter-my-list.component';
 import { CargoFilterCreateComponent } from './component/logistic/cargo-filter-create/cargo-filter-create.component';
-import {FilterService} from "./service/logistic/cargo/filter.service";
+import { FilterService } from "./service/logistic/cargo/filter.service";
+import { FormErrorComponent } from './control/error/form-error/form-error.component';
+
+import { registerLocaleData } from '@angular/common';
+import ru_RU from '@angular/common/locales/ru';
+registerLocaleData(ru_RU);
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,6 +63,7 @@ export function createTranslateLoader(http: HttpClient) {
         GooglePlaceidComponent,
         CargoFilterCreateComponent,
         CargoFilterMyListComponent,
+        FormErrorComponent,
     ],
     imports: [
         TranslateModule.forRoot({
@@ -71,7 +76,6 @@ export function createTranslateLoader(http: HttpClient) {
         HttpClientModule,
         HttpModule,
         BrowserAnimationsModule,
-        DatepickerModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
@@ -95,7 +99,7 @@ export function createTranslateLoader(http: HttpClient) {
     providers: [
         {
             provide: LOCALE_ID,
-            useValue: 'RU'
+            useValue: 'ru'
         },
         UserService,
         SessionService,

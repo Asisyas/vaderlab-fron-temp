@@ -19,9 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
-        "../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
+
         "../node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css",
         "../node_modules/ng2-toasty/style-material.css",
         "../node_modules/flag-icon-css/css/flag-icon.min.css",
@@ -31,7 +29,6 @@
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js",
         "../node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js",
         "../node_modules/leaflet/dist/leaflet.js",
         "../node_modules/clipper-lib/clipper.js",

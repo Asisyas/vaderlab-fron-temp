@@ -35,9 +35,14 @@ export abstract class StoreService<T extends EntityInterface> {
   }
 
   public update(entity: T): Promise<T> {
+    const _entity =  this._processEntity(entity);
+
+    delete _entity['creator_id'];
+    delete _entity['id'];
+
     return this._processPromise(this.api_service.call(
       this.path_update + '/' + entity.id + '.json',
-      this._processEntity(entity),
+        _entity,
       RequestMethod.Put
     ));
   }
@@ -83,7 +88,9 @@ export abstract class StoreService<T extends EntityInterface> {
   }
 
   protected _processEntity(entity: T): object {
-    return Object.assign({}, entity);
+    const e = Object.assign({}, entity);
+
+    return e;
   }
 
   protected _updateEntityCollection(entity: T): void {

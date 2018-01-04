@@ -1,0 +1,15 @@
+.mat-row[entity_warning="true"] {
+    background-color: var(--warning);
+}
+
+.mat-row[entity_warning="true"] > .mat-cell > .mat-icon {
+    color: var(--red);
+}
+
+.mat-row[entity_warning="false"] > .mat-cell > .mat-icon {
+    display: none;
+}
+
+.mat-column-warning {
+    max-width: 35px;
+}

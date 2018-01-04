@@ -71,3 +71,8 @@ a:hover.mat-button {
   color: #f5f5f5;
   text-decoration: none;
 }
+
+.has-error {
+  color: var(--danger);
+  border-color: var(--danger);
+}

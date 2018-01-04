@@ -18,7 +18,7 @@ export class CargoMyListComponent implements OnInit {
 
   @Input()
   public displayedColumns = [
-    'departure_place', 'arrival_place', 'created_at', 'title', 'transport_type',
+      'warning', 'departure_place', 'arrival_place', 'created_at', 'title', 'transport_type',
     'load_type', 'departure_date', 'arrival_date', 'is_permanent'
   ];
   @Input()
@@ -30,6 +30,33 @@ export class CargoMyListComponent implements OnInit {
     private __userService: UserService,
     private __cargoService: CargoService
   ) {
+  }
+
+  entityWarning(entity: Cargo) {
+    const current_date = new Date();
+    current_date.setMinutes(0);
+    current_date.setHours(0);
+    current_date.setSeconds(0);
+    let status = false;
+
+    if(entity.is_permanent === true) {
+      return status;
+    }
+
+    if(entity.arrival_date && this._entityDateFormat(entity.arrival_date) < current_date) {
+        status = true;
+    }
+
+    if((entity.departure_date && this._entityDateFormat(entity.departure_date) < current_date)) {
+        status =  true;
+    }
+
+    return status;
+  }
+
+
+  _entityDateFormat(date) {
+    return new Date(date);
   }
 
   ngOnInit() {
@@ -50,9 +77,10 @@ export class CargoMyListComponent implements OnInit {
     return this._showPreloader;
   }
 
-  openDialog() {
+  openDialog(entity?: Cargo) {
     const dialogRef = this.dialog.open(CargoCreateComponent, {
       disableClose: true,
+      data: entity || null,
     });
 
     dialogRef.afterClosed().subscribe(result => {

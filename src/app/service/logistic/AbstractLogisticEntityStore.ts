@@ -13,14 +13,40 @@ export abstract class AbstractLogisticEntityStore<T extends LogisticEntityInterf
 
     delete data['created_at'];
     delete data['updated_at'];
-    data['departure_date'] = data['departure_date'] ? data['departure_date'].toLocaleDateString() : null;
-    data['arrival_date'] = data['arrival_date'] ? data['arrival_date'].toLocaleDateString() : null;
+    data['departure_date'] = this._serializeDate(data['departure_date']);
+    data['arrival_date'] = this._serializeDate(data['arrival_date'] );
 
     return data;
   }
 
   protected _entityInit(entity: T) {
-    entity.departure_date = entity.departure_date ? new Date(entity.departure_date): null;
-    entity.arrival_date = entity.arrival_date ? new Date(entity.arrival_date): null;
+    entity.departure_date = this._parseDate(entity.departure_date);
+    entity.arrival_date = this._parseDate(entity.arrival_date);
   }
+
+    protected _serializeDate(date: any) {
+        if (!date) {
+            return null;
+        }
+
+
+        if (!(date instanceof Date)) {
+            date = new Date(date);
+        }
+
+        return date.toLocaleDateString();
+    }
+
+    protected _parseDate(date: any) {
+        if (!date) {
+            return null;
+        }
+
+        if (date instanceof Date) {
+            return date;
+        }
+
+        return new Date(date);
+    }
+
 }
