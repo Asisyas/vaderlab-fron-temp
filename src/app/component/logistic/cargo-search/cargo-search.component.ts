@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CargoService} from '../../../service/logistic/cargo/cargo.service';
 import {Cargo} from '../../../model/logistic/cargo/cargo';
+import {Subject} from "rxjs/Subject";
+import {SearchService} from "../../../service/logistic/cargo/search.service";
 
 @Component({
   selector: 'app-cargo-search',
@@ -9,17 +11,22 @@ import {Cargo} from '../../../model/logistic/cargo/cargo';
 })
 export class CargoSearchComponent implements OnInit {
 
-  constructor(private cargo_service: CargoService) { }
+  protected _entities: Cargo[];
+  protected __entitiesObservable;
 
-  @Input()
-  private cargoCollection: Cargo[];
+  constructor(private cargo_service: SearchService) {
+      this._entities = [];
+      this.__entitiesObservable = new Subject();
+  }
+
+  public get entities() {
+    return this._entities;
+  }
 
   ngOnInit() {
-    /*this.cargo_service.search().then(cargo => {
-      this.cargoCollection = <Cargo[]>cargo;
-      console.log(this.cargoCollection);
-    });
-    */
+    this.cargo_service.startSearch();
+    this._entities = this.cargo_service.entities;
+    this.__entitiesObservable = this.cargo_service.entitiesObservable;
   }
 
 }

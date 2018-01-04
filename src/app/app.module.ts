@@ -16,6 +16,7 @@ import { GeocoderComponent } from './control/geocoder/geocoder/geocoder.componen
 import { AgmCoreModule } from '@agm/core';
 import { ApiService } from './service/core/api.service';
 import { CargoService } from './service/logistic/cargo/cargo.service';
+import { SearchService as CargoSearchService } from './service/logistic/cargo/search.service';
 import { HttpModule } from '@angular/http';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { ToastyModule } from 'ng2-toasty';
@@ -106,6 +107,7 @@ export function createTranslateLoader(http: HttpClient) {
         OAuthService,
         ApiService,
         CargoService,
+        CargoSearchService,
         FilterService,
         AuthService,
         GeocoderService,

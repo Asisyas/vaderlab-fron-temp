@@ -62,32 +62,4 @@
 
   </div>
 
-  <!--
-  <div *ngFor="let cargo of cargoCollection" class="card bmd-card-raised logistic-list-item">
-    <div class="card-header">
-      <div class="row">
-        <div class="col"><b>BY</b> Минск - <b>RU</b> Москва</div>
-        <div class="col" *ngIf="!cargo.is_permanent">
-          {{ cargo.departure_date | date:'dd.MM.yyyy' }} -
-          {{ cargo.arrival_date | date:'dd.MM.yyyy' }}
-        </div>
-        <div class="col" *ngIf="cargo.is_permanent"> Regularly </div>
-        <div class="col"> <b>{{ cargo.transport_type }}</b> {{ cargo.load_type}} </div>
-        <div class="col"> {{ cargo.title }}
-          <span *ngIf="cargo.weight"> •{{ cargo.weight }}т.</span>
-          <span *ngIf="cargo.volume"> • {{cargo.volume}}м³ </span>
-        </div>
-        <div class="col text-right text-danger"> 1200 $ </div>
-      </div>
-    </div>
-    <div class="card-footer">
-      <b>
-        ЧУТП "БЕЛСЕЛЬТУР"
-      </b>
-      <span class="text-primary">• +375297777041 • +375296327742 • Skype: vtruck2007 • ICQ: 581576833</span>
-      <span class="float-right text-muted"> Created {{ cargo.created_at|timeAgo }}</span>
-      <span class="float-right text-muted" *ngIf="cargo.updated_at">/ Updated {{ cargo.updated_at|timeAgo }}</span>
-    </div>
-  </div>
-  -->
 </div>
