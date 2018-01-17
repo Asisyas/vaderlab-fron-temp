@@ -1,11 +1,12 @@
-import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {TRANSPORT_TYPE} from '../../../enum/logistic/transport-type';
 import {LogisticEntityInterface} from '../../../model/logistic/logistic-entity-interface';
 import {StoreService} from '../../../service/entity/store.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Inject, OnInit, ViewChild} from '@angular/core';
 import {LOAD_TYPE} from '../../../enum/logistic/load-type';
-import {FormErrorFactory} from "../../../service/forms/FormErrorFactory";
+import {FormErrorFactory} from '../../../service/forms/FormErrorFactory';
+
 
 declare var window;
 
@@ -29,7 +30,6 @@ export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInte
     protected _formBuilder: FormBuilder;
 
     constructor() {
-        this._formValidationInit();
     }
 
     public get entity_service(): StoreService<T> {
@@ -49,6 +49,7 @@ export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInte
     }
 
     ngOnInit() {
+        this._formValidationInit();
         this.date_now = new Date();
         this.date_max = new Date( Date.now() * 1000 + 86400 * 365 );
     }
@@ -62,7 +63,7 @@ export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInte
     onSubmit(f: NgForm) {
         this.updatePosition();
         let action = 'create';
-        if(this.entity.id) {
+        if (this.entity.id) {
             action = 'update';
         }
 
@@ -90,7 +91,81 @@ export abstract class AbstractEntityCreateComponent<T extends LogisticEntityInte
 
 
     protected _formValidationInit(errors: any = null) {
+        const self = this;
         this.formErrors = FormErrorFactory.getErrors(errors);
+
+        this._entityFormGroup  = this._formBuilder.group({
+            title: [ '', Validators.compose([
+                Validators.min(3),
+                Validators.max(30),
+                this._validateTitle.bind(self),
+            ])],
+            departure_place: [ '' , Validators.compose([this._validateDeparturePlace.bind(self)])],
+            arrival_place: [ '' , Validators.compose([this._validateArrivalPlace.bind(self)])],
+            departure_date: ['', Validators.compose([this._validateDepartureDate.bind(self)])],
+            arrival_date: ['', Validators.compose([this._validateArrivalDate.bind(self)])],
+            is_permanent: [''],
+            load_type: [ '', Validators.compose([this._validateLoadType.bind(self)])],
+            transport_type: [ '', Validators.compose([this._validateTransportType.bind(self)])],
+            volume: ['', Validators.compose([
+                Validators.min(0),
+                this._validateVolume.bind(self)
+                ]
+            ) ],
+            weight: ['', Validators.compose([
+                Validators.min(0),
+                this._validateWeight.bind(self)
+            ]) ]
+        });
     }
 
+
+    protected _validateTitle(control: FormControl) {
+        return this._validate('title');
+    }
+
+    protected _validateDepartureDate(control: FormControl) {
+        return this._validate('departure_date');
+    }
+
+    protected _validateArrivalDate(control: FormControl) {
+        return this._validate('arrival_date');
+    }
+
+    protected _validateWeight(control: FormControl) {
+        return this._validate('weight');
+    }
+
+    protected _validateVolume(control: FormControl) {
+        return this._validate('volume');
+    }
+
+    protected _validateTransportType(control: FormControl) {
+        return this._validate('transport_type');
+    }
+
+    protected _validateLoadType(control: FormControl) {
+        return this._validate('load_type');
+    }
+
+    protected _validateArrivalPlace(control: FormControl) {
+        return this._validate('arrival_place');
+    }
+
+    protected _validateDeparturePlace(control: FormControl) {
+        return this._validate('departure_place');
+    }
+
+    protected _validate(prop: string) {
+        const fe = this.formErrors.getError(prop);
+        let err = null;
+        const key = 'validate_' + prop;
+
+        if (fe) {
+            err = {};
+            err[key] = true;
+        }
+
+        return err;
+    }
 }

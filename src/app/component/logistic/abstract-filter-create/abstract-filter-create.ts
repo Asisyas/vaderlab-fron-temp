@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { PERMANENT_TYPE } from '../../../enum/logistic/permanent-type';
+import {ANY, PERMANENT_TYPE} from '../../../enum/logistic/permanent-type';
 import { MapsAPILoader } from '@agm/core';
 import 'leaflet.pm';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -12,7 +12,6 @@ declare var turf, L, LGeo, window;
 
 
 export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEntityInterface>
-
     implements OnInit {
 
     isLinear = true;
@@ -28,13 +27,14 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
     arrival_geometry_layer: any;
     map: any;
 
-    protected _permanent_type: number[] = PERMANENT_TYPE;
+    protected _permanent_type: number[];
 
     constructor(
         public dialogRef: MatDialogRef<any>,
         protected __mapsAPILoader: MapsAPILoader,
         protected _formBuilder: FormBuilder
     ) {
+        this._permanent_type = PERMANENT_TYPE;
     }
 
     public abstract get filter(): T;
@@ -42,7 +42,6 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
     public abstract get filterService(): AbstractLogisticFilterEntityStore<T>;
 
     ngOnInit() {
-
         this.date_now = new Date();
         this.date_max = new Date( Date.now() + 86400 * 365 );
         this.arrivalFormGroup = this._formBuilder.group({});
@@ -74,6 +73,10 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
             [action](this.filter)
             .then(filter => { this.dialogRef.close(filter); })
             .catch(error => { console.log(error); });
+    }
+
+    protected _comparePermanentStatus(f1: any, f2: any): boolean {
+        return (f1 && f2 && f1.value === f2.value) || (!f2 && f1 === ANY);
     }
 
     protected getGeometry(layer) {
@@ -147,10 +150,12 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
 
     protected _union(layer, newLayer) {
         const layers = layer.getLayers();
-        let unoinLayer = newLayer.toGeoJSON();
+        let unionLayer = newLayer.toGeoJSON();
         for (let i = 0; i < layers.length; ++i) {
             const tmpLayer = layers[i];
             let tmpLayerJson = tmpLayer.toGeoJSON();
+            let tmpUnionLayer = null;
+            let needRemoveLayer = null;
 
             if (tmpLayerJson.type === 'FeatureCollection') {
                 tmpLayerJson = tmpLayerJson.features[0];
@@ -162,14 +167,21 @@ export abstract class AbstractFilterCreateComponent<T extends LogisticFilterEnti
             }
 
             try {
-                unoinLayer = turf.union(unoinLayer, tmpLayerJson);
+                tmpUnionLayer = turf.union(unionLayer, tmpLayerJson);
+                unionLayer = tmpUnionLayer;
+                needRemoveLayer = tmpLayer;
             } catch (e) {
                 console.log(e);
+                needRemoveLayer = unionLayer;
+                if (unionLayer.length > 0) {
+                    unionLayer = unionLayer[0];
+                }
             }
-            layer.removeLayer(tmpLayer);
+
+            layer.removeLayer(needRemoveLayer);
         }
 
-        const currentlayers = L.geoJson(unoinLayer).getLayers();
+        const currentlayers = L.geoJson(unionLayer).getLayers();
 
         for (let i = 0; i < currentlayers.length; i++) {
             const tmpLayer = currentlayers[i];

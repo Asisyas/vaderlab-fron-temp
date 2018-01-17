@@ -1,7 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {OAuthService} from 'angular2-oauth2/oauth-service';
-import {ApiService} from './service/core/api.service';
-import {AuthService} from "./service/secured/auth-service";
 import {UserService} from "./service/user/user.service";
 
 declare var $;
@@ -29,6 +26,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    $('body').bootstrapMaterialDesign();
   }
 }

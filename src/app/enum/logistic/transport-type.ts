@@ -22,6 +22,7 @@ export const CEMENT_CARRIER      = 'CEMENT_CARRIER';
 export const SPEC_TRANSPORT      = 'SPEC_TRANSPORT';
 export const OTHER               = 'OTHER';
 
+
 export const TRANSPORT_TYPE  = [
   AWNING,
   REFRIGERATOR,

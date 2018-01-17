@@ -1,34 +1,39 @@
-<form #f="ngForm" (submit)="onSubmit(f)" >
-    <mat-dialog-content>
-      <div mat-dialog-title>{{ 'New Cargo'| translate }}</div>
-          <div class="row">
+<form #f="ngForm" [formGroup]="_entityFormGroup" (submit)="onSubmit(f)" >
+  <mat-dialog-content>
+    <div mat-dialog-title>{{ 'New Cargo'| translate }}</div>
+    <div class="row">
 
-            <div class="col-md-6">
-              <app-input-geocoder
-                required
+      <div class="col-md-6">
+        <app-input-geocoder
+                [_formGroup]="_entityFormGroup"
+                _formControlName="departure_place"
                 #geocoder_departure_input
+                [formErrors]="formErrors.getErrorText('departure_place')"
                 [google_id]="entity.departure_place"
                 placeholder="{{ 'Departure city' | translate }}"
                 [types]="['(cities)']"
-              ></app-input-geocoder>
-            </div>
+        ></app-input-geocoder>
+      </div>
 
-            <div class="col-md-6 from-froup ">
-              <app-input-geocoder
-                required
+      <div class="col-md-6 ">
+        <app-input-geocoder
+                [_formGroup]="_entityFormGroup"
+                [formErrors]="formErrors.getErrorText('arrival_place')"
+                _formControlName="arrival_place"
                 [google_id]="entity.arrival_place"
                 #geocoder_arrival_input
                 placeholder="{{ 'Arrival city' | translate }}"
                 [types]="['(cities)']"
-              ></app-input-geocoder>
-            </div>
+        ></app-input-geocoder>
+      </div>
 
-          </div>
+    </div>
 
-          <div class="row">
-            <div class="col-md-4">
-              <mat-form-field [class]="formErrors.getErrorClass('title')">
-                <input
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <input
+                  formControlName="title"
                   matInput
                   required
                   maxlength="30"
@@ -36,29 +41,35 @@
                   value="{{ entity.title }}"
                   [(ngModel)]="entity.title"
                   name="title"
-                />
-                  <app-form-error field="title" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
-            </div>
-            <div class="col-md-3">
-              <mat-form-field [class]="formErrors.getErrorClass('departure_date')">
-                <input
+          />
+          <mat-error *ngIf="formErrors.hasError('title')">
+            {{ formErrors.getErrorText('title') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field >
+          <input  formControlName="departure_date"
                   [min]="date_now"
                   [max]="date_max"
-                  matInput [matDatepicker]="departure_date"
+                  matInput
+                  [matDatepicker]="departure_date"
                   placeholder="{{ 'Date of download'|translate }}"
                   [(disabled)]="entity.is_permanent"
                   [(ngModel)]="entity.departure_date"
                   name="departure_date"
-                >
-                <mat-datepicker-toggle matSuffix [for]="departure_date"></mat-datepicker-toggle>
-                <mat-datepicker [startAt]="date_now" #departure_date></mat-datepicker>
-                  <app-form-error field="departure_date" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
-            </div>
-            <div class="col-md-3" [(attr.disabled)]="entity.is_permanent || !entity.departure_date">
-              <mat-form-field [class]="formErrors.getErrorClass('arrival_date')">
-                <input
+          >
+          <mat-datepicker-toggle matSuffix [for]="departure_date"></mat-datepicker-toggle>
+          <mat-datepicker [startAt]="date_now" #departure_date></mat-datepicker>
+          <mat-error *ngIf="formErrors.hasError('departure_date')">
+            {{ formErrors.getErrorText('departure_date') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3" [(attr.disabled)]="entity.is_permanent || !entity.departure_date">
+        <mat-form-field>
+          <input
+                  formControlName="arrival_date"
                   [min]="entity.departure_date"
                   [max]="date_max"
                   matInput [matDatepicker]="arrival_date"
@@ -66,83 +77,99 @@
                   [(disabled)]="entity.is_permanent || !entity.departure_date"
                   [(ngModel)]="entity.arrival_date"
                   name="arrival_date"
-                >
-                <mat-datepicker-toggle matSuffix [for]="arrival_date"></mat-datepicker-toggle>
-                <mat-datepicker
+          >
+          <mat-datepicker-toggle matSuffix [for]="arrival_date"></mat-datepicker-toggle>
+          <mat-datepicker
                   #arrival_date
                   [(startAt)]="entity.departure_date"
                   [(startView)]="entity.departure_date"
-                ></mat-datepicker>
-                  <app-form-error field="arrival_date" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
+          ></mat-datepicker>
+          <mat-error *ngIf="formErrors.hasError('arrival_date')">
+            {{ formErrors.getErrorText('arrival_date') }}
+          </mat-error>
+        </mat-form-field>
 
-            </div>
-            <div class="col-md-2">
-              <mat-checkbox name="permanent" [(ngModel)]="entity.is_permanent">{{ 'Is Permanent'| translate }}</mat-checkbox>
-            </div>
-          </div>
+      </div>
+      <div class="col-md-2">
+        <mat-checkbox
+                formControlName="is_permanent"
+                name="permanent" [(ngModel)]="entity.is_permanent">{{ 'Is Permanent'| translate }}</mat-checkbox>
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="col-md-3">
-              <mat-form-field [class]="formErrors.getErrorClass('transport_type')">
-                <mat-select
-                        placeholder="{{ 'Body type' | translate }}"
-                        [(ngModel)]="entity.transport_type"
-                        name="transport_type"
-                >
-                  <mat-option *ngFor="let tt of transport_type" [value]="tt">
-                    {{ tt|translate }}
-                  </mat-option>
-                </mat-select>
-                  <app-form-error field="transport_type" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
-            </div>
-            <div class="col-md-3">
-              <mat-form-field [class]="formErrors.getErrorClass('load_type')">
-                <mat-select
-                        placeholder="{{ 'Load type'| translate }}"
-                        [(ngModel)]="entity.load_type"
-                        name="load_type"
-                >
-                  <mat-option *ngFor="let lt of load_type" [value]="lt">
-                    {{ lt|translate }}
-                  </mat-option>
-                </mat-select>
-                  <app-form-error field="load_type" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
-            </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-select
+                  formControlName="transport_type"
+                  placeholder="{{ 'Body type' | translate }}"
+                  [(ngModel)]="entity.transport_type"
+                  name="transport_type"
+          >
+            <mat-option *ngFor="let tt of transport_type" [value]="tt">
+              {{ tt|translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formErrors.hasError('transport_type')">
+            {{ formErrors.getErrorText('transport_type') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field>
+          <mat-select
+                  formControlName="load_type"
+                  placeholder="{{ 'Load type'| translate }}"
+                  [(ngModel)]="entity.load_type"
+                  name="load_type"
+          >
+            <mat-option *ngFor="let lt of load_type" [value]="lt">
+              {{ lt|translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="formErrors.hasError('load_type')">
+            {{ formErrors.getErrorText('load_type') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-            <div class="col-md-1">
-              <mat-form-field [class]="formErrors.getErrorClass('weight')">
-                <input
+      <div class="col-md-3">
+        <mat-form-field >
+          <input
+                  formControlName="weight"
                   matInput
                   type="number"
                   placeholder="{{ 'Weight'|translate }}"
                   value="{{ entity.weight }}"
                   [(ngModel)]="entity.weight"
                   name="weight"
-                >
-                  <app-form-error field="weight" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
-            </div>
+          >
+          <mat-error *ngIf="formErrors.hasError('weight')">
+            {{ formErrors.getErrorText('weight') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
 
-            <div class="col-md-1">
-              <mat-form-field [class]="formErrors.getErrorClass('volume')">
-                <input
+      <div class="col-md-3">
+        <mat-form-field>
+          <input
+                  formControlName="volume"
                   matInput
                   type="number"
                   placeholder="{{ 'Volume' | translate }}"
                   value="{{ entity.volume }}"
                   [(ngModel)]="entity.volume"
                   name="volume"
-                >
-                  <app-form-error field="volume" [formErrors]="formErrors"></app-form-error>
-              </mat-form-field>
-            </div>
+          >
+          <mat-error *ngIf="formErrors.hasError('volume')">
+            {{ formErrors.getErrorText('volume') }}
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-          </div>
-    </mat-dialog-content>
+    </div>
+  </mat-dialog-content>
 
   <div mat-dialog-actions>
     <button mat-button (click)="cancelCreation($event)" i18n> {{ 'Cancel'| translate }}</button>

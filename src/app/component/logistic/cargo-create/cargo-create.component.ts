@@ -24,12 +24,11 @@ export class CargoCreateComponent extends AbstractEntityCreateComponent<Cargo> {
     }
 
     ngOnInit() {
-        super.ngOnInit();
-
-        if(!this._entity) {
+        if (!this._entity) {
             this._entity = new Cargo();
         } else {
             this.entity = this._entity;
         }
+        super.ngOnInit();
     }
 }

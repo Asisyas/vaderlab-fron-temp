@@ -1,7 +1,9 @@
-import {Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, forwardRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { } from 'googlemaps';
 import {GeocoderService} from '../../../service/google/geocoder/geocoder.service';
+import {ControlValueAccessor, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator} from '@angular/forms';
+import {MatFormFieldControl} from "@angular/material";
 
 @Component({
     selector: 'app-input-geocoder',
@@ -9,6 +11,7 @@ import {GeocoderService} from '../../../service/google/geocoder/geocoder.service
     styleUrls: ['./geocoder.component.css']
 })
 export class GeocoderComponent implements OnInit {
+
 
     @Input()
     public placeholder: string;
@@ -18,6 +21,15 @@ export class GeocoderComponent implements OnInit {
 
     @Input()
     public google_id?: string;
+
+    @Input()
+    public formErrors: string;
+
+    @Input()
+    public _formControlName: string = null;
+
+    @Input()
+    public  _formGroup: FormGroup = null;
 
     private _position: google.maps.GeocoderResult;
 
@@ -69,5 +81,23 @@ export class GeocoderComponent implements OnInit {
                 });
             }
         });
+    }
+
+    private propagateChange = (_: any) => { };
+    // this is the initial value set to the component
+    public writeValue(obj: any) {
+        this.google_id = obj;
+
+        console.log('WRITE_VAL', obj);
+
+    }
+
+    public registerOnChange(fn: any) {
+        this.propagateChange = fn;
+    }
+    public registerOnTouched() { }
+
+    private onChange(event) {
+        this.propagateChange(this.google_id);
     }
 }

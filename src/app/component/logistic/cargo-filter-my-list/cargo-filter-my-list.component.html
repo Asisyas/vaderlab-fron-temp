@@ -2,6 +2,7 @@
 
   <mat-card-header [hidden]="!isReady()">
     <button
+            class="filter__create-button"
             matTooltip="{{ 'Create new filter of the cargo'|translate }}"
             matTooltipPosition="above"
             mat-raised-button
@@ -20,22 +21,28 @@
   </mat-card-content>
   <mat-card-content [hidden]="!isReady()">
     <mat-list dense>
-      <div *ngFor="let filter of filterListObservable | async">
-      <mat-list-item class="">
+      <mat-list-item class="" *ngFor="let filter of filterListObservable | async">
+        <!-- <mat-icon matListIcon class="text-danger">warning </mat-icon> -->
         <span class="filter__list-item">
-          <span matLine maxlength="32">
+          <span maxlength="32">
             {{ filter.title }}
           </span>
           <span class="filter__list-item-actions">
             <button mat-icon-button (click)="createFilterDialog(filter)">
               <mat-icon matTooltip="{{ 'Edit filter'|translate }}">build</mat-icon>
             </button>
+            <!--
             <button mat-icon-button>
               <mat-icon matTooltip="{{ 'Filter is active'|translate }}">visibility</mat-icon>
             </button>
+            -->
           </span>
         </span>
       </mat-list-item>
+      <div *ngIf="isReady() && !_filterService.entities.length">
+        <p>
+          Create your first filter
+        </p>
       </div>
     </mat-list>
   </mat-card-content>

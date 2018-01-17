@@ -109,7 +109,12 @@
           </div>
           <div class="col-md-4">
             <mat-form-field>
-              <mat-select placeholder="{{ 'Is permanent'| translate }}"  [(ngModel)]="filter.permanent_status" name="permanent_status">
+              <mat-select
+                      [compareWith]="_comparePermanentStatus"
+                      placeholder="{{ 'Is permanent'| translate }}"
+                      [(ngModel)]="filter.permanent_status"
+                      name="permanent_status"
+              >
                 <mat-option *ngFor="let pt of _permanent_type" [value]="pt">
                   {{ 'permanent-type-' + pt |translate }}
                 </mat-option>

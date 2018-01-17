@@ -25,10 +25,13 @@ export class CargoFilterCreateComponent extends AbstractFilterCreateComponent<Fi
         protected __filterService: FilterService,
         protected __mapsAPILoader: MapsAPILoader,
         protected _formBuilder: FormBuilder,
-        @Inject(MAT_DIALOG_DATA) public __filter: Filter,
+        @Inject(MAT_DIALOG_DATA) protected __filter: Filter,
     ) {
         super(dialogRef, __mapsAPILoader, _formBuilder);
-        this.filter = this.__filter;
+    }
+
+    ngOnInit() {
+        super.ngOnInit();
     }
 
     public get filterService(): AbstractLogisticFilterEntityStore<Filter> {
@@ -36,9 +39,8 @@ export class CargoFilterCreateComponent extends AbstractFilterCreateComponent<Fi
     }
 
     public get filter(): Filter {
-
-        if(!this.__filter) {
-            this.__filter = new Filter();
+        if (!this.__filter) {
+            this.filter = new Filter();
         }
 
         return this.__filter;

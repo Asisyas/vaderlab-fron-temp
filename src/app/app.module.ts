@@ -25,9 +25,11 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 import {
     MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
     MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
-    MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule, MatMenuModule,
+    MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule, MatIconModule,
+    MatMenuModule,
     MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule, MatTableModule, MatSortModule,
-    MatTooltipModule, MatStepperModule,
+    MatTooltipModule, MatStepperModule, MatAutocompleteModule, MatChipsModule, MatExpansionModule, MatPaginatorModule,
+    MatRadioModule, MatRippleModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule,
 } from '@angular/material';
 
 import { AuthService } from './service/secured/auth-service';
@@ -45,6 +47,7 @@ import { FormErrorComponent } from './control/error/form-error/form-error.compon
 
 import { registerLocaleData } from '@angular/common';
 import ru_RU from '@angular/common/locales/ru';
+import {CdkTableModule} from "@angular/cdk/table";
 registerLocaleData(ru_RU);
 
 export function createTranslateLoader(http: HttpClient) {
@@ -81,11 +84,23 @@ export function createTranslateLoader(http: HttpClient) {
         FormsModule,
         ReactiveFormsModule,
         /** **/
+        CdkTableModule, MatNativeDateModule,
         MatButtonModule, MatCheckboxModule, MatInputModule, MatFormFieldModule,
         MatListModule, MatCommonModule, MatGridListModule, MatCardModule, MatDatepickerModule,
         MatNativeDateModule, MatSelectModule, MatToolbarModule, MatTabsModule, MatDialogModule,
         MatIconModule, MatMenuModule, MatButtonToggleModule, MatProgressBarModule, MatProgressSpinnerModule,
         MatTableModule, MatSortModule, MatTooltipModule, MatStepperModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatExpansionModule,
+        MatPaginatorModule,
+        MatRadioModule,
+        MatRippleModule,
+        MatSidenavModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatSnackBarModule,
+
         /** **/
 
         ToastyModule.forRoot(),

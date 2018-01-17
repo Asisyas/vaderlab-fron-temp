@@ -1,13 +1,18 @@
-<mat-form-field>
-<input
-  [required]="required"
-  matInput
-  placeholder="{{ placeholder }}"
-  autocorrect="off"
-  autocapitalize="off"
-  spellcheck="off"
-  #search
-  value=""
-  onkeydown="if(event.keyCode==13){return false;}"
->
+<mat-form-field [formGroup]="_formGroup">
+    <input
+            [formControlName]="_formControlName"
+            matInput
+            placeholder="{{ placeholder }}"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="off"
+            spellcheck="off"
+            [name]="_formControlName"
+            #search
+            value=""
+            onkeydown="if(event.keyCode==13){return false;}"
+    >
+    <mat-error *ngIf="formErrors">
+        {{ formErrors }}
+    </mat-error>
 </mat-form-field>
