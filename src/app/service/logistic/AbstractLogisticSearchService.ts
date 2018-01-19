@@ -1,14 +1,15 @@
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
-import {ApiService} from "../core/api.service";
-import {RequestMethod} from "@angular/http";
-import {EntityInterface} from "../../model/entity/entity-interface";
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+import {ApiService} from '../core/api.service';
+import {RequestMethod} from '@angular/http';
+import {EntityInterface} from '../../model/entity/entity-interface';
 
 export abstract class AbstractLogisticSearchService<T extends EntityInterface> {
 
     protected _entities: T[] = [];
     protected _entitiesObservable: Subject<T[]>;
     protected _apiService: ApiService;
+    protected _count = null;
 
     public abstract get search_path(): string;
 
@@ -19,14 +20,19 @@ export abstract class AbstractLogisticSearchService<T extends EntityInterface> {
     public stopSearch(): void {
     }
 
+    public get count(): number {
+        return this._count;
+    }
+
     public get entities(): T[] {
         return this._entities;
     }
 
     public get entitiesObservable(): Subject<T[]> {
 
-        if(!this._entitiesObservable) {
+        if (!this._entitiesObservable) {
             this._entitiesObservable = new Subject<T[]>();
+            this._entitiesObservable.next([]);
         }
 
         return this._entitiesObservable;
@@ -40,7 +46,8 @@ export abstract class AbstractLogisticSearchService<T extends EntityInterface> {
         )
         .then(res => res.json())
         .then( res => {
-            this._publishEntities(res);
+            this._publishEntities(res.data);
+            this._count = res.count;
 
             return res;
         })
@@ -52,20 +59,20 @@ export abstract class AbstractLogisticSearchService<T extends EntityInterface> {
         const nel   = entities.length;
         const el    = this.entities.length;
 
-        if(nel === 0) {
+        if (nel === 0) {
             return;
         }
 
-        if(el === 0) {
+        if (el === 0) {
            this._publish(entities);
 
            return;
         }
 
-        for(let i: number = 0; i < nel; i++) {
+        for (let i = 0; i < nel; i++) {
             const t: T = entities[i];
             const tp: number = this._indexOf(t);
-            if(this._indexOf(t) === -1) {
+            if (this._indexOf(t) === -1) {
                 this._entities.push(t);
 
                 continue;
@@ -80,9 +87,9 @@ export abstract class AbstractLogisticSearchService<T extends EntityInterface> {
     protected _indexOf(entity: T) {
         const el = this.entities.length;
 
-        for(let i = el - 1; i >= 0; --i) {
+        for (let i = el - 1; i >= 0; --i) {
             const e: T = this.entities[i];
-            if(e.id == entity.id) {
+            if (e.id == entity.id) {
                 return i;
             }
         }

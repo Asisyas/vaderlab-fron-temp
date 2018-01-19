@@ -10,7 +10,7 @@ export const environment = {
 
   vaderlab_oauth_login_url: 'https://www.vaderlab.com/en/oauth/v2/auth',
   vaderlab_oauth_redirect_uri: 'http://localhost:4200/',
-  vaderlab_oauth_client_id: '1_42wvpowlyd4w0oookcw800kc4oo8gscsgw0wokk4oocssk4o40',
+  vaderlab_oauth_client_id: '1_1x5ldfvs6jgg00c0kwcg4sks0ss0ck0okoc0c04s0scww4o4w4',
   vaderlab_oauth_client_issuer: 'https://www.vaderlab.com/api/user/current.json',
   vaderlab_oauth_scope: '',
   vaderlab_oauth_logout_url: '', //https://www.vaderlab.com/en/logout

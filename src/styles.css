@@ -6,6 +6,7 @@
 }
 
 body {
+  overflow: hidden;
   padding: 0px;
   margin: 0px;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
@@ -75,4 +76,25 @@ a:hover.mat-button {
 .has-error {
   color: var(--danger);
   border-color: var(--danger);
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  width: 6em
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  background-color: #fafafa;
+}
+
+.main-content-wrapper {
+  position: absolute;
+  overflow: auto;
+  height: calc(100% - 40px);
+  width: 100%
 }

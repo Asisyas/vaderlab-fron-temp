@@ -4,62 +4,88 @@
     <div class="col-md-3">
       <app-cargo-filter-my-list></app-cargo-filter-my-list>
     </div>
+    <div class="col-md-9">
+      <div class="row" class="">
+        <div class="col-md-12">
+          <div [hidden]="entity_search_service.count !== null">
+            <mat-progress-spinner class="center"
+                                  color="primary"
+                                  mode="indeterminate">
+            </mat-progress-spinner>
+          </div>
+          <div [hidden]="entity_search_service.count === null">
+            <div class="row">
+               <div class="col-md-12">
+                 <mat-paginator
+                         #paginator
+                         [length]="entity_search_service.count"
+                         [pageIndex]="0"
+                         [pageSize]="25"
+                         [pageSizeOptions]="[25, 100]">
+                 </mat-paginator>
+                 <mat-table class="" #table [dataSource]="dataSource">
+                     <ng-container matColumnDef="departure_place">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Departure'|translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row">
+                         <app-google-placeid
+                                 [viewItems]="['flag', 'city']"
+                                 [placeId]="row.departure_place"
+                         >
+                         </app-google-placeid>
+                       </mat-cell>
+                     </ng-container>
 
-    <div class="col-md-8">
-      <div class="row list item card" *ngFor="let cargo of cargoCollection">
-        <div class="container-fluid card-body">
-          <div class="row title">
-            <div class="col-6">
-              <div class="h4 card-title float-left">RU - BY (1925 км)</div>
-            </div>
-            <div class="col-5">
-              <div class="modified float-right">
-                <span class="float-right text-muted"> Created {{ cargo.created_at|timeAgo }}</span>
-                <span class="float-right text-muted" *ngIf="cargo.updated_at">/ Updated {{ cargo.updated_at|timeAgo }}</span>
-              </div>
-            </div>
-            <div class="col-1">
-              <button class="favourite btn btn-danger bmd-btn-fab bmd-btn-fab-sm float-right"><i
-                class="material-icons"></i></button>
-            </div>
-          </div>
-          <div class="clearfix"></div>
-          <div class="row data">
-            <div class="col-2"><h5>1452 бел.руб.</h5>Безнал.</div>
-            <div class="col-4">
-              <div class="row">
-                <div class="col">
-                  <app-google-placeid [placeId]="cargo.departure_place"></app-google-placeid>
-                </div>
-                <div class="col">
-                  <app-google-placeid [placeId]="cargo.arrival_place"></app-google-placeid>
-                </div>
-              </div>
-            </div>
-            <div class="col-2 text-center">
-              <strong *ngIf="!cargo.is_permanent">
-                {{ cargo.departure_date | date:'dd.MM.yyyy' }} -
-                {{ cargo.arrival_date | date:'dd.MM.yyyy' }}
-              </strong>
-              <strong *ngIf="cargo.is_permanent">
-                Regularly
-              </strong>
-            </div>
-            <div class="col-2"><b>{{ cargo.transport_type }}</b> {{ cargo.load_type}}
-              <span *ngIf="cargo.weight"> • {{ cargo.weight }}т.</span>
-              <span *ngIf="cargo.volume"> • {{ cargo.volume }}м³ </span>
-            </div>
-            <div class="col-2">{{ cargo.title }}</div>
-          </div>
-          <div class="miscellanious">
-            <div class="float-right">
-              <button class="btn btn-primary">Войти для просмотра контактов</button>
+                     <ng-container matColumnDef="arrival_place">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Arrival'|translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row">
+                         <app-google-placeid
+                                 [viewItems]="['flag', 'city']"
+                                 [placeId]="row.arrival_place"
+                         >
+                         </app-google-placeid>
+                       </mat-cell>
+                     </ng-container>
+
+                     <ng-container matColumnDef="title">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Title'|translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                     </ng-container>
+
+                     <ng-container matColumnDef="transport_type">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Transport Type'|translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row"> {{row.transport_type | translate }} </mat-cell>
+                     </ng-container>
+
+                     <ng-container matColumnDef="load_type">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Load Type'|translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row"> {{row.load_type | translate}} </mat-cell>
+                     </ng-container>
+
+                     <ng-container matColumnDef="departure_date">
+                       <mat-header-cell *matHeaderCellDef  disableClear="true"> {{ 'Departure Date'| translate  }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row"> {{ row.is_permanent ? '' : row.departure_date|date }} </mat-cell>
+                     </ng-container>
+
+                     <ng-container matColumnDef="arrival_date">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Arrival Date' | translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row">
+                         {{ row.is_permanent ? '' : row.arrival_date|date }}
+                       </mat-cell>
+                     </ng-container>
+
+                     <ng-container matColumnDef="is_permanent">
+                       <mat-header-cell *matHeaderCellDef > {{ 'Is Permanent'|translate }} </mat-header-cell>
+                       <mat-cell *matCellDef="let row"> {{ (row.is_permanent ? 'Yes' : 'No') | translate }} </mat-cell>
+                     </ng-container>
+
+                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                     <mat-row class="cursor-pointer" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                   </mat-table>
+               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
-
 </div>

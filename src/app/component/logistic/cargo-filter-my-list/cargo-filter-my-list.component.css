@@ -1,9 +1,3 @@
-.center {
-  margin-left: auto;
-  margin-right: auto;
-  width: 6em
-}
-
 .filter__list-item {
   display: flex;
   justify-content: space-between;
