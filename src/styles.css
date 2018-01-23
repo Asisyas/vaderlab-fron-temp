@@ -93,8 +93,26 @@ a:hover.mat-button {
 }
 
 .main-content-wrapper {
-  position: absolute;
+  position: relative;
   overflow: auto;
-  height: calc(100% - 40px);
-  width: 100%
+  height: calc(100% - 300px);
+  width: 100%;
+}
+
+.mat-paginator-page-size-select>.mat-form-field-wrapper {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+
+.mat-drawer-backdrop {
+  position: relative;
+  display: none  !important;;
+  z-index: 0 !important;
+  visibility: hidden;
+}
+
+.search-item-viewer {
+  width: 350px;
 }

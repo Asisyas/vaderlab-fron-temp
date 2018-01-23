@@ -1,91 +1,206 @@
-<div class="container-fluid" style="margin-top: 10px">
+<mat-drawer-container class="example-container" autosize>
 
-  <div class="row">
-    <div class="col-md-3">
-      <app-cargo-filter-my-list></app-cargo-filter-my-list>
-    </div>
-    <div class="col-md-9">
-      <div class="row" class="">
-        <div class="col-md-12">
-          <div [hidden]="entity_search_service.count !== null">
-            <mat-progress-spinner class="center"
-                                  color="primary"
-                                  mode="indeterminate">
-            </mat-progress-spinner>
-          </div>
-          <div [hidden]="entity_search_service.count === null">
+    <mat-drawer #drawer class="search-item-viewer" mode="over">
+        <div class="container-fluid">
             <div class="row">
-               <div class="col-md-12">
-                 <mat-paginator
-                         #paginator
-                         [length]="entity_search_service.count"
-                         [pageIndex]="0"
-                         [pageSize]="25"
-                         [pageSizeOptions]="[25, 100]">
-                 </mat-paginator>
-                 <mat-table class="" #table [dataSource]="dataSource">
-                     <ng-container matColumnDef="departure_place">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Departure'|translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row">
-                         <app-google-placeid
-                                 [viewItems]="['flag', 'city']"
-                                 [placeId]="row.departure_place"
-                         >
-                         </app-google-placeid>
-                       </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="arrival_place">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Arrival'|translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row">
-                         <app-google-placeid
-                                 [viewItems]="['flag', 'city']"
-                                 [placeId]="row.arrival_place"
-                         >
-                         </app-google-placeid>
-                       </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="title">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Title'|translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="transport_type">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Transport Type'|translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row"> {{row.transport_type | translate }} </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="load_type">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Load Type'|translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row"> {{row.load_type | translate}} </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="departure_date">
-                       <mat-header-cell *matHeaderCellDef  disableClear="true"> {{ 'Departure Date'| translate  }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row"> {{ row.is_permanent ? '' : row.departure_date|date }} </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="arrival_date">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Arrival Date' | translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row">
-                         {{ row.is_permanent ? '' : row.arrival_date|date }}
-                       </mat-cell>
-                     </ng-container>
-
-                     <ng-container matColumnDef="is_permanent">
-                       <mat-header-cell *matHeaderCellDef > {{ 'Is Permanent'|translate }} </mat-header-cell>
-                       <mat-cell *matCellDef="let row"> {{ (row.is_permanent ? 'Yes' : 'No') | translate }} </mat-cell>
-                     </ng-container>
-
-                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                     <mat-row class="cursor-pointer" *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                   </mat-table>
-               </div>
+                <div class="col-md-12">
+                    <h3>
+                        <p>
+                            Details
+                        </p>
+                    </h3>
+                </div>
             </div>
-          </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <b>Departure from:</b>
+                </div>
+                <div class="col-md-7">
+                    <app-google-placeid
+                            [viewItems]="['flag', 'city']"
+                            [placeId]="'ChIJ0RhONcBEFkcRv4pHdrW2a7Q'"
+                    ></app-google-placeid>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    Arrival to:
+                </div>
+                <div class="col-md-7">
+                    <app-google-placeid
+                            [viewItems]="['flag', 'city']"
+                            [placeId]="'ChIJdQljIwIMIUcRma5kH6SeMU0'"
+                    ></app-google-placeid>
+                </div>
+            </div>
+            <br>
+            <mat-divider></mat-divider>
+            <div class="row">
+                <div class="col-md-5">
+                    Departure date:
+                </div>
+                <div class="col-md-7">
+                    <b>11.08.2018</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    Arrival date:
+                </div>
+                <div class="col-md-7">
+                    <b>12.08.2018</b>
+                </div>
+            </div>
+            <br>
+            <mat-divider></mat-divider>
+            <div class="row">
+                <div class="col-md-5">
+                    Transport type:
+                </div>
+                <div class="col-md-7">
+                    <b>any</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    Load type:
+                </div>
+                <div class="col-md-7">
+                    <b>any</b>
+                </div>
+            </div>
+            <br>
+            <mat-divider></mat-divider>
+            <div class="row">
+                <div class="col-md-5">
+                    Title:
+                </div>
+                <div class="col-md-7">
+                    <b>Small little any cargo Small little any cargSmall little any cargSmall little any carg</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    Volume:
+                </div>
+                <div class="col-md-7">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    Weight
+                </div>
+                <div class="col-md-7">
+
+                </div>
+            </div>
+            <mat-divider>
+
+            </mat-divider>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="mat-button mat-raised-button" (click)="drawer.close()">Close</button>
+                </div>
+            </div>
         </div>
-      </div>
+    </mat-drawer>
+
+    <div class="container-fluid" style="margin-top: 10px">
+
+        <div class="row">
+            <div class="col-md-3">
+                <app-cargo-filter-my-list></app-cargo-filter-my-list>
+                <button type="button" mat-button (click)="drawer.toggle()">
+                    Toggle sidenav
+                </button>
+            </div>
+            <div class="col-md-9">
+                <mat-paginator
+                        #paginator
+                        [length]="entity_search_service.count"
+                        [pageIndex]="0"
+                        [pageSize]="25"
+                        [pageSizeOptions]="[25, 100]">
+                </mat-paginator>
+                <div class="main-content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div [hidden]="entity_search_service.count !== null">
+                                <mat-progress-spinner class="center"
+                                                      color="primary"
+                                                      mode="indeterminate">
+                                </mat-progress-spinner>
+                            </div>
+                            <div [hidden]="entity_search_service.count === null">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <mat-table class="" #table [dataSource]="dataSource">
+                                            <ng-container matColumnDef="departure_place">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Departure'|translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row">
+                                                    <app-google-placeid
+                                                            [viewItems]="['flag', 'city']"
+                                                            [placeId]="row.departure_place"
+                                                    >
+                                                    </app-google-placeid>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="arrival_place">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Arrival'|translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row">
+                                                    <app-google-placeid
+                                                            [viewItems]="['flag', 'city']"
+                                                            [placeId]="row.arrival_place"
+                                                    >
+                                                    </app-google-placeid>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="title">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Title'|translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> {{row.title}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="transport_type">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Transport Type'|translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> {{row.transport_type | translate }} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="load_type">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Load Type'|translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> {{row.load_type | translate}} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="departure_date">
+                                                <mat-header-cell *matHeaderCellDef  disableClear="true"> {{ 'Departure Date'| translate  }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> {{ row.is_permanent ? '' : row.departure_date|date }} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="arrival_date">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Arrival Date' | translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row">
+                                                    {{ row.is_permanent ? '' : row.arrival_date|date }}
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="is_permanent">
+                                                <mat-header-cell *matHeaderCellDef > {{ 'Is Permanent'|translate }} </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> {{ (row.is_permanent ? 'Yes' : 'No') | translate }} </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                            <mat-row class="cursor-pointer" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                        </mat-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</mat-drawer-container>

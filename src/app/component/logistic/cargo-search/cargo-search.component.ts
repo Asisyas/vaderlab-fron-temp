@@ -19,10 +19,10 @@ export class CargoSearchComponent implements OnInit {
 
     constructor(protected entity_search_service: SearchService) {
         this.dataSource = new EntityDataSource(this.entity_search_service.entitiesObservable);
-        this.entity_search_service.startSearch();
     }
 
     ngOnInit() {
+        this.entity_search_service.startSearch();
         this.displayedColumns = [
             'departure_place', 'arrival_place', 'title', 'transport_type',
             'load_type', 'departure_date', 'arrival_date', 'is_permanent'

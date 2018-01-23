@@ -73,7 +73,8 @@ export abstract class AbstractLogisticSearchService<T extends EntityInterface> {
             const t: T = entities[i];
             const tp: number = this._indexOf(t);
             if (this._indexOf(t) === -1) {
-                this._entities.push(t);
+                this._entities.unshift(t);
+                i--;
 
                 continue;
             }
